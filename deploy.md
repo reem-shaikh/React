@@ -22,7 +22,7 @@ git push -u origin master
 ```bash 
 npm install --save gh-pages 
 ```
-![](2.PNG)
+![](images/2.PNG)
 
 - if your using yarn 
 ```bash 
@@ -36,7 +36,7 @@ yarn add gh-pages
 "deploy": "gh-pages -d build",
 }
 ```
-![](3.PNG)
+![](images/3.PNG)
 
 4. To get the production code, run these commands in terminal of vscode, targetting the same react folder directory 
 ```bash 
