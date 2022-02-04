@@ -16,6 +16,13 @@ git push -u origin master
 "homepage": "https://reem-shaikh.github.io/React/29-01/my-app",
 ```
 ![](images/1.PNG)
+> then I pushed to git again 
+```bash 
+git add . 
+git commit -m "added"
+git pull 
+git push -u origin master 
+```
 
 2. Install gh-pages package using either of the commands in terminal of vscode, in the same directory of your react app 
 - if your using npm 
@@ -42,5 +49,13 @@ yarn add gh-pages
 ```bash 
 npm run deploy
 ```
+> then I pushed to git again 
+```bash 
+git add . 
+git commit -m "added"
+git pull 
+git push -u origin master 
+```
+
 5. For a project page, ensure your project's settings use gh-pages branch 
 > hover to settings -> and use the gh-pages branch to host your website, then, copy paste the link for reference
