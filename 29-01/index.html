@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Person {
+            //passing 2 properties 
+            constructor(name, age){
+                this.name = name 
+                this.age = age 
+            }
+
+            //method 
+            printInfo(){
+                console.log('i am', this.name, 'age is', this.age, 'experience of', this.YOE)
+            }
+        }
+
+        const x = new Person('geek', 20)
+        console.log(x)
+
+        //x is object of class Person
+        x.printInfo()
+
+        //programmer inherits properties of person 
+        class Programmer extends Person {
+            constructor(name, age, YOE){
+                //super() biult in method which runs the parent constructor 
+                super(name, age)
+                this.YOE = YOE
+            }
+
+            printInfo(){
+                console.log('i am', this.name, 'age is', this.age, 'experience of', this.YOE)
+            }
+        }
+
+        const p = new Programmer('geekster', 23,3)
+        console.log("programmer",p)
+
+        p.printInfo()
+    </script>
+</body>
+</html>
