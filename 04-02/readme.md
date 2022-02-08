@@ -133,7 +133,7 @@ const Contact = () => {
 
 export default Contact;
 ```
-6. However, switch was used in version below v6, we are working with react-router-dom v6.2.1, which uses **Routes** instead of switch 
+6. In react-router-dom v6 (which we are using), "Switch" is replaced by routes "Routes". Note that: switch only works in v5.2 and below.
 
 > App.js 
 ```bash 
