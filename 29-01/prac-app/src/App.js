@@ -1,13 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
-import Car from './components/Car'
+import Navbar from './component/Navbar'
 
 function App() {
   return (
     <>
-    <Car></Car>
+    <Navbar></Navbar>
     </>
-
   );
 }
 

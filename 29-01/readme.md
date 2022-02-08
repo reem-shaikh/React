@@ -1241,44 +1241,66 @@ class Car extends React.Component {
 > using this.setstate() method 
 
 When a value in the state object changes, the component will re-render, meaning that the output will change according to the new value(s).
+> src/component/Car.js
 ```bash 
-class Car extends React.Component {
-  constructor(props) {
-    super(props);
-    ✅adding multiple properties to state object 
-    this.state = {
-      brand: "Ford",
-      model: "Mustang",
-      color: "red",
-      year: 1964
-    };
+import React, {Component} from 'react';
 
-  }
-  ✅when the button is clicked the state of the color will change from red to blue  
-  changeColor = () => {
-    this.setState({color: "blue"});
-  }
+export default class Car extends React.Component {
+    constructor(props) {
+      super(props);
+    // ✅adding multiple properties to state object 
+      this.state = {
+        brand: "Ford",
+        model: "Mustang",
+        color: "red",
+        year: 1964
+      };
+
+      this.changeColor = this.changeColor.bind(this)
   
-  ✅render() displays components to the application 
-  render() {
-    return (
-      <div>
-        <h1>My {this.state.brand}</h1>
-        <p>
-          It is a {this.state.color}
-          {this.state.model}
-          from {this.state.year}.
-        </p>
-
-        <button
-          type="button"
-          onClick={this.changeColor}
-        >Change color</button>
-
-      </div>
-    );
+    }
+    // ✅when the button is clicked the state of the color will change from red to blue  
+    changeColor = () => {
+      this.setState({color: "blue"});
+    }
+    
+    //✅render() displays components to the application 
+    render() {
+      return (
+        <div>
+          <h1>My {this.state.brand}</h1>
+          <p>
+            It is a {this.state.color}
+            {this.state.model}
+            from {this.state.year}.
+          </p>
+  
+          <button
+            type="button"
+            onClick={this.changeColor}
+          >Change color</button>
+  
+        </div>
+      );
+    }
   }
+```
+> App.js 
+```bash 
+import logo from './logo.svg';
+import './App.css';
+import Car from './components/Car'
+
+function App() {
+  return (
+    <>
+    <Car></Car>
+    </>
+
+  );
 }
+
+export default App;
 ```
 ![](10.PNG)
 
