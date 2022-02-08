@@ -4,8 +4,10 @@ axios
 react routing 
 lifecycle methods 
 context API 
+const [state, setstate]
+virtual dom and real dom 
+diffing & reconsilation
 
 heruko / firebase for deployment 
 
-get terms from sushil sir's lecs 
-- diffing & reconsilation
+
