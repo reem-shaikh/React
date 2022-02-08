@@ -1,7 +1,9 @@
 #### Client side rendering VS server side rendering 
 - every time the page reloads, were using the ***server side rendering/routing***
-- However, react doesn't refresh the page, it renders the particular component and displays it, without refreshing the entire page, this is known as ***client side rendering/routing**. This is known as react router. 
+- However, react doesn't refresh the page, it renders the particular component and displays it, without refreshing the entire page, this is known as ***client side rendering/routing**. 
 
+## React Router Setup
+Through React router, we can acheive client side rendering. However, React router is not a biult in feature.
 ### React router is a library which is need to install 
 1. search google 'react router dom npm'
 ```bash 
@@ -13,6 +15,9 @@ https://www.npmjs.com/package/react-router-dom
 2. go to terminal and navigate to the react app you want to install react router package for 
 ```bash 
 npm install --save react-router-dom
+
+or
+npm install react-router-dom
 ```
 3. to ensure whether your package is properly installed or not, navigate to package.json file and check whether you have react-router-dom installed in it 
 > package.json
@@ -27,10 +32,12 @@ npm install --save react-router-dom
     "@testing-library/user-event": "^13.5.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    ✅"react-router-dom": "^6.2.1",
+    ✅"react-router-dom": "^6.2.1", 
     "react-scripts": "5.0.0",
     "web-vitals": "^2.1.4"
   },
+
+this is v6 version
 ```
 4. you'll need to import browserRouter from react-router-dom package in index.js 
 
@@ -86,7 +93,7 @@ ReactDOM.render(
 reportWebVitals();
 ```
 5. you'll need to import Route and Switch from react-router-dom package in index.js 
-> src/App.jsx
+> src/App.js
 ```bash 
 import React from "react";
 import { Route, Switch } from "react-router-dom";
@@ -106,7 +113,7 @@ const App = () => {
 
 export default App;
 ```
-> About.jsx (custom component)
+> About.js (custom component)
 ```bash 
 import React from "react";
 
@@ -116,7 +123,7 @@ const About = () => {
 
 export default About;
 ```
-> Contact.jsx (custom component)
+> Contact.js (custom component)
 ```bash 
 import React from "react";
 
@@ -125,4 +132,57 @@ const Contact = () => {
 }
 
 export default Contact;
+```
+6. However, switch was used in version below v6, we are working with react-router-dom v6.2.1, which uses **Routes** instead of switch 
+
+> App.js 
+```bash 
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+
+//importing components 
+import About from "./About.js";
+import Contact from "./Contact.js";
+
+const App = () => {
+  return (
+    <>
+    {/* whne we go to the application, based on the routes, render the application */}
+      <Routes>
+        <Route path="/About" element={<About />} />
+        <Route path="/Contact" element={<Contact />} />
+      </Routes>
+    {/* <About></About>
+    <Contact></Contact> */}
+    </>
+  );
+}
+
+export default App;
+```
+> About.js 
+```bash 
+import React from "react";
+
+const About = () => {
+  return <h1>About page</h1>
+}
+
+export default About;
+```
+> Contact.js 
+```bash 
+import React from "react";
+
+const Contact = () => {
+  return <h1>Contact page</h1>
+}
+
+export default Contact;
+```
+```bash 
+Viewport:
+When the user types this in the browser: http://localhost:3000/About it shows them the About page 
+
+When the user types this in the browser: http://localhost:3000/Contact it shows them the contact page 
 ```
