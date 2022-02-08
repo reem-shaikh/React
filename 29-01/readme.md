@@ -76,8 +76,9 @@ div component
 Eg: for routing(going from one page to another), we can use react router DOM package 
 ```
 #### Components 
-Components are independent and reusable bits of code:
+component is a class in which we can render methods.
 
+##### Components are independent and reusable bits of code:
 > Components can be defined 
 1. on the same page (Components inside components)
 2. in different files (preffered)
@@ -1043,10 +1044,12 @@ import logo from './logo.svg';
 import './App.css';
 import Navbar from './components/Navbar'
 
+✅Note that: Parent component is rendering the child components 
 function App() {
   return (
     <>
     ✅were passing 2 props over here 
+    ✅passing data to child component (Navbar.js) from parent component (App.js) using props 
    <Navbar title="Reem" aboutText="navbar yo"></Navbar>
     </>
   );
@@ -1060,6 +1063,7 @@ export default App;
 import React from 'react'
 ✅import PropTypes from 'prop-types'
 
+✅Recieving props from child component 
 export default function Navbar(props){
     return(
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -1123,9 +1127,6 @@ import React from 'react'
 
 export default function Navbar(props){
     return(
-        // <div>
-        //     hello i am a navabr 
-        // </div>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <a className="navbar-brand" href="/">{props.title}</a>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -1427,3 +1428,9 @@ Always use the setState() method to change the state object, since it will ensur
 2. State can only be used in class components or functional components with hooks / Props can be used in both without additional hooks 
 3. Event handlers such as onClick update state / Parent component sets props for the children components 
 4. State is used to store the data / Props are used to pass the data 
+```bash 
+Props - data passed from parent component to child component 
+state - data that belongs to a component (its own personal data)
+```
+
+
