@@ -6,8 +6,12 @@ lifecycle methods
 context API 
 const [state, setstate]
 virtual dom and real dom 
-diffing & reconsilation
+diffing & reconsilation 
+heruko deploy
 
-heruko / firebase for deployment 
-
-
+#### 11-02
+deploy to firebase 
+complete 2 lecs 
+6:30pm session 
+lecture 8:00pm
+redux

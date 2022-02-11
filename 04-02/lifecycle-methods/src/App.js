@@ -1,30 +1,38 @@
 import logo from './logo.svg';
 import './App.css';
-import React, {Component} from 'react'
+import React, {useState} from 'react'
+import User from './User';
 
 class App extends React.Component {
-
-  //1. constructor is called 
    constructor(){
      super()
-
-     this.state = {
-       show: true 
-     }
      console.log('constructor')
+     this.state = {
+       toggle: true
+     }
+
+   }
+   componentDidMount(){
+    console.log('componentdidmount')
+
    }
 
-   //3. this is called at last 
-   //when component is ready, this function is called 
-   componentDidMount(){
-    console.log('mounted')
-   }
+    componentDidUpdate(){
+       console.log('updated')
+    }
 
     render(){
-      //2. render is called 
       console.log('render')
       return (
-        <div>life cycle method</div>
+        <>
+        {
+          (this.state.toggle? 
+          <User />:null)
+        }
+        <button onClick={()=> {
+          this.setState({toggle:!this.state.toggle})
+        }}>Delete user</button>
+        </>
 
       );
     }
