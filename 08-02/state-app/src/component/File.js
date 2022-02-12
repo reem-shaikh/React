@@ -12,29 +12,31 @@ function File(props) {
   //     fileIcon = "file image outline";
   //   }
 
-  const ext = props.name.split(".")[1];
+  //ZNMD.mp4 
+  // 0    1
 
+  //(2) ['ZNMD', 'mp4']
+  //0: "ZNMD"
+  //1: "mp4"
+  //length: 2[[Prototype]]: Array(0)
+
+  const ext = props.name.split(".")[1];
   console.log(props.name.split("."));
 
+  //this is to change the icons as the extension of the children changes 
+  //we create an object = key:value pairs instead of if else 
   const iconsList = {
     mp4: "headphones",
     jpeg: "file image",
     png: "file image outline",
   };
 
+  //based on the extension it gets 
   const fileIcon = iconsList[ext];
-
-  //   const obj = {
-  //     name: "abhishek",
-  //     age: "25",
-  //   };
-
-  //   const x = "name";
-
-  //   console.log(obj[x]);
 
   return (
     <div className="file">
+      {/* it displays the icon image before the icon name */}
       <i className={`${fileIcon} icon`}></i>
       {props.name}
     </div>

@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import "../App.css";
 
+
 class Folder extends Component {
+  //folder should get name property from the parent through props 
   constructor(props) {
     super(props);
     this.state = {
@@ -9,11 +11,8 @@ class Folder extends Component {
     };
   }
 
-  //   {
-  //       name: "src",
-  //       children:
-  //   }
-
+  //when we click on the span arrow then we want to display thw child elements 
+  //this function is to toggle the state 
   handleClick = () => {
     this.setState({ isOpen: !this.state.isOpen });
   };
@@ -30,6 +29,7 @@ class Folder extends Component {
           <i className="blue folder icon"></i>
         </span>
         {this.props.name}
+        {/* when the state vairable is open then display children else display null */}
         {this.state.isOpen ? this.props.children : null}
       </div>
     );
