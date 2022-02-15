@@ -211,3 +211,182 @@ function App() {
 export default App;
 ```
 ![](images/1.PNG)
+
+### Handling objects using UseState Hooks 
+Get data from an object using useState, when you click on update button, update the value 
+
+> UseStateObject.js 
+```bash 
+import React, {useState} from 'react'
+
+const UseStateObject = () => {
+  const [myObject, setMyObject] = useState({
+      myName: "reem",
+      city:"mumbai"
+  })
+  //this object is defined inside myObject 
+
+  const changeObject = () =>{
+      setMyObject({myName: "Resin", city:"Mumbai"})
+  }
+
+  return (
+    <>
+     <h1 className='h1style'>Name: {myObject.myName} City:{myObject.city}</h1>
+     <button className='btn' onClick={changeObject}>Update</button>
+    </>
+  )
+}
+
+export default UseStateObject
+```
+> App.js 
+```bash 
+import logo from './logo.svg';
+import './App.css';
+import UseStateObject from './component/UseStateObject';
+
+function App() {
+  return (
+    <div className="App">
+      <UseStateObject></UseStateObject>
+    </div>
+  );
+}
+
+export default App;
+```
+> before clicking on update button 
+![](images/2.PNG)
+
+> after clicking on update button 
+![](images/3.PNG)
+
+#### When we dont set a value for one of the objects when the update button is clicked, then the object field shows no value 
+> UseStateObject.js 
+```bash 
+import React, {useState} from 'react'
+//rafce
+
+const UseStateObject = () => {
+  const [myObject, setMyObject] = useState({
+      myName: "reem",
+      city:"mumbai"
+  })
+  //this object is defined inside myObject 
+
+  const changeObject = () =>{
+        setMyObject({myName: "Resin"})
+        // When we dont set a value for one of the objects when the update button is clicked, then the object field shows no value 
+  }
+
+  return (
+    <>
+     <h1 className='h1style'>Name: {myObject.myName} City:{myObject.city}</h1>
+     <button className='btn' onClick={changeObject}>Update</button>
+    </>
+  )
+}
+
+export default UseStateObject
+```
+> on clicking on the update button
+![](images/4.PNG)
+
+#### to only update one object value we use ternary operator (which is represented by ...)
+> UseStateObject.js 
+```bash 
+import React, {useState} from 'react'
+
+const UseStateObject = () => {
+  const [myObject, setMyObject] = useState({
+      myName: "reem",
+      city:"mumbai"
+  })
+  //this object is defined inside myObject 
+
+  const changeObject = () =>{
+        setMyObject({...myObject, myName: "Resin"})
+        // When we dont set a value for one of the objects when the update button is clicked, then the object field shows no value 
+  }
+
+  return (
+    <>
+     <h1 className='h1style'>Name: {myObject.myName} City:{myObject.city}</h1>
+     <button className='btn' onClick={changeObject}>Update</button>
+    </>
+  )
+}
+
+export default UseStateObject
+```
+> Before clicking on update button 
+![](images/2.PNG)
+
+> After clicking on update button 
+![](images/5.PNG)
+
+#### To Do List 
+remove individual elements on clicking on it 
+
+> UseStateArray.js 
+```bash 
+import React, {useState} from 'react'
+
+const UseStateArray = () => {
+  const bioData = [
+      {
+          id:0, myName:"reem"
+      }, 
+      {
+          id:1, myName:"resin"
+      }
+  ]
+  console.log('array', bioData)
+
+  const [myArray, setmyArray] = useState(bioData)
+
+  const clearArray = ()=> {
+      setmyArray([]);
+  }
+
+  const removeElem = (id)=> {
+    // when we click on the 0th index id to delete it 
+    // it stores all the other index ids in a new array called myNewArray 
+    // and we set the display to myNewArray 
+
+      const myNewArray = myArray.filter((currElem) => {
+          return currElem.id != id
+      })
+
+      setmyArray(myNewArray)
+  }
+
+  return (
+    <>
+        {
+          myArray.map((currElem) => {
+            return <h1 className='h1style' key={currElem.id}>Name: {currElem.myName} 
+            {/* to ensure that onclick on buttton removeelem should run, we add the fat arrow functio, if we didnt add it, it would call the function removeElem by default */}
+            <button className='btnInner' onClick={ () => removeElem(currElem.id)}>remove</button></h1>
+          })
+        }
+        <button className='btn' onClick={clearArray}>clear</button>
+    </>
+  )
+}
+
+export default UseStateArray
+
+console:
+array (2) [{…}, {…}]
+0: {id: 0, myName: 'reem'}
+1: {id: 1, myName: 'resin'}
+length: 2[[Prototype]]: Array(0)
+```
+> before clicking on remove 
+![](images/6.PNG)
+
+> after removing the element on 1st index 
+![](images/7.PNG)
+
