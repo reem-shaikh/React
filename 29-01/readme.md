@@ -156,7 +156,6 @@ ECMAScript was created to standardize JavaScript, and ES6 is the 6th version of 
     "react-scripts": "5.0.0",
     "web-vitals": "^2.1.4"
   },
-
 ```
 #### Why do we need react / what can react do that JS cant?
 - JS uses DOM, which consumes alot of memory and doesnt update as quickly
@@ -209,6 +208,8 @@ https://reactjs.org/docs/create-a-new-react-app.html
 ```bash 
 npx create-react-app my-app
 ```
+> when you use create react app it basically runs node server to host your app and npm for packages.
+
 2. my-app is created with this directory structure 
 ![](tomakenotesonlist.PNG)
 
@@ -263,7 +264,6 @@ for instance, there is a form (component), which contains details (props)
 2. state 
 for instance, the heading of the form(component), is called a state, this state can be changed based on user interaction / HttpRequestResponse / etc 
 ```
-
 ### How to start React app ?
 1. open terminal and type 
 ```bash 
@@ -302,6 +302,7 @@ cd my-app
 ```bash 
 npm install 
 ```
+> React element is a JSX element which gets returned from the React Component 
 
 ### JSX 
 JSX stands for **JavaScript XML**. It is simply a syntax extension of JavaScript. It allows us to directly write HTML in React (within JavaScript code). It is easy to create a template using JSX in React.

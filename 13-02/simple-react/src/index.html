@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- instead of using cra we can use CDN links for react -->
+    <title>Document</title>
+    <link rel="stylesheet" src="index.css" />
+</head>
+<body>
+    <div id="app"></div>
+    <!-- src is coming from a CDN (external network), but what if the website go down, in that case its more reliable to download the script 
+    
+    if they update changes, then it wont be compatible with our app,
+
+    so ts better to save it as a local package -->
+
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <!-- 
+    i saved it in the local 
+    <script crossorigin src="./packages/reactdevelopment.js"></script> -->
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel" src="App.js"></script>
+    <script type="text/babel" src="index.js"></script>
+    
+    <!-- importing all components
+    natively browser doesnt understand JSX; babel helps to convert it  -->
+    <script type="text/babel" src="Like.js"></script>
+    <script type="text/babel" src="Dislike.js"></script>
+    <script type="text/babel" src="ShowCounter.js"></script>
+</body>
+</html>
