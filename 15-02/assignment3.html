@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+    // difference of the sum of two diagonals using one for loops 
+      var sum = 0
+      var sum2 = 0
+      var diff = 0
+
+      var arr = [
+        [4, 3, 2, 4],
+        [9, 1, 5, 6],
+        [2, 7, 9, 8],
+        [8, 5, 2, 0],
+      ]
+
+      // This loop is for outer array
+      for (var i = 0; i < arr.length; i++) {
+        // This loop is for inner-arrays
+        for (var j = 0; j < arr[i].length; j++) {
+          // Accessing each elements of inner-array
+          document.write(arr[i][j] + ' ')
+
+          if (i == j) {
+            sum = sum + arr[i][j]
+          }
+
+          if((i+j) == 3)
+            sum2 = sum2 + arr[i][j];
+        }
+        document.write('<br>')
+        diff = sum2 - sum
+    }
+
+      document.write('sum: ', sum, '<br>')
+      document.write('sum2: ', sum2, '<br>')
+      document.write('diff: ', diff)
+    </script>
+  </body>
+</html>

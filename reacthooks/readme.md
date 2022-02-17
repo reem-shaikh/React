@@ -390,3 +390,240 @@ length: 2[[Prototype]]: Array(0)
 > after removing the element on 1st index 
 ![](images/7.PNG)
 
+
+#### counter App using useState hook (traditional method)
+> UseReducer.js 
+```bash 
+import React, {useState} from 'react'
+
+const UseReducer = () => {
+  const [count, setCount] = useState(0)
+  return (
+    <>
+    <div>
+        <p>{count}</p>
+        <div className='btn'>
+            <button onClick={() => setCount(count + 1)}>Inc</button>
+            <button onClick={() => setCount(count - 1)}>Dec</button>
+        </div>
+    </div>
+    </>
+  )
+}
+
+export default UseReducer
+```
+> App.js 
+```bash 
+import logo from './logo.svg';
+import './App.css';
+import UseReducer from './component/UseReducer';
+
+function App() {
+  return (
+    <div className="App">
+      <UseReducer></UseReducer>
+    </div>
+  );
+}
+
+export default App;
+```
+> when we clicked on inc a couple times 
+![](images/8.PNG)
+
+##### Counter App using useReducer hook 
+### What is useReducer hook?
+```bash 
+its just like useState, except useReducer hook is used to manage multiple states
+```
+**Reducer is a pure function which takes in a state and action and returns a new state*
+
+#### Pure functions 
+- it doesnt have any side effects 
+- every single time you give the same input, it returns the same output 
+
+> for a function to be pure, it needs to use parameters from inside the function scope only, if it takes parameters from outside of its function scope and altering current data(this is called a side effect), then its considered impure function.
+```bash 
+✅impure function
+    <script>
+        const array = [1, 2, 3]
+        // taking parameters that are outside of the function scope - pure functions cannot do this 
+
+        function addElementToArray(element) {
+            array.push(element)
+            // its altering the datatype that is outside of the function scope - pure functions cannot do this 
+        }
+    </script>
+```
+![](images/9.PNG)
+
+> Math.random() is an impure function, because everytime you give the same input, you get a different output for it 
+![](images/10.PNG)
+
+> Given below is an example of a pure function
+```bash 
+    <script>
+        const array = [1, 2, 3]
+
+        function addElementToArray(arr, element) {
+          //create new array arr and add element to it 
+          return [...arr, element]
+
+          //it only uses its inputs that are defined
+          //it doesnt change any input its getting (it doesnt add onto the previous array, instead it creates a new array and adds the element to it 
+
+          //everytime you give the same input, you get the same output 
+        }
+    </script>
+```
+![](images/11.PNG)
+
+> Given below is an example of an impure function
+```bash 
+    <script>
+        const array = [1, 2, 3]
+
+        function addElementToArray(arr, element) {
+            //create new array arr and add element to it 
+            return [...arr, element, Math.random()]
+        }
+    </script>
+```
+![](images/12.PNG)
+
+#### Counter using useReducer hook 
+> App.js 
+```bash 
+import logo from './logo.svg';
+import './App.css';
+import UseReducer from './component/UseReducer';
+
+function App() {
+  return (
+    <div className="App">
+      <UseReducer></UseReducer>
+    </div>
+  );
+}
+
+export default App;
+```
+
+> useReducer.js 
+```bash 
+import React, {useReducer} from 'react'
+
+const initialState = 0 
+
+// reducer function - defined here 
+// takes 2 arguments: current sttae and action method 
+const reducer = (state, action) => {
+  console.log('state',state)
+  console.log('action', action)
+
+  if(action.type === 'INCREEMENT'){
+    return state + 1
+  } 
+
+  if(action.type === 'DECREEMENT'){
+    return state - 1
+  } 
+
+    //reducer always needs to return 
+  return state 
+}
+
+const UseReducer = () => {
+  //const [count, setCount] = useState(0)
+
+  //useReducer is just like useState 
+  //takes 2 arguments: reducer function, initial state 
+  const [state, dispatch] = useReducer(reducer, initialState)
+
+  return (
+    <>
+    <div>
+        <p>{state}</p>
+        <div className='btn'>
+          {/* once product is dispatched, it is then on the way to reach its destination
+          
+          dispatch: is used to trigger the action method (that is an argumnet of the reducer function*/}
+            <button onClick={() => dispatch({type: 'INCREEMENT'})}>Inc</button>
+            <button onClick={() => dispatch({type: 'DECREEMENT'})}>Dec</button>
+        </div>
+    </div>
+    </>
+  )
+}
+
+export default UseReducer
+```
+### UseEffect Hook 
+UseEffect hook helps perform side effects in functional components 
+```bash 
+If we want to implement aa feature, where were adding notifications to the title dyanamically, it can be acheived through useEffect hook
+```
+> What are side effects?
+side effects are anything that afffects something outside of the scope of the current function thats been executed. 
+
+> What can we acheive through side effects?
+- API requsts to our backend service 
+- calls to our authentication service 
+- Data fetching 
+- setting up a subscription 
+
+> UseEffect.js
+```bash 
+import React, {useState, useEffect} from 'react'
+
+const UseEffect = () => {
+  //whenver we use useState it re-renders our component 
+  const [count, setCount] = useState(0)
+
+  //useEffect will be called everytime the page reloads 
+  useEffect(()=> {
+      console.log('use effect')
+      document.title = `chats (${count})`
+  })
+
+  //first outside will be called in console, then the useEffect will be called 
+  console.log('outside')
+
+  return (
+    <div>
+        <h1>{count}</h1>
+        <button className='btn' onClick={()=> setCount(count + 1)}>click me</button>
+    </div>
+  )
+}
+
+export default UseEffect
+```
+
+> App.js 
+```bash 
+import logo from './logo.svg';
+import './App.css';
+import UseEffect from './component/UseEffect';
+
+function App() {
+  return (
+    <div className="App">
+      <UseEffect></UseEffect>
+    </div>
+  );
+}
+
+export default App;
+
+console:
+outside 
+use effect
+
+(these 2 will be called as many times the page re-renders)
+(the page will re-render everytime we click on increement, because its linked to useState)
+(everytime useState is called, it re-renders the page)
+(everytime the page re-renders, the new count will be logged to our title)
+```
+![](images/10.PNG)

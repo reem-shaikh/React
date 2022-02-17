@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const myArray = []
+
+        for(let i=0; i<=3; i++){
+            myArray[i] = []
+
+            for(let j=0; j<=3; j++){
+                myArray[i][j] = null
+            }
+        }
+        console.log(myArray)
+
+        // sum of 1D array 
+        let arr = [1,2,3,4, 5, 6]
+        let arrsum = 0 
+
+        arr.forEach((element)=> {
+            //console.log(element)
+            arrsum = arrsum + element
+        })
+        console.log(arrsum)
+
+        // sum of 2D array 
+        let multi = [[1,2,3],[4,5,6],[7,8,9]]
+        let multisum = 0 
+
+        for(let i=0; i< multi.length; i++){
+            console.log(multi[i])
+
+            multi[i].forEach((element)=> {
+            //console.log(element)
+            multisum = multisum + element
+        })
+
+        console.log('multisum', multisum)
+        }
+
+        // sum of 3D array 
+        let three = [[[1, 2, 3, 4]], [[1, 2, 3, 4]], [[1, 2, 3, 4]]]
+        let thsum = 0 
+
+        for (let i=0; i<three.length; i++){
+            three[i].forEach(element => {
+                //console.log(element)
+
+                for(let j=0; j<element.length; j++){
+                    console.log(element[j])
+
+                    thsum = thsum + element[j]
+                }
+            })
+        }
+        console.log('thsum', thsum)
+
+// displaying elements in 2d array 
+var salary = [
+   ["ABC", 24, 18000],
+   ["EFG", 30, 30000],
+   ["IJK", 28, 41000],
+   ["EFG", 31, 28000],
+];
+
+// This loop is for outer array
+for (var i = 0, l1 = salary.length; i < l1; i++) {
+
+// This loop is for inner-arrays
+for (var j = 0, l2 = salary[i].length; j < l2; j++) {
+
+    // Accessing each elements of inner-array
+    document.write( salary[i][j] + " "); 
+}
+document.write("<br>")
+}
+
+// get input from user for a 1D array 
+// var geek = []
+// var elem = prompt('enter number of elements')
+
+// for(let i=0; i<=elem; i++) {
+//     geek[i] = prompt('enter number')
+// }
+
+// for(let i=0; i<=elem; i++){
+//     document.write(geek[i] + "<br>")
+// }
+
+
+// get input from user for a 2D array 
+var rows = 3
+var columns = 3 
+
+// iniitalising a 2d array structure 
+var geek = new Array(rows)
+for(var i=0 ; i<rows; i++) {
+    geek[i] = new Array(columns)
+}
+
+for(var i=0; i<rows;i++) {
+    for(var j=0; j<columns; j++) {
+        geek[i][j] = prompt('enter elements')
+    }
+}
+
+// displaying the values 
+for(var i=0; i<rows;i++) {
+    for(var j=0; j<columns; j++) {
+        document.write(geek[i][j] + " ")
+    }
+    document.write("<br>")
+}
+
+    </script>
+</body>
+</html>
