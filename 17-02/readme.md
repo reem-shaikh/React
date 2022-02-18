@@ -101,6 +101,10 @@ ReactDOM.render(<App/>, document.getElementById('root'))
 ```
 ![](1.PNG)
 
+#### Axios POST request to send form data
+> reem-shaikh.github.io/axios-form/
+> code link: https://github.com/reem-shaikh/React/tree/master/17-02/assignment-app
+
 #### Assignment 
 create form using bootstrap classes 
 - form should have 3 properties: name, email, phone number 
