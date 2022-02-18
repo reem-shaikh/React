@@ -26,8 +26,9 @@ redux
 #### 17-02 
 - fetch api 2
 - axios 
-- tdl (4)
 
+#### 18-02
+- tdl (4)
 - complete 12-02 lecture with notes 
 - practice session 8-02 with notes 
 - revamp the gallery and tdl 

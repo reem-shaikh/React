@@ -14,6 +14,14 @@ class Card extends React.Component {
         };
       });
     };
+
+    reset = () => {
+      this.setState((prev) => {
+        return {
+          numberOflikes: 0,
+        };
+      });
+    };
   
     dec = () => {
       this.setState((prev) => {
@@ -24,7 +32,8 @@ class Card extends React.Component {
     };
   
     render() {
-      console.log(this.props);
+      //console.log('props',this.props);
+
       // const obj = {
       //   avatar: "https://reqres.in/img/faces/1-image.jpg",
       //   email: "george.bluth@reqres.in",
@@ -36,18 +45,27 @@ class Card extends React.Component {
       return (
         // were using the props that we passed through from the parent component 
         <div className="card-container">
+          <h1>totalCount: {this.state.totalcount}</h1>
+
           <img src={this.props.avatar} />
           <p className="names">
-            <small>{this.props.first_name}</small>
-            <small>{this.props.last_name}</small>
+            <small>first name: {this.props.first_name}</small>
+            <small>last name: {this.props.last_name}</small>
           </p>
+          
           <p className="email">{this.props.email}</p>
         {/* the likes are updated only for the specific card component  */}
           <div className="likes">
             <button onClick={this.inc}>👍🏻</button>
             {this.state.numberOflikes}
             <button onClick={this.dec}>👎🏻</button>
+            <button onClick={this.reset}>reset</button>
           </div>
+
+          {/* changing the state of the parent component from inside the child component */}
+          <button onClick={this.props.changeParentCount}>
+          increase parent count
+        </button>
 
         </div>
       );

@@ -40,19 +40,21 @@ render(){
 
     // };
 
-    return <div className="card-container">
-    <img src={this.props.avatar} />
-    <p className="names">
-        <small>{this.props.first_name}</small>
-        <small >{this.props.last_name}</small>
-    </p>
+    return  (
+    <div className="card-container">
+        <img src={this.props.avatar} />
+            <p className="names">
+                <small>{this.props.first_name}</small>
+                <small >{this.props.last_name}</small>
+            </p>
     <p className="email">{obj.email}</p>
-    <div className="likes">
-        <button onClick={this.inc}>thumbs up</button>
-        {this.state.numberOfLikes}
-        <button onClick={this.dec}>thumbs down</button>
-    </div>
+        <div className="likes">
+            <button onClick={this.inc}>thumbs up</button>
+            {this.state.numberOfLikes}
+            <button onClick={this.dec}>thumbs down</button>
+        </div>
     
     </div>
-}
+    );
+  }
 }

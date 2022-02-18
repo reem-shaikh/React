@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import PersonList from './component/PersonList'
-import PersonInput from './component/PersonInput'
+import PersonInput from './component/PersonInput.js'
 
 function App() {
   return (

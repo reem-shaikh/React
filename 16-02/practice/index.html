@@ -4,17 +4,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="./index.css" />
     <title>Document</title>
 </head>
 <body>
-    <div id="root"></div> 
+
+    <div id="root"></div>
+    <!-- were using the CDN links in place of the cra in the npm to install the react app template -->
     <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- adding cdn link for axios -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    
-    <script type="text/babel"  src="./Card.js"></script>
-    <script type="text/babel"  src="./index.js"></script>
+
+<!-- 
+    Developers can use new JavaScript language features (release after 2015) by using Babel to convert their source code into versions of JavaScript that Web browsers are able to process. -->
+    <script type="text/babel" src="./Card.js"></script>
+    <script type="text/babel" src="./index.js"></script>
 </body>
 </html>

@@ -1,3 +1,5 @@
+// how to update state of parent component (index.js) from inside a child component (Card.js)? 
+
 class App extends React.Component {
 
     constructor(){
@@ -11,14 +13,14 @@ class App extends React.Component {
 // axios library  was released 
 // axios is same as fetch except its easier to work with 
     getData = () => {
-        fetch("https://reres.in/api/users")
+        fetch("https://reqres.in/api/users")
         .then((res) => res.json())
         .then((result) => console.log(result))
     };
 
     // axios under the hood is same like fetch 
     getDataAxios = () => {
-        axios.get("https://reres.in/api/users")
+        axios.get("https://reqres.in/api/users")
         .then((res) => //console.log(res.data))
 
         this.setState(prev => {
@@ -36,27 +38,39 @@ class App extends React.Component {
         this.getDataAxios()
     }
 
-    convertToCards = () => {
+
         // we need to convert object to card so we can pass to it directly 
         //loop through array and print the data 
 
         // were passing it through map method, because we want to acces individual array 
         // jsx can only print array in curly braces, it cannot print objects in curly braces 
-        return this.state.geek.map((item)=> (
-            // map method returns an array 
-            console.log(item)
+        convertToCards = () => {
+            // for (let i = 0; i < this.state.geek.length; i++) {
+            //   console.log(this.state.geek[i]);
+            // }
+        
+            return this.state.geek.map((item) => (
+                // were using map, because it returns elements in the form of an array 
+                // JSX only renders array elements 
+              <Card
+                avatar={item.avatar}
+                first_name={item.first_name}
+                last_name={item.last_name}
+                email={item.email}
+              />
+      
+            ));
+      
+      //  what fetch returns in console:
+      // {avatar: 'https://reqres.in/img/faces/2-image.jpg', first_name: 'Janet', last_name: 'Weaver', email: 'janet.weaver@reqres.in'}
+      // avatar: "https://reqres.in/img/faces/2-image.jpg"
+      // email: "janet.weaver@reqres.in"
+      // first_name: "Janet"
+      // last_name: "Weaver"
+      // [[Prototype]]: Object
+      
+          };
 
-            <Card
-            avatar={item.avatar}
-            first_name={item.first_name}
-            last_name={item.last_name}
-            email={item.email}
-            />
-
-
-        ));
-    };
-    
     deleteCard = () => {
         this.setState((prev) => {
             // create a new array, 
@@ -71,13 +85,13 @@ class App extends React.Component {
             }
         })
     }
+
+    
     
     render(){
         console.log(this.state.geek)
         // const x = {geek: {}}
         console.log(this.convertToCards())
-
-        this.convertToCards()
 
         return (
             <div className="app-container">

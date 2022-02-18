@@ -320,5 +320,144 @@ export default App;
 ![](4.PNG)
 > Note that: RHS is JSON placeholder data 
 
-#### Difference between axios and fetch 
+#### Submitting form data using axios.post to an API 
+> PersonInput.js 
+```bash 
+import React from 'react'
+//importing axios from the axios library we just installed 
+import axios from 'axios'
+import PersonList from './PersonList'
+
+class PersonInput extends React.Component {
+  constructor(){
+      super()
+
+✅we define the state of PersonInput.js inside the constuctor 
+✅intially name is an empty string 
+  this.state = {
+      name: '',
+  }
+}
+
+✅this function will be called when the user enters a value in the input field 
+  handleChange = (event) => {
+    ✅were setting the inputfield value to the same value that the user enters 
+
+    ✅to change the state we can either use this 
+    ✅1. 
+    //   this.setState({ name: event.target.value })
+
+    ✅or this method 
+    ✅2. 
+    this.setState(prev => {
+        return {
+            ✅the state is now updated 
+            name: event.target.value
+        }
+    })
+    console.log('event',event.target.value )
+  }
+
+✅when we submit the form this function is called  
+  handleSubmit = (event) => {
+      event.preventDefault()
+
+✅we create an object which changes values dyanamically based on what the user enters in the input field
+      const user = {
+          name: this.state.name 
+      }
+
+✅we send this object to the api endpoint through POST request 
+✅axios.post takes 2 arguments 
+      axios.post('https://jsonplaceholder.typicode.com/posts', { user }).then(res => {
+          console.log('response',res)
+          console.log('data',res.data)
+          ✅res.data contains the object that we just created 
+      })
+  }
+
+  render(){
+      return (
+    <div className='app-container'>
+        <form onSubmit={this.handleSubmit}>
+            <div>
+                <label>name</label>
+                ✅we assort a value to this, the value overides the placeholder 
+                ✅the value changes dyanamically, based on the current state 
+                ✅the state is changed using setState using this function 
+                <input placeholder="name" name="name" value={this.state.name} onChange={this.handleChange} />
+            </div>
+            <button type="submit">submit</button>
+        </form>
+     </div>
+      )
+  }
+}
+
+export default PersonInput
+```
+> PersonList.js 
+```bash 
+import React from 'react'
+//importing axios from the axios library we just installed 
+import axios from 'axios'
+
+class PersonList extends React.Component {
+  state = {
+      persons: []
+  }
+
+✅weve added axios.get inside componentDidMount() thats why the json data from API is loaded without us having to click on the button 
+  componentDidMount(){
+      //performs http get request from endpoint 
+      axios.get('https://jsonplaceholder.typicode.com/posts')
+      .then(res => {
+          console.log(res)
+          this.setState({persons: res.data})
+      })
+  }
+
+  render(){
+      return (
+          <ul>
+          ✅we use the map method, because we want to access individual elements of the array 
+          ✅JSX can only print array elements in curly braces, it cannot print objects in curly braces 
+
+              {this.state.persons.map(person => 
+                <li key={person.id}>{person.title}</li>
+               )}
+          </ul>
+      )
+  }
+}
+
+export default PersonList
+```
+> App.js 
+```bash 
+import logo from './logo.svg';
+import './App.css';
+import PersonList from './component/PersonList'
+import PersonInput from './component/PersonInput.js'
+
+function App() {
+  return (
+    <div className="App">
+      <PersonList />
+      <PersonInput />
+      <h1>hello</h1>
+    </div>
+  );
+}
+
+export default App;
+```
+![](5.PNG)
+> when we click on submit, response and data was printed 
+```bash 
+      axios.post('https://jsonplaceholder.typicode.com/posts', { user }).then(res => {
+          console.log('response',res)
+          console.log('data',res.data)
+```
+### Difference between axios and fetch 
 ![](3.PNG)
