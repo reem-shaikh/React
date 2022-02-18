@@ -102,7 +102,8 @@ ReactDOM.render(<App/>, document.getElementById('root'))
 ![](1.PNG)
 
 #### Axios POST request to send form data
-> reem-shaikh.github.io/axios-form/
+reem-shaikh.github.io/axios-form/
+
 > code link: https://github.com/reem-shaikh/React/tree/master/17-02/assignment-app
 
 #### Assignment 
