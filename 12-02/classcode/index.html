@@ -5,33 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="index.css" />
 </head>
 <body>
-    <div id="nav_container"></div>
-    <!-- Development React CDN links to load react scripts 
-    we imported this from https://reactjs.org/docs/cdn-links.html-->
-<script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
-<script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <div id="app"></div>
 
-<script>
-class NavigationBar extends React.Component {
-    render(){
-        let name = 'rum'
-        return (
-        <div>
-            <h2>React Page {name}</h2>
-        </div>
-        );
-    }
-}
-
-export default NavigationBar;
-
-ReactDOM.render(
-    <NavigationBar />,
-    document.getElementById('nav_container')
-);
-</script>
-
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <script type="text/babel" src="Gallery.js"></script>
+    <script type="text/babel" src="index.js"></script>
 </body>
 </html>

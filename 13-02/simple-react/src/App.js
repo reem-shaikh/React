@@ -19,7 +19,7 @@ increaseCounter = () => {
     //this.state.counter++;
 
     //this approach seems right
-    //however there is no gaurantee that this is the correct value because there is the possibility that the state's current value isnt really the previous value because state is asynchronous in nature 
+    //however there is no gaurantee that this is the correct value because there is the possibility that the state's current value isnt really the previous value (it could be the previos previos value) because state is asynchronous in nature 
 
     //react will try its best to update state as soon as possible, but it does not promise it will update immediately 
     
@@ -39,8 +39,8 @@ increaseCounter = () => {
     })
  }
 
- //foreach loops, creates elements but doesnt return  
- //map loops and returns JSX element 
+ //foreach loops, loops array but doesnt return any element 
+ //map loops array and returns JSX element 
 
  decreaseCounter = () =>{
      this.setState((prev)=> {

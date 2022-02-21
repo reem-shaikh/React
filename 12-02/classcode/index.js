@@ -1,9 +1,37 @@
-import NavigationBar from "./nav";
-let NavigationBar = require('./nav.js')
+class WelcomeText extends React.Component {
+    render() {
+        let name = "Aayush";
+        return (
+            <h1>Hello {name}</h1>
+        )
+    }
+}
 
-console.log('reactdom', ReactDOM)
+class NavigationBar extends React.Component {
+    render() {
+        return (
+            <div className="navbar">
+                <WelcomeText />
+                <input type="text" />
+                <button>Search</button>
+            </div>
+        );
+    }
+}
+
+class App extends React.Component {
+    render() {
+        return (
+            <div>
+                <NavigationBar />
+                <Gallery />
+            </div>
+        );
+    }
+}
+
 
 ReactDOM.render(
-    <NavigationBar />,
-    document.getElementById('nav_container')
-);
+    <App />,
+    document.getElementById('app')
+)

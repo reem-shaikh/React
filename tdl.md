@@ -28,10 +28,18 @@ redux
 - axios 
 
 #### 18-02
-- tdl (4)
-- complete 12-02 lecture with notes 
-- practice session 8-02 with notes 
-- revamp the gallery and tdl 
-- complete 12-02 assignmnet 
-- complete 8-02 assignment 
+- 13-02 tdl assignment 
+- gallery 12-02 take reference classcode rep 
+
+#### 19-02
+tdl (4)
+revamp the final 
+make a list of assignment and code links 
+
+
+- 12-02 gallery 
+code: https://reem-shaikh.github.io/react-gallery/
+assignment link: https://github.com/reem-shaikh/react-gallery
+
+- 13-02 to do list app 
 

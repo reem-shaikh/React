@@ -1,0 +1,22 @@
+body {
+  margin: 0;
+  /* background:linear-gradient(140deg, #71b7e6, #51106a); */
+  /* background-image: url('https://c.tenor.com/UkXBmkGcpNEAAAAC/rain-raining.gif '); */
+  background-image: url('https://i.pinimg.com/originals/a3/9f/12/a39f126ec96716640c3bbe8f06d3e801.gif');
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  monospace;
+}
