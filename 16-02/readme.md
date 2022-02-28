@@ -543,6 +543,7 @@ axios.get(url)
 )
 .catch((error) => console.log(error))
 ```
+#### Requests can be made by passing the relevant config to axios.
 > When were defining config object, we can define a bunch of properties 
 - BaseUrl 
 - params 
@@ -550,7 +551,7 @@ axios.get(url)
 - auth 
 - responseType 
 
-> creating a config object as a variable and passing to axios:
+> creating a config object as a variable and passing config to axios 
 ```bash 
 const config = {
 url: 'http://api.com',
