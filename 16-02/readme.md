@@ -460,4 +460,70 @@ export default App;
           console.log('data',res.data)
 ```
 ### Difference between axios and fetch 
+Fetch allows us to make network request and handle responses easier than our old friend XMLHttpRequest(XHR). One of the main differences is that Fetch API uses Promises, which provides a way to avoid callbacks hell and boilerplate heavy code that XMLHttpRequest(XHR) provides
+
+1. fetch is a part of JS window object method Fetch API, fetch allows us to fetch data from API asynchronously without installing any additional libraries. 
+> syntax of a basic fetch request 
+```bash 
+fetch(url)
+.then((res) => {
+// handle response 
+// promise returns the response object 
+
+# response format types:
+# - response.json()
+# - response.text()
+# - response.blob()
+# - response.formData()
+
+}.catch((error) => {
+// handle error 
+}
+```
+> Fetch with Request options - The fetch() method can optionally accept a second parameter, an init object that allows you to control a number of different settings:
+```bash 
+# Example POST method implementation:
+async function postData(url = '', data = {}) {
+  # Default options are marked with *
+  const response = await fetch(url, {
+    method: 'POST', 
+    # *GET, POST, PUT, DELETE, etc.
+    
+    mode: 'cors', 
+    # no-cors, *cors, same-origin
+  
+    cache: 'no-cache', 
+    # *default, no-cache, reload, force-cache, only-if-cached
+    
+    credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+      'Content-Type': 'application/json'
+      # Content-Type': 'application/x-www-form-urlencoded',
+    },
+    redirect: 'follow',
+    # manual, *follow, error
+    
+    referrerPolicy: 'no-referrer',
+    # no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin,  strict-origin, strict-origin-when-cross-origin, unsafe-url
+    
+    body: JSON.stringify(data)  // convert js object to json() string 
+    # body data type must match "Content-Type" header
+  });
+  return response.json(); // parses JSON response into native JavaScript objects
+}
+
+postData('https://example.com/answer', { answer: 42 })
+  .then(data => {
+    console.log(data); // JSON data parsed by `data.json()` call
+  });
+```
+2. Axios is a third party js library for making HTTP Requests from Node.js or XMLHTtpRequests or browser.
+- its based on promise API, however it has additonal advanatges like it protects from XSRF attack and cancelling / interepting Http requests.  
+- to be able to use axios library we have to install it using CDN / NPM / Yarn and import to our project.
+> syntax of basic axios request 
+```bash 
+axios.get(url)
+.then(response => console.log(response))
+.catch((error) => console.log(error))
+```
 ![](3.PNG)
