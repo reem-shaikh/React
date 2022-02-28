@@ -467,8 +467,9 @@ Fetch allows us to make network request and handle responses easier than our old
 ```bash 
 fetch(url)
 .then((res) => {
+console.log(res.json()
 // handle response 
-// promise returns the response object 
+# as a response, fetch returns a promise which can be resolved through a response object 
 
 # response format types:
 # - response.json()
@@ -476,7 +477,10 @@ fetch(url)
 # - response.blob()
 # - response.formData()
 
-}.catch((error) => {
+}.then(data => 
+console.log(data)
+}
+.atch((error) => {
 // handle error 
 }
 ```
@@ -517,13 +521,46 @@ postData('https://example.com/answer', { answer: 42 })
     console.log(data); // JSON data parsed by `data.json()` call
   });
 ```
+> using fetch() method when we are sending the body with the request we need to stringify the data.
+> we also need to mention the method (GET/ POST etc) on the response data 
+
 2. Axios is a third party js library for making HTTP Requests from Node.js or XMLHTtpRequests or browser.
 - its based on promise API, however it has additonal advanatges like it protects from XSRF attack and cancelling / interepting Http requests.  
 - to be able to use axios library we have to install it using CDN / NPM / Yarn and import to our project.
 > syntax of basic axios request 
 ```bash 
 axios.get(url)
-.then(response => console.log(response))
+.then(response => console.log(response)
+# as a response, axios returns a promise which can be resolved through a response object 
+
+# response object:-
+# data - response body 
+# status - HTTP status of the call (200 or 404)
+# statusText - HTTP status as a text message 
+# headers - the same as in request 
+# config - request configuration 
+# request - XMLHttpRequestObject 
+)
 .catch((error) => console.log(error))
 ```
+> When were defining config object, we can define a bunch of properties 
+- BaseUrl 
+- params 
+- headers
+- auth 
+- responseType 
+
+> creating a config object as a variable and passing to axios:
+```bash 
+const config = {
+url: 'http://api.com',
+method: 'POST',
+header: { Content-Type': 'application/json' },
+data: { name: 'John', age: 22 }
+}
+
+axios(config)
+```
+> In axios we pass data in the request and get data from the response, we dont need to stringify the data as we would in fetch, in case of axios its automatically stringified. 
+
 ![](3.PNG)
