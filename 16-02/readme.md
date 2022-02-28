@@ -565,3 +565,25 @@ axios(config)
 > In axios we pass data in the request and get data from the response, we dont need to stringify the data as we would in fetch, in case of axios its automatically stringified. 
 
 ![](3.PNG)
+- axios has url in request object 
+```bash 
+const config = {
+url: 'http://api.com',
+method: 'POST',
+header: { Content-Type': 'application/json' },
+data: { name: 'John', age: 22 }
+}
+
+axios(config)
+```
+- fetch doesnt have url in request object, rather url is passed as a parameter 
+```bash 
+fetch(url, {
+method: 'POST',
+headers: {
+ 'Content-Type': 'application/json'
+ },
+ body: JSON.stringify(data)
+ })
+ .then((response) => response.json())
+```
