@@ -460,4 +460,130 @@ export default App;
           console.log('data',res.data)
 ```
 ### Difference between axios and fetch 
+Fetch allows us to make network request and handle responses easier than our old friend XMLHttpRequest(XHR). One of the main differences is that Fetch API uses Promises, which provides a way to avoid callbacks hell and boilerplate heavy code that XMLHttpRequest(XHR) provides
+
+1. fetch is a part of JS window object method Fetch API, fetch allows us to fetch data from API asynchronously without installing any additional libraries. 
+> syntax of a basic fetch request 
+```bash 
+fetch(url)
+.then((res) => {
+console.log(res.json()
+// handle response 
+# as a response, fetch returns a promise which can be resolved through a response object 
+
+# response format types:
+# - response.json()
+# - response.text()
+# - response.blob()
+# - response.formData()
+
+}.then(data => 
+console.log(data)
+}
+.atch((error) => {
+// handle error 
+}
+```
+> Fetch with Request options - The fetch() method can optionally accept a second parameter, an init object that allows you to control a number of different settings:
+```bash 
+# Example POST method implementation:
+async function postData(url = '', data = {}) {
+  # Default options are marked with *
+  const response = await fetch(url, {
+    method: 'POST', 
+    # *GET, POST, PUT, DELETE, etc.
+    
+    mode: 'cors', 
+    # no-cors, *cors, same-origin
+  
+    cache: 'no-cache', 
+    # *default, no-cache, reload, force-cache, only-if-cached
+    
+    credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+      'Content-Type': 'application/json'
+      # Content-Type': 'application/x-www-form-urlencoded',
+    },
+    redirect: 'follow',
+    # manual, *follow, error
+    
+    referrerPolicy: 'no-referrer',
+    # no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin,  strict-origin, strict-origin-when-cross-origin, unsafe-url
+    
+    body: JSON.stringify(data)  // convert js object to json() string 
+    # body data type must match "Content-Type" header
+  });
+  return response.json(); // parses JSON response into native JavaScript objects
+}
+
+postData('https://example.com/answer', { answer: 42 })
+  .then(data => {
+    console.log(data); // JSON data parsed by `data.json()` call
+  });
+```
+> using fetch() method when we are sending the body with the request we need to stringify the data.
+> we also need to mention the method (GET/ POST etc) on the response data 
+
+2. Axios is a third party js library for making HTTP Requests from Node.js or XMLHTtpRequests or browser.
+- its based on promise API, however it has additonal advanatges like it protects from XSRF attack and cancelling / interepting Http requests.  
+- to be able to use axios library we have to install it using CDN / NPM / Yarn and import to our project.
+> syntax of basic axios request 
+```bash 
+axios.get(url)
+.then(response => console.log(response)
+# as a response, axios returns a promise which can be resolved through a response object 
+
+# response object:-
+# data - response body 
+# status - HTTP status of the call (200 or 404)
+# statusText - HTTP status as a text message 
+# headers - the same as in request 
+# config - request configuration 
+# request - XMLHttpRequestObject 
+)
+.catch((error) => console.log(error))
+```
+#### Requests can be made by passing the relevant config to axios.
+> When were defining config object, we can define a bunch of properties 
+- BaseUrl 
+- params 
+- headers
+- auth 
+- responseType 
+
+> creating a config object as a variable and passing config to axios 
+```bash 
+const config = {
+url: 'http://api.com',
+method: 'POST',
+header: { Content-Type': 'application/json' },
+data: { name: 'John', age: 22 }
+}
+
+axios(config)
+```
+> In axios we pass data in the request and get data from the response, we dont need to stringify the data as we would in fetch, in case of axios its automatically stringified. 
+
 ![](3.PNG)
+- axios has url in request object 
+```bash 
+const config = {
+url: 'http://api.com',
+method: 'POST',
+header: { Content-Type': 'application/json' },
+data: { name: 'John', age: 22 }
+}
+
+axios(config)
+```
+- fetch doesnt have url in request object, rather url is passed as a parameter 
+```bash 
+fetch(url, {
+method: 'POST',
+headers: {
+ 'Content-Type': 'application/json'
+ },
+ body: JSON.stringify(data)
+ })
+ .then((response) => response.json())
+```
