@@ -1,0 +1,23 @@
+{
+  "name": "webpack",
+  "version": "1.0.0",
+  "description": "Webpack is a module bundler. It bundles / minifies / compresses JS & HTML files into a bundle. It modulizes the code.\r ```bash\r All dependencies need to be loaded in a specific order, in order to be executed, webpack solves this problem by modulizing our code and placing the dependencies the right order, \r ```\r ![](1.PNG)",
+  "main": "webpack.config.js",
+  "scripts": {
+    "start": "webpack serve",
+    "build": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-loader": "^8.2.3",
+    "css-loader": "^6.7.1",
+    "html-webpack-plugin": "^5.5.0",
+    "style-loader": "^3.3.1",
+    "svg-inline-loader": "^0.8.2",
+    "webpack": "^5.70.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.4"
+  }
+}

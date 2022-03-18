@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //The rest operator allows a function to accept an indefinite number of arguments as an array, 
+        //we can take n number of arguments in the array while were passing
+
+        //rest operator - all the extra elements we defined in the function, will be added in ...d
+        function addNumber(a, b, c, ...d){
+            console.log('d', d)
+            return a+b+c;
+        }
+ 
+        const res = addNumber(2, 5, 6, 7, 8)
+        console.log('res', res)
+
+        //another example of REST operator 
+        function sum(...theArgs) {
+           return theArgs.reduce((previous, current) => {
+              return previous + current;
+           });
+        }      
+
+       console.log(sum(1, 2, 3));
+
+
+        //spread operator is passed in the function arguments 
+        //rest operator is passed in the function parameter
+
+        //spread operator - spreads elements in the new array 
+        var names= ['ajay', 'anuj', 'vivek'];
+
+        function getNames(name1, name2, name3) //paramteer
+        {
+            console.log(name1, name2, name3)
+        }
+ 
+        //getNames(names[0], names[1], names[2])
+        //instead of this just write this 
+        getNames(...names)  //arguments
+    </script>
+</body>
+</html>
