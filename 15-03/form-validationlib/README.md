@@ -190,3 +190,4 @@ function Form() {
 
 export default Form;
 ```
+> To learn about Form validation with formik and Yup, head over to the formik folder.
