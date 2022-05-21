@@ -137,5 +137,3 @@ export default PrivateRoute
 > when we click on `Login` and then click on `profile` component, then it routes us to the `profile` component.
 > when we click on `Logout` and then click on `profile` component, then it routes us to the `home` component
 
-### Difference between BrowserRouter and HashRouter
-
