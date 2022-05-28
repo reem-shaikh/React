@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Bhai+2&family=Poppins:wght@100;300&display=swap');
+
+:root{
+  --base:   #E8EDDF;
+  --light:  #CFDBD5;
+  --yellow: #F5CB5C;
+  --dark:   #2c2ca9;
+  --black:  #242423;
+}
+
+body{
+  font-family: 'Baloo Bhai 2', cursive;
+  background-color: var(--base);
+}
+
+.main-title{
+  color: var(--yellow);
+}
+.App {
+  text-align: center;
+}
+
+/* flex is 1D, and it send to next line if overflows, we can 
+   acheive 2d in flex, but it becomes a little complex, thats why we use Grid 
+   Grid is 2D */
+.card-container {
+  display: grid;
+  /* repeat column of 1fr width 4 times */
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 0.5rem;
+  max-width: 50rem;
+  margin: auto;
+  padding: 0.5rem;
+}
+
+.card {
+  border: 1px solid var(--black);
+  border-radius: 5px;
+  background-color: black;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.card:hover {
+  /* psuedo class - applies css on the whole card, not a part of it */
+  border-color: var(--yellow);
+}
+
+.card.flipped {
+  border-color: 3px solid red;
+}
+
+.flipped {
+  background-color: var(--dark);
+}
+
+.content {
+  visibility: hidden;
+}
+
+.flipped > .content {
+  visibility: visible;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
