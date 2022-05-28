@@ -88,4 +88,7 @@ console.log('func',x.someFunc())
 // ReactDOM.render(x.render(), document.getElementById('root'))
 
 // we can write 
-ReactDOM.render(<Something/>,  document.getElementById('root'))
+//ReactDOM.render(<Something/>,  document.getElementById('root'))
+const app_elem = document.getElementById('root');
+const react_root = ReactDOM.createRoot(app_elem);
+react_root.render(<App />);
