@@ -42,7 +42,7 @@ We cannot use live server to run this, we run on node instead, by using `npm sta
 export PORT = 3001 
 npm start
 ```
-### Memory Game 
+### Memory Game
 1. create wireframe for the app 
 ![](1.PNG)
 
@@ -612,6 +612,7 @@ const Card = (props) => {
 
 export default Card;
 ```
+![](https://quiet-sorbet-551643.netlify.app/)
 
 
 
