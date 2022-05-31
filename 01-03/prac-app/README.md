@@ -1,4 +1,6 @@
 ### Create Ecommerce App using react-redux 
+![Hosted Link](https://ornate-sprinkles-2379bd.netlify.app/)
+
 > using https://fakestoreapi.com API 
 ![](2.PNG)
 

@@ -2,7 +2,7 @@ import '../App.css';
 const Header = () => {
     return (
         <div className="main-title">
-         <h1> header </h1>
+         <h1> Flip Card Game </h1>
         </div>
     )
 }
