@@ -352,6 +352,7 @@ Method is called imeediately before a component is unmounted and destroyed.
 - do not call setstate method here 
 
 > We added a new state and were going to toggle its value from false to true using a button, when its set to true LifecycleB component is mounted, when its set to false its unmounted
+
 > LifecycleB.js 
 ```bash 
 import React, { Component } from 'react'
