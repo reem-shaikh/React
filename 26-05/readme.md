@@ -828,7 +828,7 @@ const Card = (props) => {
             props.flip(props.index)
         }
     }
-    
+
     return (
         #What to do when we encounter a particular boolean value?
 
@@ -863,6 +863,7 @@ export default Card;
 - create a build file using `npm run build` 
 netlify -> select git repo -> mention the base file -> 
 ![](4.PNG)
+![The Link](https://merry-kataifi-94c706.netlify.app/)
 
 
 

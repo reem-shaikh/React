@@ -16,7 +16,8 @@ When there is a state update, re-rendering occurs. Over here the component is up
 ```
 its possible that a component is mounted and not rendered 
 
-> Lifecycle of react component using `useEffect`
+#### Lifecycle of react component using `useEffect`
+> App.js 
 ```bash
 import {useEffect, useState} from 'react'
 
@@ -68,3 +69,127 @@ function App() {
 
 export default App;
 ```
+#### To do List 
+- useEffect - cleanup 
+- axios 
+- Asynchronous state management 
+- useRef 
+
+### codesandbox.io
+website using which we can create react application without the need of having nodeJS installed on machine. 
+- sign in with git -> create sandbox -> choose react -> it creates a react environment for you
+
+#### How to acheive cleanup in useEffect?
+> App.js 
+```bash
+import {useState} from 'react'
+import Position from './Position';
+
+function App() {
+  const [showPosition, setShowPosition] = useState(true)
+ return (
+   <div className='app'>
+    {showPosition ? <Position/> : false}
+    <button onClick={() => setShowPosition(false)}>do not track</button>
+   </div>
+ )
+ }
+
+export default App;
+```
+> Position.js 
+```bash
+import {useEffect, useState} from 'react'
+
+function Position() {
+  const [mouse, setMouse] = useState({x:0, y:0})
+
+  #useEffect shows what happens when component is first mounted 
+  useEffect(() => {
+  
+    const fn = (e) => {
+      console.log(e)
+      console.log('tracking', e.x, e.y)
+      #we added event listener at mounting time 
+      #on mouse moving, it tracks the coordinates at x and y 
+       setMouse({
+         x: e.x,
+         y: e.y
+       })
+
+    }
+  #Its a new feature in React 18, Inside useEffect, whenever your setting a state which is defined outside its inner scope, i.e its dependent on previous state, encapsulate it inside callback expecially if your adding an event listner linked to that function 
+
+  # States are asynchronous in nature. 
+  # if you want to access a previous state from within useEffect 
+  # then use a callback method method taking argument as the old value and return new value.
+
+  # Its not a react 18 feature, it has been a part of react 17 as well, however rn react 18 is making it more strict to not use it. 
+
+
+  #for instance you cannot do this 
+  # const id = window.addEventListener('mousemove',  const fn = (e) => {
+  #     console.log(e)
+  #     console.log('tracking', e.x, e.y)
+  #     #we added event listener at mounting time 
+  #     #on mouse moving, it tracks the coordinates at x and y 
+  #      setMouse({
+  #        x: e.x,
+  #        y: e.y
+  #      })
+
+  #   })
+
+  const id = window.addEventListener('mousemove', fn)
+
+  #cleanup function is executed when component is unmounted 
+  #when it gets unmounted we want to remove all of this listeners 
+  return () => {
+    window.removeEventListener('mousemove', id)
+    console.log('removed')
+  }
+}, [])
+
+  
+ return (
+   <div>
+   # setInterval executes after some interval 
+    <h3>x:{mouse.x} || y:{mouse.y}</h3>
+   </div>
+ )
+ }
+
+export default Position;
+```
+### some JS code examples 
+```bash
+function fn(){
+  # everything inside is lexically scoped, binded to the function fn
+  let a = 10 
+  function fn2(){
+    console.log(a)
+  }
+
+  return fn2
+}
+
+const a = fn() #function fn2() { console.log(a) }
+console.log(a)
+a()            #10
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
