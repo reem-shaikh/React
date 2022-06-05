@@ -25,6 +25,7 @@ function Focus(){
 }
 ```
 ![](1.PNG)
+
 ### useState 
 - useState hook is used for re-rendering DOM element
 - In useState hook you can create any value 

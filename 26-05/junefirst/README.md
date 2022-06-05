@@ -673,7 +673,7 @@ const Component2 = React.forwardRef((props, ref) => {
 
     #forwarded ref from parent to child 
     return (
-        #ref is updated over here, and send from child to parent when user clicks on the button 
+        #ref is updated over here, and the update is registered in the parent
         <div ref={ref} style={{backgroundColor: 'red', padding: '15px'}}>
             {props.children}
              <h1>hello</h1>
@@ -721,7 +721,7 @@ const Component2 = React.forwardRef((props, ref) => {
 
 export default Component2
 ```
-- When user clicks on this button, it retreives `ref` from Component2.js 
+- When user clicks on this button, it retreives `ref` from Component2.js, 
 > App.js 
 ```bash
   <button ref={buttonRef} onClick={_ => console.log(buttonRef)} id='sample_button'>onClick</button>

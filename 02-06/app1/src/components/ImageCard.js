@@ -1,16 +1,22 @@
 import React from 'react'
 import { Card } from 'react-bootstrap'
-const ImageCard = () => {
+const ImageCard = (props) => {
+  console.log(props.image.details)
   return (
     <>
       {/* mb-3 to add margin in between cards */}
-      <Card className="bg-dark text-white mb-3">
-        <Card.Img src="https://images.unsplash.com/photo-1648737154547-b0dfd281c51e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="Card image" />
+      <Card className="bg-dark text-white mb-3" onClick={props.click}>
+        {/* <Card.Img src="https://images.unsplash.com/photo-1648737154547-b0dfd281c51e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="Card image" /> */}
+        <Card.Img src={props.image.details.urls.thumb} alt="Card image" />
         <Card.ImgOverlay>
-          <Card.Title>Card title</Card.Title>
-          <Card.Text>
+          {/* <Card.Title>Card title</Card.Title> */}
+          <Card.Title>{props.image.details.user.name}</Card.Title>
+          {/* <Card.Text>
             This is a wider card with supporting text below as a natural lead-in
             to additional content. This content is a little bit longer.
+          </Card.Text> */}
+          <Card.Text>
+             {props.image.details.created_at}
           </Card.Text>
           <Card.Text>Last updated 3 mins ago</Card.Text>
         </Card.ImgOverlay>
