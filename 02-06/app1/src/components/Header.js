@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useRef} from 'react'
 import {
   Navbar,
   Container,
@@ -9,12 +9,30 @@ import {
   Button,
 } from 'react-bootstrap'
 
-const Header = () => {
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
+const Header = (props) => {
+  const inputRef = useRef()
+  const navigate = useNavigate();
+
+  const formSubmitted = (e) => {
+    console.log(e)
+    e.preventDefault()
+
+    console.log(inputRef.current.value)
+
+    props.setSearchKey(inputRef.current.value)
+
+    navigate("/");
+  }
   return (
     <>
       <Navbar bg="light" expand="lg">
         <Container fluid>
-          <Navbar.Brand href="#">Navbar scroll</Navbar.Brand>
+ 
+          <Navbar.Brand ><Link to="/" style={{textDecoration: "none", color: "black"}}>GeekGallery</Link></Navbar.Brand>
+       
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav
@@ -38,12 +56,14 @@ const Header = () => {
                 Link
               </Nav.Link>
             </Nav>
-            <Form className="d-flex">
+            <Form className="d-flex" onClick={formSubmitted} action='#'>
               <FormControl
                 type="search"
                 placeholder="Search"
                 className="me-2"
                 aria-label="Search"
+                name="search"
+                ref={inputRef}
               />
               <Button variant="outline-success">Search</Button>
             </Form>
@@ -55,3 +75,48 @@ const Header = () => {
 }
 
 export default Header
+
+// import React, { useRef } from 'react'
+// import {Navbar, Container, Nav, Form, FormControl, Button} from 'react-bootstrap';
+
+// const Header = (props) => {
+//   // header recieves props from app.js 
+//   // were maintaing a ref state since we dont want the input field to re-render 
+//   const inputRef = useRef();
+
+//   const formSubmitted = e => {
+//     e.preventDefault();
+//     props.setSearchKey(inputRef.current.value);
+//   }
+
+//   return (
+//     <>
+//       <Navbar bg="light" expand="lg">
+//         <Container fluid>
+//           <Navbar.Brand href="./">GeekGallery</Navbar.Brand>
+//           <Navbar.Toggle aria-controls="navbarScroll" />
+//           <Navbar.Collapse id="navbarScroll">
+//             <Nav
+//               className="me-auto my-2 my-lg-0"
+//               style={{ maxHeight: '100px' }}
+//               navbarScroll
+//             >
+//             </Nav>
+//             <Form className="d-flex" onSubmit={formSubmitted}>
+//               <FormControl
+//                 type="search"
+//                 placeholder="Search"
+//                 className="me-2"
+//                 aria-label="Search"
+//                 ref={inputRef}
+//               />
+//               <Button variant="outline-success">Search</Button>
+//             </Form>
+//           </Navbar.Collapse>
+//         </Container>
+//       </Navbar>
+//     </>
+//   )
+// }
+
+// export default Header
