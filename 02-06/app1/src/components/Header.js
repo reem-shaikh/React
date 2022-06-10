@@ -25,7 +25,7 @@ const Header = (props) => {
     props.setSearchKey(inputRef.current.value)
 
     navigate("/");
-    // navigate(`search/?q=${inputRef.current.value}`);
+    
   }
   return (
     <>

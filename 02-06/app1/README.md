@@ -14,14 +14,17 @@
 
 ### Implemented the App in 3 parts
 1. Created an image gallery and every time the user clicks on the card, we open a popup 
+https://helpful-dasik-3ef1d1.netlify.app/
 ```bash
 folder: 02-06/classcode 
 ```
-2. Created an image gallery and every time the user clicks on the card, we open Details page 
+2. Created an image gallery and every time the user clicks on the card, we open Details page. Also Note that: we have only added the path parameter whenever the image is clicked on, we havent integrated the feature where when user types something in the search bar those search results render, also we have yet to set the query parameters whenever the entered search result of the user is rendered. 
+https://famous-buttercream-781d68.netlify.app/
 ```bash
 folder: 02-06/app1 
 ```
-3. Created an image gallery and every time the user searches something in the input field, changes are made in the query parameter and everytime user clicks on the card, a details page is opened
+3. Created an image gallery and every time the user searches something in the input field, changes are made in the query parameter of the main url and everytime user clicks on the card, a details page is opened and changes are made in the path parameter of the main url.
+https://stunning-alfajores-c8dbc2.netlify.app/
 ```bash
 folder: 09-06/geekgallery 
 ```
