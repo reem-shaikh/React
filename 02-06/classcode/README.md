@@ -1,5 +1,6 @@
 ### The working of the Code 
-![The Site is Live](https://62a342a192fe183b30a12c7d--helpful-dasik-3ef1d1.netlify.app/)
+https://62a342a192fe183b30a12c7d--helpful-dasik-3ef1d1.netlify.app/
+
 ```bash
 Further Details about every step of the code implementation is inside the readme of 02/06/app1
 ```
