@@ -69,7 +69,6 @@ function App() {
 
   return (
     <>
-
       <Header setSearchKey={setSearchKey} />
 
       <InfiniteScroll

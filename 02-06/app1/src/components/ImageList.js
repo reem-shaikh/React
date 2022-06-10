@@ -35,7 +35,7 @@ const ImageList = (props) => {
             {props.images.map((single_image, idx) => {
               return <Col key={idx}>
                   <ImageCard 
-                     click={props.cardClick} 
+                     //click={props.cardClick} 
                      image_details={single_image} />
 
                      </Col>

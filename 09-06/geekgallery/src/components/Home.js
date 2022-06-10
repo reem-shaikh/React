@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import InfiniteScroll from 'react-infinite-scroller';
 import axios from 'axios';
 import ImageList from "./ImageList";
+import Header from './Header';
 
 const Home = () => {
   const [imageList, setImageList] = useState([]);
@@ -13,6 +14,7 @@ const Home = () => {
   }
 
   return (
+    <>    
     <InfiniteScroll
         pageStart={0}
         loadMore={loadFunc}
@@ -21,6 +23,7 @@ const Home = () => {
       >
         <ImageList images={imageList} />
       </InfiniteScroll>
+      </>
   )
 }
 

@@ -12,6 +12,19 @@
 - click on the image should give option to like, share and download. 
 - when i like it should show red heart (otherwise transparent)
 
+### Implemented the App in 3 parts
+1. Created an image gallery and every time the user clicks on the card, we open a popup 
+```bash
+folder: 02-06/classcode 
+```
+2. Created an image gallery and every time the user clicks on the card, we open Details page 
+```bash
+folder: 02-06/app1 
+```
+3. Created an image gallery and every time the user searches something in the input field, changes are made in the query parameter and everytime user clicks on the card, a details page is opened
+```bash
+folder: 09-06/geekgallery 
+```
 ### Wireframe 
 - entire webpage 
 ![](1.PNG)

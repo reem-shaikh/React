@@ -9,6 +9,9 @@ const Header = (props) => {
 
   const formSubmitted = e => {
     e.preventDefault();
+    // we added the value of search inside navigate 
+    //when the user enters something in the input field the url is updated to this 
+    //for example, 
     navigate(`/search?q=${inputRef.current.value}`);
   }
   return (

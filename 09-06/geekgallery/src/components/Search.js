@@ -5,7 +5,9 @@ import ImageList from './ImageList';
 import InfiniteScroll from 'react-infinite-scroller';
 import 'bootstrap/dist/css/bootstrap.min.css';
 const Search = () => {
+  //were using the useParams hook for setting the url for the query parameter 
   const [searchParams] = useSearchParams();
+  //paste imageList as a state inside here 
   const [imageList, setImageList] = useState([]);
 
   const loadFunc = pageNo => {
