@@ -1,5 +1,5 @@
 import React from 'react'
-import ChildB from './ChildB.JS'
+import ChildB from './ChildB.js'
 const ChildA = () => {
   return (
     <div><ChildB/></div>

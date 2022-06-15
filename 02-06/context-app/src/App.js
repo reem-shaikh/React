@@ -1,12 +1,12 @@
-import logo from './logo.svg';
 import './App.css';
 import Child1 from './components/Child1';
 import ChildA from './components/ChildA';
 import { useState } from 'react';
+
 import nameContext from './NameContext';
 import setNameContext from './SetNameContext';
-import lastNameContext from './lastNameContext';
-import setLastNameContext from './setLastNameContext';
+import lastNameContext from './LastNameContext';
+import setLastNameContext from './SetLastNameContext';
 
 function App() {
   const [name, setName] = useState("");
@@ -14,16 +14,14 @@ function App() {
 
   return (
     <nameContext.Provider value={name}>
-      <lastNameContext.Provider value={lastName}>
+        <lastNameContext.Provider value={lastName}>
         <setNameContext.Provider value={setName}>
           <setLastNameContext.Provider value={setLastName}>
-            <div className="App">
                 <Child1 />
                 <ChildA />
-            </div>
           </setLastNameContext.Provider>
-        </setNameContext.Provider>
-      </lastNameContext.Provider>
+         </setNameContext.Provider>
+        </lastNameContext.Provider>
     </nameContext.Provider>
   );
 }

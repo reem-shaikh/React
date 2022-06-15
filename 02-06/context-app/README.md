@@ -54,6 +54,12 @@ Instead of passing props via prop-drilling, we use context-API through which we 
 Comparitively to prop-drilling consumer API is more secure. 
 
 ### Steps to implementing createContext()
+```bash
+1. Create a context using createContext()
+2. Context that you created export it 
+3. Where we have the data give the Provider 
+4. Wherever we want to import it just import it within Consumer 
+```
 1. Create a context by running createContext() Context which we created export it, where we have the data give the provider
 > App.js 
 ```bash
@@ -64,29 +70,29 @@ import {useState, createContext} from 'react'
 
 const context = createContext()
 function App() {
-  //if we have some state here 
+  #if we have some state here 
   const [name, setName] = useState('reem')
 
   return (
     <div className="App">
-      {/* anything insdie the provider can access the data */}
+      #anything inside the provider can access the data
       <context.Provider value={name}>
          <Child1/>
       </context.Provider>
 
-      {/* the normal prop-drilling way */}
-      {/* <Child1 name={name}/> */}
     </div>
   );
 }
 
+#we need to export it
 export {context}
 export default App;
 ```
 2. wherever we want to import it, just do import and use consumer
-- consumer requires a function, and this function will be called verytime the data changes 
+- consumer requires a function, and this function will be called everytime the data changes 
 ```bash
 import React from 'react'
+#importing context in child 
 import {context} from '../App'
 
 function Child4() {
@@ -98,15 +104,19 @@ function Child4() {
         )
       }}
     </context.Consumer>
-
-    //the propdrilling way 
-    // <div>{props.name}</div>
   )
 }
 
 export default Child4
+
+# DOM:
+Name: reem
 ```
+### Within one Provider can we pass multiple data?
+Well technically we can, but if were making change in one data and the other data is not changed, then it will be re-rendered as well (irrespective of whether it had any changes in it or not)
+
 ### what is babel, webpack ?
+We type in JSX in react, we can give extension as .js or .jsx both will work.
 - Conversion from JSX to JS - babel 
 - bundling from react code to HTML/CSS/JS- webpack 
 
@@ -114,8 +124,9 @@ export default Child4
 state lifting - first we lift the state from child components and we transfer it to the parent component and then we send the prop to the child components either on every child level via prop drilling or directly via context api 
 ![](g8.PNG)
 
-### Passing more than one data via Context API 
-We can have one context inside another and pass more than one data from parent component to child component 
+If we placed an input at ChildD, then we would lift it, then we would drill it. (this is discussed in passing more than 1 data in context API example)
+
+### Passing one data via Context API 
 > App.js 
 ```bash
 import logo from './logo.svg';
@@ -125,21 +136,74 @@ import {useState, createContext} from 'react'
 import ChildA from './components/ChildA';
 
 const context = createContext()
-const setContext = createContext()
+
 function App() {
-  //if we have some state here 
   const [name, setName] = useState('reem')
 
   return (
     <div className="App">
-      {/* anything inside the provider can access the data */}
       <context.Provider value={name}>
-        <setContext.Provider value={setName}>
-        <Child1/>
          <ChildA/>
-        </setContext.Provider>
       </context.Provider>
 
+    </div>
+  );
+}
+
+export {context}
+export default App;
+```
+> ChildD.js 
+In this example, were technically updating the state from child component and the results are rendered at the parent component.
+```bash
+import React from 'react'
+import {context} from '../App'
+const ChildD = () => {
+  return (
+
+  <context.Consumer>
+    {data => {
+      return (
+        <div>
+         <p>Name: {data} </p>
+        </div>
+      )
+    }}
+  </context.Consumer>
+  )
+}
+
+export default ChildD
+
+DOM:
+name: reem
+```
+### Passing more than one data via Context API 
+> You can have many contexts in one app. 
+
+We can have one context inside another and pass more than one data from parent component to child component 
+> App.js 
+```bash
+import './App.css';
+import Child1 from './components/Child1';
+import {useState, createContext} from 'react'
+import ChildA from './components/ChildA';
+
+const context = createContext()
+const setContext = createContext()
+
+function App() {
+  #if we have some state here 
+  const [name, setName] = useState("")
+
+  return (
+    <div className="App">
+      <context.Provider value={name}>
+        <setContext.Provider value={setName}>
+          <Child1/>
+          <ChildA/>
+        </setContext.Provider>
+      </context.Provider>
     </div>
   );
 }
@@ -152,14 +216,16 @@ In this example, were technically updating the state from child component and th
 ```bash
 import React from 'react'
 import {setContext} from '../App'
+
 const ChildD = () => {
   return (
-    // we are sharing data from any component to any other component, not necessarily from parent to child component 
+  #we are sharing (function) data from any component to any other component, not necessarily from parent to child component 
+  #Lifting state from ChildD to App.js and then the state is passed as props to Child4.js directly through context API 
   <setContext.Consumer>
-    {data => {
+    {param => {
       return (
         <div>
-          <input type='text' onKeyUp={(e => data(e.target.value))} />
+          <input type='text' onKeyUp={(e => param(e.target.value))} />
         </div>
       )
     }}
@@ -169,12 +235,40 @@ const ChildD = () => {
 
 export default ChildD
 ```
+> Child4.js 
+```bash
+import React from 'react'
+import {context} from '../App'
+
+const Child4 = () => {
+  return (
+  <context.Consumer>
+    {param => {
+      return (
+        <div>
+          <p>{param}</p>
+        </div>
+      )
+    }}
+  </context.Consumer>
+  )
+}
+
+export default Child4
+```
+![](g15.PNG)
+
+> This is how were acheiving state lifting. 
+Data is going from ChildD (where state is set) to App.js and then its send from App.js to Child4 (where state is printed)
+![](g13.PNG)
+
 ### Advantage 
 - even if we move the component's position and add additional components in between ancestor and descendent and if we passed props via context API its not going to make any difference. This allows us to maintain the code easily.
 
 - In case of prop-drilling if we added components in between ancestor and descendent, then we'd have to individually change all the components in between to link to the very next child component which (therefore, propdrilling aint a practical option)
 
 For example, if we already had 3 existing components i.e ChildA, ChildB and ChildD and if we were to add an existing component say ChildC in between ChildB and ChildD, then, we'd have to link ChildB to ChildC and further link ChildC to ChildD. If instead of having to send props down at every level, we wouldve used context API which ensures that props are passed directly from the parent/provider to the child/consumer component, then we wouldnt have to make any link changes in between.
+
 > ChildA.js 
 ```bash
 const ChildA = () => {
@@ -207,6 +301,7 @@ const ChildD = (props) => {
 export default ChildD
 ```
 - Note: one provider can have two or more consumers
+If we have 4 states, we need to make 4 providers and pass it as 4 values. 
 
 ### We can even seperate the contexts in seperate files 
 We defined all the contexts in seperate files. 
@@ -235,8 +330,79 @@ import { createContext } from "react";
 const setLastNameContext = createContext()
 export default setLastNameContext 
 ```
-### The Problem: Callback Hell
-and import multiple imports in a nested format, but this becomes harder to manage and read and causes callback hell. 
+### When you pass TWO values through Context API 
+> App.js 
+```bash
+import './App.css';
+import Child1 from './components/Child1';
+import ChildA from './components/ChildA';
+import { useState } from 'react';
+
+import nameContext from './NameContext';
+import setNameContext from './SetNameContext';
+
+function App() {
+  const [name, setName] = useState("");
+
+  return (
+    <nameContext.Provider value={name}>
+        <setNameContext.Provider value={setName}>
+                <Child1 />
+                <ChildA />
+        </setNameContext.Provider>
+    </nameContext.Provider>
+  );
+}
+
+export default App;
+```
+> ChildD.js 
+```bash
+import React from 'react'
+import setNameContext from '../SetNameContext'
+
+const ChildD = () => {
+  return (
+  //we are sharing (function) data from any component to any other component, not necessarily from parent to child component 
+  //Lifting state from ChildD to App.js and then the state is passed as props to Child4.js directly through context API 
+  <setNameContext.Consumer>
+    {param => {
+      return (
+        <div>
+          <input type='text' onKeyUp={(e => param(e.target.value))} />
+        </div>
+      )
+    }}
+  </setNameContext.Consumer>
+  )
+}
+
+export default ChildD
+```
+> Child4.js 
+```bash
+import React from 'react'
+import nameContext from '../NameContext'
+
+// The Problem: callback hell 
+const Child4 = () => {
+  return (
+    <nameContext.Consumer>
+      {param => {
+         return (
+            <p>{param}</p>
+         )
+      }}
+    </nameContext.Consumer>
+  )
+}
+
+export default Child4
+```
+
+### When you pass more than TWO values through Context API 
+### The Problem: Callback Hell: When you have more than a couple contexts, the readibility becomes confusing
+import multiple imports in a nested format, but this becomes harder to manage and read and causes callback hell. 
 ![](g9.PNG)
 
 > App.js 
@@ -245,10 +411,11 @@ import './App.css';
 import Child1 from './components/Child1';
 import ChildA from './components/ChildA';
 import { useState } from 'react';
+
 import nameContext from './NameContext';
 import setNameContext from './SetNameContext';
-import lastNameContext from './lastNameContext';
-import setLastNameContext from './setLastNameContext';
+import lastNameContext from './LastNameContext';
+import setLastNameContext from './SetLastNameContext';
 
 function App() {
   const [name, setName] = useState("");
@@ -256,16 +423,14 @@ function App() {
 
   return (
     <nameContext.Provider value={name}>
-      <lastNameContext.Provider value={lastName}>
+        <lastNameContext.Provider value={lastName}>
         <setNameContext.Provider value={setName}>
           <setLastNameContext.Provider value={setLastName}>
-            <div className="App">
                 <Child1 />
                 <ChildA />
-            </div>
           </setLastNameContext.Provider>
-        </setNameContext.Provider>
-      </lastNameContext.Provider>
+         </setNameContext.Provider>
+        </lastNameContext.Provider>
     </nameContext.Provider>
   );
 }
@@ -276,7 +441,7 @@ export default App;
 ```bash
 import React from 'react'
 import nameContext from '../NameContext'
-import lastNameContext from '../lastNameContext'
+import lastNameContext from '../LastNameContext'
 
 // The Problem: callback hell 
 const Child4 = () => {
@@ -303,30 +468,32 @@ export default Child4
 ```bash
 import React from 'react'
 import setNameContext from '../SetNameContext'
-import setLastNameContext from '../setLastNameContext'
-
-// The Problem: Callback hell 
+import setLastNameContext from '../SetLastNameContext'
 const ChildD = () => {
-  <setNameContext.Consumer>
-    {setFirstName => {
-      return (
-        <setLastNameContext.Consumer>
-          {setLastName => {
-            return (
-                <div>
-                  <input type="text" onKeyUp={e => setFirstName(e.target.value)} />
-                  <input type="text" onKeyUp={e => setLastName(e.target.value)} />
-                </div>
-            )
-          }}
-        </setLastNameContext.Consumer>
-      )
-    }}
+  return (
+    <setNameContext.Consumer>
+        {setFirstName => {
+          return (
+            <setLastNameContext.Consumer>
+              {setLastName => {
+                return (
+                    <div>
+                      <input type="text" onKeyUp={e => setFirstName(e.target.value)} />
+                      <input type="text" onKeyUp={e => setLastName(e.target.value)} />
+                    </div>
+                )
+              }}
+            </setLastNameContext.Consumer>
+          )
+        }}
   </setNameContext.Consumer>
+  )
 }
 
 export default ChildD
 ```
+![](g77.PNG)
+
 ### useContext() to the rescue
 - useContext Hook 
 
@@ -337,7 +504,7 @@ export default ChildD
 - ChildD written in useContext VS ChildD written in callback hell
 ![](g11.PNG)
 
-### useContext() implementation  
+### `useContext()` implementation  
 > App.js 
 ```bash
 import './App.css';
@@ -345,32 +512,25 @@ import Child1 from './components/Child1';
 import ChildA from './components/ChildA';
 import { useState } from 'react';
 
-#we imported these contexts from their specific files defined outside src 
 import nameContext from './NameContext';
 import setNameContext from './SetNameContext';
-import lastNameContext from './lastNameContext';
-import setLastNameContext from './setLastNameContext';
+import lastNameContext from './LastNameContext';
+import setLastNameContext from './SetLastNameContext';
 
 function App() {
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
 
   return (
-    #were ultimately passing each state in a seperate Provider 
-    #Moreover, since the export is already defined inside their individual context files, we dont need to do named export here, as we were doing in the callback hell scenario. 
     <nameContext.Provider value={name}>
-      <lastNameContext.Provider value={lastName}>
+        <lastNameContext.Provider value={lastName}>
         <setNameContext.Provider value={setName}>
           <setLastNameContext.Provider value={setLastName}>
-            <div className="App">
-                #Child 1 is linked to Child2 is linked to Child3 which is finally linked to Child4
                 <Child1 />
-                #similarly ChildA is ultimately linked to ChildD 
                 <ChildA />
-            </div>
           </setLastNameContext.Provider>
-        </setNameContext.Provider>
-      </lastNameContext.Provider>
+         </setNameContext.Provider>
+        </lastNameContext.Provider>
     </nameContext.Provider>
   );
 }
@@ -415,7 +575,7 @@ const Child4 = () => {
 
 export default Child4
 ```
-
+![](g77.PNG)
 
 
 
