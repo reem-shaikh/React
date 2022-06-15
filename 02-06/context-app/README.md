@@ -209,18 +209,212 @@ export default ChildD
 - Note: one provider can have two or more consumers
 
 ### We can even seperate the contexts in seperate files 
+We defined all the contexts in seperate files. 
+
+> NameContext.js 
+```bash
+import { createContext } from "react";
+const nameContext = createContext()
+export default nameContext 
+```
+> setNameContext.js 
+```bash
+import { createContext } from "react";
+const setNameContext = createContext()
+export default setNameContext 
+```
+> lastNameContext.js 
+```bash
+import { createContext } from "react";
+const lastNameContext = createContext()
+export default lastNameContext 
+```
+> setLastNameContext.js 
+```bash
+import { createContext } from "react";
+const setLastNameContext = createContext()
+export default setLastNameContext 
+```
+### The Problem: Callback Hell
 and import multiple imports in a nested format, but this becomes harder to manage and read and causes callback hell. 
 ![](g9.PNG)
 
+> App.js 
+```bash
+import './App.css';
+import Child1 from './components/Child1';
+import ChildA from './components/ChildA';
+import { useState } from 'react';
+import nameContext from './NameContext';
+import setNameContext from './SetNameContext';
+import lastNameContext from './lastNameContext';
+import setLastNameContext from './setLastNameContext';
+
+function App() {
+  const [name, setName] = useState("");
+  const [lastName, setLastName] = useState("");
+
+  return (
+    <nameContext.Provider value={name}>
+      <lastNameContext.Provider value={lastName}>
+        <setNameContext.Provider value={setName}>
+          <setLastNameContext.Provider value={setLastName}>
+            <div className="App">
+                <Child1 />
+                <ChildA />
+            </div>
+          </setLastNameContext.Provider>
+        </setNameContext.Provider>
+      </lastNameContext.Provider>
+    </nameContext.Provider>
+  );
+}
+
+export default App;
+```
+> Child4.js 
+```bash
+import React from 'react'
+import nameContext from '../NameContext'
+import lastNameContext from '../lastNameContext'
+
+// The Problem: callback hell 
+const Child4 = () => {
+  return (
+    <nameContext.Consumer>
+      {firstName => {
+        return (
+          <lastNameContext.Consumer>
+            {lastName => {
+              return(
+                <h1>Name: {firstName} {lastName} </h1>
+              )
+            }}
+          </lastNameContext.Consumer>
+        )
+      }}
+    </nameContext.Consumer>
+  )
+}
+
+export default Child4
+```
+> ChildD.js 
+```bash
+import React from 'react'
+import setNameContext from '../SetNameContext'
+import setLastNameContext from '../setLastNameContext'
+
+// The Problem: Callback hell 
+const ChildD = () => {
+  <setNameContext.Consumer>
+    {setFirstName => {
+      return (
+        <setLastNameContext.Consumer>
+          {setLastName => {
+            return (
+                <div>
+                  <input type="text" onKeyUp={e => setFirstName(e.target.value)} />
+                  <input type="text" onKeyUp={e => setLastName(e.target.value)} />
+                </div>
+            )
+          }}
+        </setLastNameContext.Consumer>
+      )
+    }}
+  </setNameContext.Consumer>
+}
+
+export default ChildD
+```
 ### useContext() to the rescue
 - useContext Hook 
-> lhs is useContext, rhs is callback hell 
+
+> LHS is useContext, RHS is callback hell 
+- Child4 written in useContext VS Child4 written in callback hell
 ![](g10.PNG)
 
-> lhs is useContext, rhs is callback hell 
+- ChildD written in useContext VS ChildD written in callback hell
 ![](g11.PNG)
 
+### useContext() implementation  
+> App.js 
+```bash
+import './App.css';
+import Child1 from './components/Child1';
+import ChildA from './components/ChildA';
+import { useState } from 'react';
 
+#we imported these contexts from their specific files defined outside src 
+import nameContext from './NameContext';
+import setNameContext from './SetNameContext';
+import lastNameContext from './lastNameContext';
+import setLastNameContext from './setLastNameContext';
+
+function App() {
+  const [name, setName] = useState("");
+  const [lastName, setLastName] = useState("");
+
+  return (
+    #were ultimately passing each state in a seperate Provider 
+    #Moreover, since the export is already defined inside their individual context files, we dont need to do named export here, as we were doing in the callback hell scenario. 
+    <nameContext.Provider value={name}>
+      <lastNameContext.Provider value={lastName}>
+        <setNameContext.Provider value={setName}>
+          <setLastNameContext.Provider value={setLastName}>
+            <div className="App">
+                #Child 1 is linked to Child2 is linked to Child3 which is finally linked to Child4
+                <Child1 />
+                #similarly ChildA is ultimately linked to ChildD 
+                <ChildA />
+            </div>
+          </setLastNameContext.Provider>
+        </setNameContext.Provider>
+      </lastNameContext.Provider>
+    </nameContext.Provider>
+  );
+}
+
+export default App;
+```
+> ChildD.js 
+To use the context we defined in seperate files, we import it using the useContext() hook
+```bash
+import React, { useContext } from 'react'
+#Both these contexts are defined outside src 
+import setNameContext from '../SetNameContext'
+import setLastNameContext from '../setLastNameContext'
+
+const ChildD = () => {
+  const setFirstName = useContext(setNameContext);
+  const setLastName  = useContext(setLastNameContext);
+  
+  return (
+    <div>
+      <input type="text" onKeyUp={e => setFirstName(e.target.value)} />
+      <input type="text" onKeyUp={e => setLastName(e.target.value)} />
+    </div>
+  )
+}
+
+export default ChildD
+```
+> Child4.js 
+```bash
+import React from 'react'
+import nameContext from '../NameContext'
+import lastNameContext from '../lastNameContext'
+import { useContext } from 'react'
+
+const Child4 = () => {
+  const firstName = useContext(nameContext);
+  const lastName = useContext(lastNameContext);
+
+  return <h1>Name: {firstName} {lastName}</h1>;
+}
+
+export default Child4
+```
 
 
 

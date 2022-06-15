@@ -1,3 +1,3 @@
 import { createContext } from "react";
-const setlastNameContext = createContext()
-export default setlastNameContext 
+const setLastNameContext = createContext()
+export default setLastNameContext 
