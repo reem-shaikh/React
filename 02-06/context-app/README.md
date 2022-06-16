@@ -577,6 +577,400 @@ export default Child4
 ```
 ![](g77.PNG)
 
+### Can we add context in index.js 
+the contexts having state cannot be added, it must be added in App.js. 
+Within index.js we cannot add state context, we can only add regular contexts which pass (eg:) say a string value
+
+### Were creating a toggle using context 
+1. we created a couple contexts (this is called context (not component))
+- ThemeContext.js 
+```bash
+import { createContext } from "react";
+const ThemeContext = createContext();
+export default ThemeContext;
+```
+- setThemeContext.js
+```bash
+import { createContext } from "react";
+const SetThemeContext = createContext();
+export default SetThemeContext;
+```
+Notes:
+- its not neccessary to write contexts in pascal casing 
+- contexts and utils not mandatory to use pascal casing 
+- Pascal casing only important for components. 
+
+2. we made these changes to App.js component 
+https://www.geeksforgeeks.org/how-to-create-a-toggle-switch-in-react-as-a-reusable-component/
+
+- ThemeContext is an object which has 2 objects provider and consumer. 
+- ThemContext.provider is an hoc and the value were passing is a prop
+> App.js 
+```bash
+import './App.css';
+import { useState } from 'react';
+import nameContext from './NameContext';
+import setNameContext from './SetNameContext';
+import lastNameContext from './LastNameContext';
+import setLastNameContext from './SetLastNameContext';
+import ThemeContext from './ThemeContext';
+import SetThemeContext from './SetThemeContext';
+import Main from './Main';
+
+function App() {
+  const [name, setName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [theme, setTheme] = useState(false);
+  //we created a couple theme objects themContext and setThemeContext to pass the state data: theme and setTheme 
+  //were ultimately passing these to the Main.js component 
+  return (
+    <ThemeContext.Provider value={theme}>
+      <SetThemeContext.Provider value={setTheme}>
+        <nameContext.Provider value={name}>
+          <lastNameContext.Provider value={lastName}>
+            <setNameContext.Provider value={setName}>
+              <setLastNameContext.Provider value={setLastName}>
+                <Main />
+              </setLastNameContext.Provider>
+            </setNameContext.Provider>
+          </lastNameContext.Provider>
+        </nameContext.Provider>
+      </SetThemeContext.Provider>
+    </ThemeContext.Provider>
+  );
+}
+
+export default App;
+```
+
+> Main.js (we transfered some code from App.js into this for better readability)
+- we'll put conditionals inside here (when isLight true, light class is added)
+```bash
+import React, { useContext } from 'react'
+//import logo from './logo.svg';
+import Child1 from './components/Child1';
+import ChildA from './components/ChildA';
+import ThemeSwitcher from './components/ThemeSwitcher';
+import ThemeContext from './ThemeContext';
+
+//were retreiving the props passed by the context provider object here at the consumer end, over here, weve imported the useContext hook to import the ThemeContext value i.e theme which is requiring for displaying the final theme 
+const Main = () => {
+  const isLight = useContext(ThemeContext);
+
+  return (
+    //when value={theme} is true then simply add the light class from App.css 
+    <div className={`App ${isLight?"light": ""}`}>
+      <header className="App-header">
+        {/* were rendering themeSwitcher component over here */}
+        <ThemeSwitcher />
+        <Child1 />
+        <ChildA />
+      </header>
+    </div>
+  )
+}
+
+export default Main
+```
+
+3. Create a component ThemeSwitcher.js within src/components
+- since `Main.js` encapsulated `ThemeSwitcher.js`, it technically contains all the state that was send through `<SetThemeContext.Provider value={setTheme}>` at `App.js`
+- we imported ToggleSwitch.js from GFG https://www.geeksforgeeks.org/how-to-create-a-toggle-switch-in-react-as-a-reusable-component/ 
+> ToggleSwitch.js 
+```bash
+import React, {useContext} from 'react';
+import SetThemeContext from '../SetThemeContext';
+import '../ThemeSwitcher.css';
+
+//We set the setTheme state in this component 
+const ThemeSwitcher = () => {
+  const setThemeContext = useContext(SetThemeContext);
+
+  //setTheme function is responsible for setting the state value for setThemeContext, it returns either true or false value, which depicts whether its light mode or dark mode 
+  const setTheme = e => {
+    console.log(e.target.checked);
+    setThemeContext(e.target.checked);
+    //true -> light mode
+    //false -> dark mode
+  }
+
+  return (
+    // everytime the user clicks on the checkbox, setTheme function is invoked 
+    <div className="container">
+      <div className="toggle-switch">
+        <input 
+          type="checkbox" 
+          className="checkbox" 
+          name="theme" 
+          id="theme"
+          onChange={setTheme} 
+        />
+        <label className="label" htmlFor="theme">
+          <span className="inner" />
+          <span className="switch" />
+        </label>
+      </div>
+    </div>
+  )
+}
+
+export default ThemeSwitcher
+```
+
+4. we created a css file `ThemeSwitcher.css`, imported code from GFG and made these changes. 
+- In order for ToggleSwitch.js to work, we'll need to import some css styling for it 
+> mainly it has these iconic stylings, you can view the rest at `src/ThemeSwitcher.css`
+```bash
+.inner:before {
+    content: "☀️";
+    padding-left: 10px;
+    background-color: #FEF9A7;
+    color: #fff;
+  }
+  
+  .inner:after {
+    content: "🌑";
+    padding-right: 10px;
+    background-color: #bbb;
+    color: #fff;
+    text-align: right;
+  }
+  .switch {
+    display: block;
+    width: 24px;
+    margin: 5px;
+    background: #fff;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 40px;
+    border: 0 solid #bbb;
+    border-radius: 20px;
+    transition: all 0.3s ease-in 0s;
+  }
+```
+
+- we also added changes to App.css 
+```bash
+#whenever light class is added, the styling is ultimately taken from here 
+.light .App-header {
+  background-color: #DFDFDF;
+  color: black;
+}
+```
+
+> Can contexts be called stateful contexts?
+stateful components has state - any component that has state in it, is reffered to as stateful components. 
+stateless components have no state - if a comonent does not have any state, then its reffered as stateless components. 
+- when contexts have state it cannot be called stateful contexts 
+compare context to prop, not state because context can be passed, state can be updated. 
+
+### Q. If parent (has state and this is passed to child component as props) then is the child component stateful or stateless?
+when a re-render of component happens; props gets changed; state is changed 
+```bash
+child's re-rendering is because of props, not state 
+it doesnt have its own state to track
+so child is stateless 
+```
+
+### Pure function VS impure function
+Pure function will always give the same results when called multiple times with the same parameters / attributes. 
+A pure function will always give the same result even if it is shifted to another place. A pure function does not depend on any data other than the parameters. It should not access anything outside of its scope. 
+
+If a function is not doing that, then its an impure function. 
+```bash
+#no matter how many times you call this function it will always give 12 
+const fn = (a, b) => {
+  return a + b
+}
+
+fn(2, 10)
+```
+```bash
+const fn = () => {
+  return Math.random()
+}
+fn()
+```
+> Impure 
+```bash
+#arrays are pass by reference, every time you call this value will be changing 
+const fn = (a) => {
+  a[0] = a[0] + 1
+  return (a)
+}
+fn([10])
+```
+> Pure 
+```bash
+const fn = (a) => {
+  b = a[0] + 1
+  return (b)
+}
+fn([10])
+```
+> Impure - accesiing outside scope 
+```bash
+const a = [10, 12, 14]
+const fn = () => {
+  return (a)
+}
+fn()
+```
+> Impure - accessing dom 
+```bash
+const fn = () => {
+  document.getElementById('DGIDHEI')
+}
+fn()
+```
+> impure - because accessing console 
+```bash
+const fn = () => {
+  console.log('abcd')
+}
+
+fn()
+```
+> Pure functions is required because if we want we can shift them anywhere in our code and they will not break 
+1. pure functions will always give same value 
+2. pure function never depends on anything outside 
+3. pure function does not change the state of whatever is passed 
+```bash
+const fn = (a) => {
+  for(let i = 0; i < a.length; i++){
+    a[i] = a[i] + 1
+  }
+  //array is pass by reference 
+}
+
+fn([10, 11, 12])
+```
+### Pure function vs Impure function
+If component is dependent only on the props, then its a pure component, otherwise its reffered as an impure component. 
+- pure component can have state, but if your not setting the state then its pure 
+> example of pure component 
+```bash
+import React from 'react'
+import ChildD from './ChildD'
+const ChildC = () => {
+  return (
+    <div><ChildD/></div>
+  )
+}
+
+export default ChildC
+```
+
+if there is state inside component or hooks then its impure, because calling it multiple times would give a different output. 
+
+### Controlled VS Uncontrolled components 
+> Controlled components 
+If component is dependent on some state then its controlled components.
+> Uncontrolled - not dependent on parent's prop. Even if were taking props, not dependent 
+
+### Input is controlled, component is uncontrolled 
+Its output is dependent on the value of the state 
+A controlled component is dependent on the props passed to it by its parent 
+```bash
+const Component = ({value, setValue}) => {
+  return (
+    <input type='text' value={value} onChange={e => setValue(e.target.value)}
+  )
+}
+```
+> example
+```bash
+#this component is dependent on the parent through its props
+import React from 'react'
+import ChildD from './ChildD'
+const ChildC = (props) => {
+  return (
+    <div name={props.name}><ChildD/></div>
+  )
+}
+
+export default ChildC
+```
+### Input is controlled, component is uncontrolled 
+> Uncontrolled - not dependent on parent's prop. Even if were taking props, not depeendent 
+```bash
+const Component = () => {
+  const [value, setValue] = useState()
+  return (
+    #input itself is controlled component because it depend on parents prop
+    <input type='text' value={value} onChange={e => setValue(e.target.value)} />
+  )
+}
+```
+![](r1.PNG)
+- `input` is controlled component 
+- `Component` is uncontrolled. 
+
+> example
+```bash
+#this component is not dependent on parent for its props 
+import React from 'react'
+import ChildD from './ChildD'
+const ChildC = () => {
+  return (
+    <div><ChildD/></div>
+  )
+}
+
+export default ChildC
+```
+> example: `index.js `
+root has no parent, it doesn't depend on the parent 
+```bash
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
+root.render(
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>
+);
+
+```
+
+### Input is uncontrolled, component is uncontrolled 
+```bash
+# component is uncontrolled
+const Component = () => {
+  const [value, setValue] = useState()
+
+  return (
+    #In the input tag over here though, its dependent on the value, but doesnt take props from the parent component -> thats why in this case its uncontrolled 
+    <input type='text' value={value}  />
+  )
+}
+```
+
+### Input is uncontrolled, component is uncontrolled 
+> many people useRef in uncontrolled 
+not dependent on parent's prop, useref just gives the reference 
+```bash
+const Component = () => {
+  const inputRef = useRef()
+  return (
+    <input type='text' ref={inputRef} />
+  )
+}
+```
+- `input` is uncontrolled 
+- `Component` is uncontrolled 
+
+![](t1.PNG)
+
+
+
+
 
 
 

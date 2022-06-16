@@ -904,7 +904,8 @@ export default function PostCard(props) {
 ```
 https://grand-torte-98bc36.netlify.app/
 
-
+> What does pagination mean? 
+When we add load more option, and when we clcik on it, it loads and so on..
 
 
 

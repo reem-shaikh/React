@@ -1,13 +1,17 @@
 import React from 'react'
 import nameContext from '../NameContext'
-import lastNameContext from '../LastNameContext'
-import { useContext } from 'react'
 
+// The Problem: callback hell 
 const Child4 = () => {
-  const firstName = useContext(nameContext);
-  const lastName = useContext(lastNameContext);
-
-  return <h1>Name: {firstName} {lastName}</h1>;
+  return (
+    <nameContext.Consumer>
+      {param => {
+         return (
+            <p>{param}</p>
+         )
+      }}
+    </nameContext.Consumer>
+  )
 }
 
 export default Child4
