@@ -363,8 +363,8 @@ import setNameContext from '../SetNameContext'
 
 const ChildD = () => {
   return (
-  //we are sharing (function) data from any component to any other component, not necessarily from parent to child component 
-  //Lifting state from ChildD to App.js and then the state is passed as props to Child4.js directly through context API 
+  #we are sharing (function) data from any component to any other component, not necessarily from parent to child component 
+  #Lifting state from ChildD to App.js and then the state is passed as props to Child4.js directly through context API 
   <setNameContext.Consumer>
     {param => {
       return (
@@ -384,7 +384,7 @@ export default ChildD
 import React from 'react'
 import nameContext from '../NameContext'
 
-// The Problem: callback hell 
+# The Problem: callback hell 
 const Child4 = () => {
   return (
     <nameContext.Consumer>
@@ -443,7 +443,7 @@ import React from 'react'
 import nameContext from '../NameContext'
 import lastNameContext from '../LastNameContext'
 
-// The Problem: callback hell 
+# The Problem: callback hell 
 const Child4 = () => {
   return (
     <nameContext.Consumer>
@@ -621,8 +621,8 @@ function App() {
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const [theme, setTheme] = useState(false);
-  //we created a couple theme objects themContext and setThemeContext to pass the state data: theme and setTheme 
-  //were ultimately passing these to the Main.js component 
+  #we created a couple theme objects themContext and setThemeContext to pass the state data: theme and setTheme 
+  #were ultimately passing these to the Main.js component 
   return (
     <ThemeContext.Provider value={theme}>
       <SetThemeContext.Provider value={setTheme}>
@@ -647,18 +647,18 @@ export default App;
 - we'll put conditionals inside here (when isLight true, light class is added)
 ```bash
 import React, { useContext } from 'react'
-//import logo from './logo.svg';
+#import logo from './logo.svg';
 import Child1 from './components/Child1';
 import ChildA from './components/ChildA';
 import ThemeSwitcher from './components/ThemeSwitcher';
 import ThemeContext from './ThemeContext';
 
-//were retreiving the props passed by the context provider object here at the consumer end, over here, weve imported the useContext hook to import the ThemeContext value i.e theme which is requiring for displaying the final theme 
+#were retreiving the props passed by the context provider object here at the consumer end, over here, weve imported the useContext hook to import the ThemeContext value i.e theme which is requiring for displaying the final theme 
 const Main = () => {
   const isLight = useContext(ThemeContext);
 
   return (
-    //when value={theme} is true then simply add the light class from App.css 
+    #when value={theme} is true then simply add the light class from App.css 
     <div className={`App ${isLight?"light": ""}`}>
       <header className="App-header">
         {/* were rendering themeSwitcher component over here */}
@@ -682,20 +682,20 @@ import React, {useContext} from 'react';
 import SetThemeContext from '../SetThemeContext';
 import '../ThemeSwitcher.css';
 
-//We set the setTheme state in this component 
+#We set the setTheme state in this component 
 const ThemeSwitcher = () => {
   const setThemeContext = useContext(SetThemeContext);
 
-  //setTheme function is responsible for setting the state value for setThemeContext, it returns either true or false value, which depicts whether its light mode or dark mode 
+  #setTheme function is responsible for setting the state value for setThemeContext, it returns either true or false value, which depicts whether its light mode or dark mode 
   const setTheme = e => {
     console.log(e.target.checked);
     setThemeContext(e.target.checked);
-    //true -> light mode
-    //false -> dark mode
+    #true -> light mode
+    #false -> dark mode
   }
 
   return (
-    // everytime the user clicks on the checkbox, setTheme function is invoked 
+    # everytime the user clicks on the checkbox, setTheme function is invoked 
     <div className="container">
       <div className="toggle-switch">
         <input 
@@ -841,7 +841,7 @@ const fn = (a) => {
   for(let i = 0; i < a.length; i++){
     a[i] = a[i] + 1
   }
-  //array is pass by reference 
+  #array is pass by reference 
 }
 
 fn([10, 11, 12])
