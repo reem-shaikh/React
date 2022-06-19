@@ -10,7 +10,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import Table from 'react-bootstrap/esm/Table';
 import { DLT } from '../redux/actions/action';
 import './style.css'
-const Header = () => {
+const Header = (props) => {
+    //console.log(props.data)
     const [price,setPrice] = useState(0);
     // console.log(price);
 
@@ -47,7 +48,7 @@ const Header = () => {
         (()=>{
             let price = 0;
             getdata.map((ele, k) => {
-                price = ele.price * ele.qnty + price
+                price = ele.price * ele.quantity + price
             });
             setPrice(price);
         })()
@@ -59,9 +60,9 @@ const Header = () => {
         <>
             <Navbar bg="dark" variant="dark" style={{ height: "60px" }}>
                 <Container>
-                    <NavLink to="/" className="text-decoration-none text-light mx-3">Add to Cart</NavLink>
+                    {/* <NavLink to="/" className="text-decoration-none text-light mx-3 cute" style={{fontSize: "30px"}}>Add to Cart</NavLink> */}
                     <Nav className="me-auto">
-                        <NavLink to="/" className="text-decoration-none text-light">Home</NavLink>
+                        <NavLink to="/" className="text-decoration-none text-light cute" style={{fontSize: "30px"}}>Add To Cart</NavLink>
                     </Nav>
 
                     <Badge badgeContent={getdata.length} color="primary"
@@ -92,9 +93,9 @@ const Header = () => {
                         <div className='card_details' style={{width:"24rem",padding:10}}>
                             <Table>
                                 <thead>
-                                    <tr>
+                                    <tr style={{fontSize: "20px"}} className='cute'>
                                         <th>Photo</th>
-                                        <th>Restaurant Name</th>
+                                        <th>Item</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -105,13 +106,14 @@ const Header = () => {
                                                     <tr key={id}>
                                                         <td>
                                                         <NavLink to={`/cart/${e.id}`}   onClick={handleClose}>
-                                                        <img src={e.imgdata} style={{width:"5rem",height:"5rem"}} alt="" />
+                                                        <img src={e.image} style={{width:"5rem",height:"5rem"}} alt="" />
                                                         </NavLink>   
                                                         </td>
-                                                        <td>
-                                                            <p>{e.rname}</p>
+                                                        <td className='cute' style={{fontSize: "20px"}}>
+                                                            <p>{e.title}</p>
                                                             <p>Price : ₹{e.price}</p>
-                                                            <p>Quantity : {e.qnty}</p>
+                                                            <p>Quantity : {e.quantity}</p>
+                                                       
                                                             <p style={{color:"red",fontSize:20,cursor:"pointer"}} onClick={()=>dlt(e.id)}>
                                                                 <i className='fas fa-trash smalltrash'></i>
                                                             </p>
@@ -125,7 +127,7 @@ const Header = () => {
                                             )
                                         })
                                     }
-                                    <p className='text-center'>Total :₹ {price}</p>
+                                    <p className='text-center cute' style={{fontSize: "23px"}}>Total :₹ {price}</p>
                                 </tbody>
                             </Table>
                         </div>:
@@ -134,7 +136,7 @@ const Header = () => {
                     <i className='fas fa-close smallclose'
                     onClick={handleClose}
                      style={{position:"absolute",top:2,right:20,fontSize:23,cursor:"pointer"}}></i>
-                    <p style={{fontSize:22}}>Your carts is empty</p>
+                    <p style={{fontSize:22}}>Your cart is empty</p>
                     <img src="./cart.gif" alt="" className='emptycart_img' style={{width:"5rem",padding:10}} />
                    </div>
                     }
