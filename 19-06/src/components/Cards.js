@@ -5,6 +5,7 @@ import Cardsdata from './CardsData'
 import "./style.css";
 import { useDispatch } from 'react-redux';
 import { ADD } from '../redux/actions/action';
+//import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Cards = () => {
 
@@ -24,7 +25,7 @@ const Cards = () => {
     <div className='container mt-3'>
       <h2 className='text-center'>Add to Cart Projects</h2>
 
-      <div className="row d-flex justify-content-center align-items-center">
+      <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "center" }}>
         {
           data.map((element, id) => {
             return (
@@ -36,7 +37,7 @@ const Cards = () => {
                     <Card.Text>
                     Price : ₹ {element.price}
                     </Card.Text>
-                    <div className="button_div d-flex justify-content-center">
+                    <div className="button_div" style={{display: "flex", justifyContent: "center"}}>
                     <Button variant="primary"  
                       onClick={()=> send(element)}
                      className='col-lg-12'>Add to Cart</Button>

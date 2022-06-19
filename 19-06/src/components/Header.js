@@ -9,9 +9,8 @@ import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Table from 'react-bootstrap/esm/Table';
 import { DLT } from '../redux/actions/action';
-
+import './style.css'
 const Header = () => {
-
     const [price,setPrice] = useState(0);
     // console.log(price);
 

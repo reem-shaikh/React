@@ -3,7 +3,7 @@ import Table from 'react-bootstrap/Table'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { DLT,ADD,REMOVE } from '../redux/actions/action'
-
+import './style.css'
 
 const CardsDetails = () => {
 
@@ -13,7 +13,7 @@ const CardsDetails = () => {
   const {id} = useParams();
   // console.log(id);
 
-  const history = useNavigate();
+  const Navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -39,7 +39,7 @@ const CardsDetails = () => {
   
   const dlt = (id)=>{
     dispatch(DLT(id));
-    history("/");
+    Navigate("/");
 }
 
 // remove one
@@ -50,8 +50,8 @@ const remove = (item)=>{
 
   useEffect(()=>{
     //compare();
-    (()=>{
-      let comparedata = getdata.filter((e)=>{
+    (async()=>{
+      let comparedata = await getdata.filter((e)=>{
         return e.id === id
       });
       setData(comparedata);
@@ -63,7 +63,7 @@ const remove = (item)=>{
   return (
     <>
       <div className="container mt-2">
-        <h2 className='text-center'>Iteams Details Page
+        <h2 className='text-center'>Items Details Page
         </h2>
 
         <section className='container mt-3'>
@@ -71,8 +71,8 @@ const remove = (item)=>{
           {
             data.map((ele, id)=>{
               return (
-                <>
-                <div className="items_img" key={id}>
+                <div key={id}>
+                <div className="items_img" >
               <img src={ele.imgdata} alt="" />
             </div>
 
@@ -101,7 +101,7 @@ const remove = (item)=>{
               </Table>
             </div>
           
-                </>
+                </div>
               )
             })
           }
