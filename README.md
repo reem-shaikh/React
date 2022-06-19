@@ -11,9 +11,8 @@
 - How to convert react17 app to react18 compatible 
 - Inheritance, Polymorphism, Props 
 
-<!-- > 01-03 
-- Create ecom app using react-redux using fakestoreapi.com before redux v8
-[Hosted Link](https://ornate-sprinkles-2379bd.netlify.app/) -->
+> 01-03 
+- Create ecom app using react-redux using fakestoreapi.com before redux v8 in class based components (fix error)
 
 > 02-03 
 - create redux counter app using class based components 
