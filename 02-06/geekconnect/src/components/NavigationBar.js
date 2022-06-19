@@ -14,6 +14,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import Logo from '../logo.png';
+import { Link } from 'react-router-dom';
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -41,12 +42,18 @@ const NavigationBar = () => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <img src={Logo} style={{height: "2rem", paddingRight: "1rem"}} alt='img'/>
+        {/* whenever the user clicks on the logo / brand name we'll redirect the user to the home page  */}
+        <Link to="/">
+          <img src={Logo} style={{height: "2rem", paddingRight: "1rem"}} />
+        </Link>
+
+          <Link to='/'>
           <Typography
             variant="h6"
             noWrap
             component="a"
-            href="/"
+            //we commented this out since were placing a Link tag instead 
+           // href="/"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -58,6 +65,7 @@ const NavigationBar = () => {
           >
             GeekConnect
           </Typography>
+          </Link>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -66,8 +74,7 @@ const NavigationBar = () => {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              color="inherit"
-            >
+              color="inherit">
               <MenuIcon />
             </IconButton>
             <Menu

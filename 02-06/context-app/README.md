@@ -581,7 +581,7 @@ export default Child4
 the contexts having state cannot be added, it must be added in App.js. 
 Within index.js we cannot add state context, we can only add regular contexts which pass (eg:) say a string value
 
-### Were creating a toggle using context 
+### Were creating a toggle using useContext Hook
 1. we created a couple contexts (this is called context (not component))
 - ThemeContext.js 
 ```bash

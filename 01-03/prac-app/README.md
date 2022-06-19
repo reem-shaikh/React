@@ -1,5 +1,5 @@
 ### Create Ecommerce App using react-redux 
-![Hosted Link](https://ornate-sprinkles-2379bd.netlify.app/)
+[Hosted Link](https://ornate-sprinkles-2379bd.netlify.app/)
 
 > using https://fakestoreapi.com API 
 ![](2.PNG)
@@ -45,17 +45,3 @@ get the state directly from the store
 
 ### context vs redux
  - context can be a bit complicated and is used for smaller applications, when app becomes huge, we should chose redux for simplicity and code readability
-
- ### Doubts?
- - why do we need mapDispatchToProps etc 
- - tutorial on it 
- - complete 26,27,01 lecture and keep log of assignments 
- - create a medium article 
- - what is peer dependency 
- - deep copy vs shallow copy 
- - lifecycle methods 
- - axios lec
-
-
-- complete rest of the lectures 
-- level up session lectures 

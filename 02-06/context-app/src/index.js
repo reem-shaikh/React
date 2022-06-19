@@ -12,10 +12,4 @@ root.render(
         </React.StrictMode>
 );
 
-//we cannot have state contexts 
-//we can have regular contexts which dont deal with state
-
-//contexts and utils not mandatory to use pascal casing 
-
-
 

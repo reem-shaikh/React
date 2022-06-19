@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 //import logo from './logo.svg';
-import Child1 from './components/Child1';
-import ChildA from './components/ChildA';
+import ChildA from './components/ChildA'
+import Child1 from './components/Child1'
 import ThemeSwitcher from './components/ThemeSwitcher';
 import ThemeContext from './ThemeContext';
 
@@ -15,8 +15,8 @@ const Main = () => {
       <header className="App-header">
         {/* were rendering themeSwitcher component over here */}
         <ThemeSwitcher />
-        <Child1 />
-        <ChildA />
+        <Child1/>
+        <ChildA/>
       </header>
     </div>
   )

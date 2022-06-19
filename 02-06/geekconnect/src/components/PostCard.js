@@ -11,6 +11,7 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite'
+import {Link} from 'react-router-dom'
 
 //we imported the icon from here: https://mui.com/material-ui/material-icons/?query=Comment&selected=Comment
 import CommentIcon from '@mui/icons-material/Comment';
@@ -23,13 +24,25 @@ export default function PostCard(props) {
   //    setExpanded(!expanded);
   //  };
 
+  //we acheived 3 Routes in this component 
+  //when user clicks on the avatar image 
+  //when user clicks on the 
   return (
     <Card sx={{ maxWidth: 520 }}>
       <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe" src={props.singlePost?.owner?.picture} />
+          //wrapped out avatar photo inside the link, the image avatr is anchor tag, when you click on the image it takes us to the profile page 
+          //when were navigated to profile/id then through App.js Route takes us to the profile component 
+          <Link to={`/profile/${props.singlePost?.owner?.id}`}>
+            <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe" src={props.singlePost?.owner?.picture} />
+        </Link>
         }
-        title={`${props.singlePost?.owner?.firstName} ${props.singlePost?.owner?.lastName}`}
+        //when user clicks on title we redirect them to profile component 
+        title={
+          <Link to={`/profile/${props.singlePost?.owner?.id}`}>
+            {props.singlePost?.owner?.firstName} {props.singlePost?.owner?.lastName}
+        </Link>
+        }
         subheader={props.singlePost?.publishDate}
         //  action={
         //      <IconButton aria-label="settings">
@@ -56,8 +69,13 @@ export default function PostCard(props) {
 
         <Stack direction="row" spacing={1} mt={1}>
           {props.singlePost?.tags?.map((singleTag, idx) => {
-            return (
-              <Chip label={`${singleTag}`} variant="outlined" key={idx} size="small" style={{textTransform: "capitalize"}} onClick={() => {}} />
+            console.log(singleTag)
+            return (  
+              // search for query parameter path 
+              <Link key={idx} to={`/search?q=${singleTag}`}>
+                <Chip label={`#${singleTag}`} variant="outlined" size="small" style={{ textTransform: "capitalize" }} onClick={() => { }} />
+              </Link>
+              // <Chip label={`${singleTag}`} variant="outlined" key={idx} size="small" style={{textTransform: "capitalize"}} onClick={() => {}} />
             );
           })}
         </Stack>
@@ -65,26 +83,20 @@ export default function PostCard(props) {
 
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
+      <IconButton aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton>
         <Typography variant="caption" display="block" gutterBottom>
           {props.singlePost?.likes} Likes
         </Typography>
-        <IconButton style={{ marginLeft: "auto" }}>
-          <CommentIcon />
-        </IconButton>
 
-    {/*<IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
-        <ExpandMore
-          expand={expanded}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more">
-          <ExpandMoreIcon />
-        </ExpandMore> */}
+        {/* adding link for comments */}
+        {/* when user clicks on commentIcon redirect them to Detail component */}
+        <Link to={`/post/:${props.singlePost?.id}`} style={{ marginLeft: "auto" }}>
+          <IconButton>
+            <CommentIcon />
+          </IconButton>
+        </Link>
       </CardActions>
     </Card>
   );
