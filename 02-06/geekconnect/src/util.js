@@ -6,7 +6,7 @@ import axios from 'axios'
 //     headers: {'X-Custom-Header': 'foobar'}
 //   });
 
-//   base url: https://dummyapi.io/data/v1/
+// base url from dummyapi: https://dummyapi.io/data/v1/
 const dummyapi = axios.create({
   baseURL: 'https://dummyapi.io/data/v1/',
   timeout: 10000,

@@ -10,7 +10,7 @@ const Home = () => {
   // by default, it loads the 0'th page 
   const [pageNumber, setPageNumber] = useState(0);
 
-  const loadPage = async() => {
+  const loadMore = async() => {
     console.log(process.env.REACT_APP_API_KEY)
 
     // We can set the axios call using axios.get(base_url, headers) and then set the data 
@@ -70,12 +70,11 @@ const Home = () => {
     })();
   }, []);
 
-  const loadMore = () => {
-    loadPage();
-  }
+  // const loadMore = () => {
+  //   loadPage();
+  // }
 
-  //so why did we place loadpage() in another function loadMore()
-  //why couldnt we just define it inside useEffect, but here's what, we needed to pass it as props as well right?
+  //so why did we place loadpage() in another function loadMore(), Why couldnt we just pass loadPage() as props?
   //so we pass loadMore as props to PostList
 
   
@@ -83,6 +82,7 @@ const Home = () => {
     <>
      {/* <PostList posts={posts} loadMore={loadMore}/> */}
       <Container fixed>
+        {/* were rendering HomeBasicCard before PostList */}
         <HomeBasicCard />
         <PostList posts={posts} loadMore={loadMore} />
       </Container>

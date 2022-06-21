@@ -32,7 +32,7 @@ function abcd(){
 abcd()
 #every space is a ch which is counted
 ```
-> minified file removes spaces `https://www.toptal.com/developers/javascript-minifier`
+> minified file removes spaces [](https://www.toptal.com/developers/javascript-minifier`)
 - save file as `.min.js `
 
 Build is optimized, so during it it removes fragments. 
@@ -905,24 +905,460 @@ export default function PostCard(props) {
 https://grand-torte-98bc36.netlify.app/
 
 > What does pagination mean? 
-When we add load more option, and when we clcik on it, it loads and so on..
+When we add load more option, and when we click on it, it loads and so on..
 
+#### Implementing Routing 
+1. In app component were rendering a `NavigationBar` at Top, then a bunch of Routes which specify which path would redirect to which component, at the end were rendering the footer component 
+```bash
+       <NavigationBar/>
+       <Routes>
+        <Route path='/' element={<Home/>} />
+        <Route path='/profile/:id' element={<Profile/>} />
+        <Route path='/posts/:id' element={<Detail/>}/>
+       </Routes>
+      <Footer/>
+```
+2. In the `home` component, were making an API call to get the list of profile user data from the API endpoint. They say to get the data you'll need to use `/post`, were also setting the pageNumber which allows us to integrate pagination (when a user clicks on load more it loads more pages). initially the page Number is set to 0, but in the loop were increementing the count after the profile users json data is updated in our `posts` state (Note that: were ensuring that previous data persists (is not lost) and the new data is added below it)
+```bash
+  const [posts, setPosts] = useState([]);
+  # we need to load to next set of pages when we click on load more 
+  # by default, it loads the 0th page 
+  const [pageNumber, setPageNumber] = useState(0);
 
+const loadPage = async() => {
+    console.log(process.env.REACT_APP_API_KEY)
 
+    # Get List
+    # Get list of posts sorted by creation date.
+    # - Pagination query params available.
+    # - Created query params available.
+    # GET
+    # /post
+    const response = await dummyapi.get(`/post?page=${pageNumber}`);  
 
+    const postsArr = response?.data?.data ?? [];
+    # were checking if its undefined or not - null collasing
+    # if its undefined use an empty array as a fallback 
+    # if its defined, it will show the value response?.data?.data
 
+    setPosts(oldPosts => [...oldPosts, ...postsArr]);
 
+    setPageNumber(page => page + 1);
 
+  }
+```
+- we've added another function with almost same functionality on useEffect within an IIFE, whenever the component is mounted for the first time, we want to retreive the data from the API endpoint (were not passing page number as an argument here we've also updated the `pageNumber `state to 1)
+```bash
+  useEffect(() => {
+    (async() => {
+      const response = await dummyapi.get(`/post`);  
+      const data = response.data.data;
+      setPosts(data);
+      setPageNumber(1);
+    })();
+  }, []);
+```
+> Doubt: Why didnt we pass `loadPage()` as a prop to` PostList` component? why did we have to encapsulate `loadpage()` inside l`oadMore()` ?
+We didnt we were actually getting an error because of this 
+```bash
+#we changed function name from loadPage to loadMore 
+  const loadMore = async() => {
+    console.log(process.env.REACT_APP_API_KEY)
 
+    # Get List
+    # Get list of posts sorted by creation date.
+    # - Pagination query params available.
+    # - Created query params available.
+    # GET
+    # /post
+    const response = await dummyapi.get(`/post?page=${pageNumber}`);  
+    const postsArr = response?.data?.data ?? [];
+    setPosts(oldPosts => [...oldPosts, ...postsArr]);
 
+    setPageNumber(page => page + 1);
 
+  }
 
+```
 
+- and finally we passed posts which contains a list of profile user data props to `postList `
+```bash
+    <>
+      <Container fixed>
+        <HomeBasicCard />
+        <PostList posts={posts} loadMore={loadMore} />
+      </Container>
+    </>
+```
+1. While `PostList` is retreiving the props send by `Home.js` and extractng each element present inside `props.post` via map and passing each user properties as props to `PostCard.js`
+- When user clicks on the button, it executes the `loadMore` functionality which is responsible for loading more user data when user clicks on load more button 
+```bash
+const PostList = (props) => {
+  console.log(props);
+    #const arr = [true, true, true, true, true]
 
+  {/* justify content works on main axis (y)
+        alignitems works on cross axis (x) */}
+  return (
+    <Stack spacing={2} mt={4} mb={4} alignItems="center">
+      {props.posts.map((singlePost, idx) => {
+        return (
+            # <Item key={idx}>
+            #     <PostCard/>
+            # </Item>
+          <PostCard key={idx} singlePost={singlePost} />
+        )
+      })}
 
+       {/* when we click on button it'll make API call and it'll fetch all the data */}
+      <Button variant="text" onClick={props.loadMore}>Load More...</Button>
+    </Stack>
+  )
+}
+```
+4. The props passed from `postList.js` is finally fetched at `PostCard.js `
+- when user clicks on the avatar  in the card he is then redirected to `/profile/id`. we've retreived this id from the props passed to this component. which will redirect user to the profile component.
+```bash
+  <Link to={`/profile/${props.singlePost?.owner?.id}`}>
+    <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe" src={props.singlePost?.owner?.picture} />
+  </Link>
+```
+-  when user clicks on the title in the card he is then redirected to `/profile/id`. we've retreived this id from the props passed to this component. which will redirect user to the profile component.
+```bash
+  <Link to={`/profile/${props.singlePost?.owner?.id}`}>
+     {props.singlePost?.owner?.firstName} {props.singlePost?.owner?.lastName}
+   </Link>
+```
+-  below the image in the card were rendering chips, the styling all imported through MUI. 
+```bash
+        <Stack direction="row" spacing={1} mt={1}>
+          {props.singlePost?.tags?.map((singleTag, idx) => {
+            console.log(singleTag)
+            return (  
+              # search for query parameter path 
+              <Link key={idx} to={`/search?q=${singleTag}`}>
+                <Chip label={`#${singleTag}`} variant="outlined" size="small" style={{ textTransform: "capitalize" }} onClick={() => { }} />
+              </Link>
+            );
+          })}
+        </Stack>
+```
+-  When user clicks on comment icon, set the url to `/posts/id`, which will redirect the user to the Detail component. 
+```bash
+    <Link to={`/post/:${props.singlePost?.id}`} style={{ marginLeft: "auto" }}>
+          <IconButton>
+            <CommentIcon />
+          </IconButton>
+    </Link>
+```
+5. In the `NavigationBar.js` we rendered the pages component (to show up as menu items) and settings component (to show up in the dropdown)
+![](y1.PNG)
 
+6. `HomeBasicCard.js` is like rendered before all the posts on page 
+```bash
+export default function HomeBasicCard() {
+  return (
+      <Card variant="outlined" sx={{maxWidth: 520, margin: "auto", marginTop: "2rem" }}>
+        <CardContent>
+          <Typography variant="h4" color="text.secondary" gutterBottom>
+            Hi 👋🏻
+          </Typography>
+          <Typography variant="h5" component="div">
+           Welcome to Geekconnect
+          </Typography>
+          <Typography variant="body2">
+            Love Animals. ❣️
+          </Typography>
+        </CardContent>
+    </Card>
+  );
+}
+```
+7. When user clicks on title or avatar from the card, he will be redirected to the Profile component. and when user clicks on the comment icon he will be redirected to the the Detail component. 
+> But, what really happens in the Profile component?
+- So technically when user is redirected to this url `/profile/${props.singlePost?.owner?.id} `he will be taken to Profile component. Now within Profile component, we are rendering all the user specific full data from the API endpoint using `/user/id`. Also were getting all the posts that particular user posted using `/user/id/post`
+- were logging the data within the post state and updating it also were passing these are props to `PostList.js`, `PostList.js` is responsible for retreiving each element within the posts prop via map and further pass it to `ProfileCard.js` where were printing cards.
+- furthermore, props are send to ProfileDetail component as well, which is responsible for rendering the top intro section of the user
+[](https://brilliant-custard-021928.netlify.app/)
 
+### Error troubleshoot
+- id is assigned but never used 
+```bash
+we'll remove imports having that particular id from the page mentioned in the error message 
+```
+### 💡Tips
+- if you want to move code backwrds: tab + shift
+- when you quickly want to navigate to the component without openning the side bar-> control + click 
+- justify content works on main axis (y), alignitems works on cross axis (x) 
 
+#### The code structure:
+> Pages 
+Were creating a different page for home, user profile page, when user clicks on tag -> search result page, comment for post page. 
+- Home (how would the home page look like?)
+```bash
+      <HomeBasicCard />
+      <PostList posts={posts} loadMore={loadMore} />
+```
+- Profile (load the profile page for each user, this is loaded when you click on the users avatar / title from the card)
+```bash
+  #sending detail props to ProfileDetail which would contain the basic intro of the user 
+  <ProfileDetail detail={detail} />
+        <Typography variant="h6" align="center" mt={4}>All Posts</Typography>
+        <PostList posts={posts} loadMore={loadMore} />
+```
+- Search (when user clicks on the tag, we need to display results of that tag search). Note that the path for the tag is defined in PostCard.js where you'll notice we set search params. 
+```bash
+    <SearchBasicCard query={searchParams.get('q')} />
+    <PostList posts={posts} loadMore={loadMore} />
+```
+- Detail (When user clicked on comments, this component would be rendered)
+```bash
+#PostDetail would load the comments
+ <PostDetail detail={detail} />
+ #commentlist sends data to comment.js where it finally gets rendered
+ <CommentList commentList={comments} />
+```
+### How are the sub components connected?
+These are the main components for providing routes when user clicks on avatar / title / comment icon etc 
+- App.js 
+- PostCard.js 
 
+> For the home page these are the key components 
+- NavigationBar.js 
+- HomeBasicCard.js 
+- PostList.js 
+- PostCard.js
+> For the Profile page these are the key components 
+- Profile.js
+- ProfileDetail.js
+- PostList.js
+- PostCard.js 
+> For the Tags these are the key components
+- Search.js 
+- SearchBasicCard.js 
+- PostList.js
+- PostCard.js 
+> For the comments these the key components 
+- Detail.js 
+- PostDetail.js 
+- CommentList.js 
+- Comment.js 
 
+> Note that: `PostList.js`, `PostCard.js`, has been reused thrice. 
 
+### When user clicks on the tag we want to render the search results 
+> Search.js 
+Note that: The path for the tag is set inside `PostCard.js` and the final routing for the `Search `component is set inside `App` component. 
+- were implementing `loadMore()` with pageNumber state incrementing by 1, since we'll be sending this as props to `PostList.js `to implement pagination
+- Within useEffect were simply retreiving the q value via the` /tag/:id/post` and updating the posts state 
+```bash
+import React, { useEffect, useState } from 'react'
+import { useSearchParams, useNavigate } from 'react-router-dom'
+import { dummyapi } from '../util';
+import { Container } from '@mui/material';
+import PostList from '../components/PostList';
+import SearchBasicCard from '../components/SearchBasicCard';
+const Search = () => {
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const [posts, setPosts] = useState([]);
+  const [pageNumber, setPageNumber] = useState(0);
+
+  #create useEffect make api call from that
+  useEffect(() => {
+    #everytime user clicks on the tag, first Posts state is set to empty, and then the search results based on the tag is displayed. 
+
+    setPosts([]);
+    #get list by tag
+     (async() => {
+        if(searchParams.has('q')){
+
+        # const response = dummyapi.get(`
+        # /tag/dog/post`)
+        const response = await dummyapi.get(`/tag/${searchParams.get('q')}/post`);
+        console.log(response.data.data);
+        setPosts(response.data.data);
+        setPageNumber(1);
+
+        }else{
+            #if dont have q parameter then 
+            navigate('/')
+        }
+     })()
+  }, [searchParams])
+
+  const loadMore = async() => {
+    const response = await dummyapi.get(`/tag/${searchParams.get('q')}/post?page=${pageNumber}`);  
+    const postsArr = response?.data?.data ?? [];
+    setPosts(oldPosts => [...oldPosts, ...postsArr]);
+    setPageNumber(page => page + 1);
+  }
+
+  return (
+    <>
+      <Container fixed>
+        <SearchBasicCard query={searchParams.get('q')} />
+        <PostList posts={posts} loadMore={loadMore} />
+      </Container>
+    </>
+  )
+}
+
+export default Search
+```
+> SearchBasicCard.js 
+The top page of the searched posts results we want to display this card 
+```bash
+import * as React from 'react';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+
+export default function SearchBasicCard({query}) {
+  return (
+    # when user clicks on the tag, this is the component that will replace the HomeBasicCard component on the main page 
+      <Card variant="outlined" sx={{maxWidth: 520, margin: "auto", marginTop: "2rem" }}>
+        <CardContent>
+          <Typography variant="h5" component="div">
+           Search Resulsts for - {query}
+          </Typography>
+          <Typography variant="body2">
+            Love Animals. ❣️
+          </Typography>
+        </CardContent>
+    </Card>
+  );
+}
+```
+### When user clicks on comment icon we want to render 
+> Detail.js 
+Note that: The path for the comment icon is set inside `PostCard.js` and the final routing for the` Search` component is set inside` App` component. 
+- were getting the individual post id via `useParams()`
+- then were extracting all the `post` data for the data via `post/id` endpoint. were also extracting the comment data for that particular post via `/post/id/comment `
+- were setting up the comments in a stack format. Were first rendering the `Postdetails` in this component by sending the detail prop to it, which is responsible for posting the image that we clicked on and were rendering the `CommentList` component below it which is responsible for mapping over the comments state, retreiving each comment within it, and passing it as props to `Comment` component. 
+```bash
+import { Container, Stack, Typography } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import CommentList from '../components/CommentList';
+import PostDetail from '../components/PostDetail';
+import { dummyapi } from '../util';
+import { Link } from 'react-router-dom';
+
+const Detail = () => {
+  const { id } = useParams()
+  const [detail, setDetail] = useState()
+  const [comments, setComments] = useState()
+
+  useEffect(() => {
+    #Get Post by id
+    # Get post full data by post id
+    # GET
+    # /post/:id
+
+    #dummyapi returns a promise, Ill wait and take the response 
+    (async() => {
+      const response = await dummyapi.get(`post/${id}`);
+      console.log(response.data);
+      setDetail(response.data);
+    })();
+
+    #get comment data 
+    # Get List By Post
+    # Get list of comments for specific post sorted by creation date.
+    # - Pagination query params available.
+    # - Created query params available.
+    # GET
+    # /post/:id/comment
+    # Response: List(Comment 
+    (async() => {
+      const response = await dummyapi.get(`/post/${id}/comment`);
+      console.log(response.data.data);
+      setComments(response.data.data);
+    })()
+  }, [id])
+
+  return (
+    <>
+      <Container style={{ maxWidth: "520px" }}>
+        <Stack mt={4} gap={4}>
+          <PostDetail detail={detail} />
+          <Typography variant='h6'>{detail?.text}
+            <Typography variant="caption">
+              {' '}-{' '}
+              <Link to={`/profile/${detail?.owner?.id}`}>
+                {detail?.owner?.firstName} {detail?.owner?.lastName}
+              </Link>
+
+            </Typography>
+
+          </Typography>
+
+          <CommentList commentList={comments} />
+        </Stack>
+      </Container>
+    </>
+    # Prop Drilling:
+    # detail -> commentList -> comment 
+
+    #we can use context API since we have only list of comments to share (1 state), if we had more than 1 state, we could've used redux. 
+
+    #commentList will run a map of comments 
+  )
+}
+
+export default Detail
+```
+> CommentList.js 
+```bash
+#list of all comments 
+import React from 'react'
+import Comment from './Comment'
+
+const CommentList = ({commentList}) => {
+  return (
+    <>
+      {commentList?.map((singleComment, idx) => {
+        return (
+          <Comment singleComment={singleComment} key={idx}/>
+        );
+      })}
+    </>
+  )
+}
+
+export default CommentList
+```
+> Comment.js 
+```bash
+#actual comments rendered here 
+import React from 'react'
+import {Link} from 'react-router-dom'
+import {Stack, Typography, Avatar, Paper} from '@mui/material'
+import moment from 'moment'
+const Comment = ({singleComment}) => {
+  console.log(singleComment)
+  return (
+    <>
+    <Paper>
+        <Stack my={1} mx={2}>
+          <Stack direction="row" gap={2}>
+            <Link to={`/profile/${singleComment?.owner?.id}`}>
+              <Avatar alt="Comment Profile Picture" src={singleComment?.owner?.picture} />
+            </Link>
+            <Stack>
+              <Link to={`/profile/${singleComment?.owner?.id}`}>
+                <Typography variant="body1">{singleComment?.owner?.firstName} {singleComment?.owner?.lastName}</Typography>
+              </Link>
+              <Typography variant="caption">{moment(singleComment?.publishDate).fromNow()}</Typography>
+            </Stack>
+          </Stack>
+          <Typography variant="h6">{singleComment?.message}</Typography>
+        </Stack>
+      </Paper>
+    </>
+  )
+}
+
+export default Comment
+```

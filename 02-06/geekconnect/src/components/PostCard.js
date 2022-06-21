@@ -80,7 +80,6 @@ export default function PostCard(props) {
           })}
         </Stack>
 
-
       </CardContent>
       <CardActions disableSpacing>
       <IconButton aria-label="add to favorites">
@@ -92,7 +91,8 @@ export default function PostCard(props) {
 
         {/* adding link for comments */}
         {/* when user clicks on commentIcon redirect them to Detail component */}
-        <Link to={`/post/:${props.singlePost?.id}`} style={{ marginLeft: "auto" }}>
+        <Link to={`/post/${props.singlePost?.id}`} style={{ marginLeft: "auto" }}>
+          {/* http://localhost:3000/post/60d21b4667d0d8992e610c85 */}
           <IconButton>
             <CommentIcon />
           </IconButton>
