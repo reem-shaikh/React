@@ -997,8 +997,8 @@ const PostList = (props) => {
   console.log(props);
     #const arr = [true, true, true, true, true]
 
-  {/* justify content works on main axis (y)
-        alignitems works on cross axis (x) */}
+  # justify content works on main axis (y)
+        alignitems works on cross axis (x) 
   return (
     <Stack spacing={2} mt={4} mb={4} alignItems="center">
       {props.posts.map((singlePost, idx) => {
@@ -1010,7 +1010,7 @@ const PostList = (props) => {
         )
       })}
 
-       {/* when we click on button it'll make API call and it'll fetch all the data */}
+       # when we click on button it'll make API call and it'll fetch all the data 
       <Button variant="text" onClick={props.loadMore}>Load More...</Button>
     </Stack>
   )
@@ -1231,6 +1231,7 @@ export default function SearchBasicCard({query}) {
 }
 ```
 ### When user clicks on comment icon we want to render 
+
 > Detail.js 
 Note that: The path for the comment icon is set inside `PostCard.js` and the final routing for the` Search` component is set inside` App` component. 
 - were getting the individual post id via `useParams()`
@@ -1309,6 +1310,12 @@ const Detail = () => {
 
 export default Detail
 ```
+We created a stack, and create image card via Paper 
+```bash
+- stack is LIFO
+- A standard queue strictly follows the FIFO (First-In-Last-Out) principle. 
+- A priority queue does not follow the FIFO principle. 
+```
 > CommentList.js 
 ```bash
 #list of all comments 
@@ -1330,6 +1337,11 @@ const CommentList = ({commentList}) => {
 export default CommentList
 ```
 > Comment.js 
+Were integrating Moment.js here [](https://momentjs.com/)
+In comment.js we hardcoded the time, we need to extract that particular time from json object 
+```bash
+npm install moment --save 
+```
 ```bash
 #actual comments rendered here 
 import React from 'react'
@@ -1362,3 +1374,454 @@ const Comment = ({singleComment}) => {
 
 export default Comment
 ```
+[Deployed Link](https://gregarious-fenglisu-362c62.netlify.app/)
+
+#### Integrating dark theme
+> App.js 
+```bash
+#import logo from './logo.svg';
+import './App.css';
+import NavigationBar from './components/NavigationBar';
+import Home from './pages/Home'
+import Search from './pages/Search'
+import Footer from './components/Footer';
+import { Routes, Route } from 'react-router-dom'
+import Profile from './pages/Profile'
+import Detail from './pages/Detail'
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+
+#converting from light to dark theme 
+const darkTheme = createTheme({
+  palette: {
+    #when we change it to mode: 'light' it changes to light theme
+    mode: 'dark',
+  },
+});
+function App() {
+  return (
+    <>
+    # we've integrated dark theme from MUI: https://mui.com/material-ui/customization/dark-mode/#dark-mode-by-default 
+       <ThemeProvider theme={darkTheme}>
+        <NavigationBar/>
+        # these are all the pages, that would be rendered when the url path matches 
+        <Routes>
+          <Route path='/' element={<Home/>} />
+          <Route path='/profile/:id' element={<Profile/>} />
+          <Route path='/post/:id' element={<Detail/>}/>
+          <Route path='/search' element={<Search/>}/>
+        </Routes>
+        <Footer/>
+       </ThemeProvider>
+    </>
+  );
+}
+
+export default App;
+```
+![](oi.PNG)
+
+> System Preference [](https://mui.com/material-ui/customization/dark-mode/#system-preference)
+checks whether your default theme is light or dark, on basis of that set the theme 
+
+#### Changing background of body 
+> cssBaseline 
+```bash
+import './App.css';
+import NavigationBar from './components/NavigationBar';
+import Home from './pages/Home'
+import Search from './pages/Search'
+import Footer from './components/Footer';
+import { Routes, Route } from 'react-router-dom'
+import Profile from './pages/Profile'
+import Detail from './pages/Detail'
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { CssBaseline } from '@mui/material';
+
+#converting from light to dark theme 
+const darkTheme = createTheme({
+  palette: {
+    #when we change it to mode: 'light' it changes to light theme
+    mode: 'dark',
+    background: {
+      default: 'red',
+    },
+  },
+});
+
+function App() {
+  return (
+    <>
+       <ThemeProvider theme={darkTheme}>
+       <CssBaseline />
+        <NavigationBar/>
+        # these are all the pages, that would be rendered when the url path matches 
+        <Routes>
+          <Route path='/' element={<Home/>} />
+          <Route path='/profile/:id' element={<Profile/>} />
+          <Route path='/post/:id' element={<Detail/>}/>
+          <Route path='/search' element={<Search/>}/>
+        </Routes>
+        <Footer/>
+       </ThemeProvider>
+    </>
+  );
+}
+
+export default App;
+```
+### Redux 
+```bash
+npm i react redux
+```
+> old form of defining redux 
+![](h8.PNG)
+
+> createStore is deprecated (it still works, after a few years they will completely stop the support), they say to use reduxToolkit instead which uses configureSTore 
+[](https://redux-toolkit.js.org/api/configureStore)
+
+> install redux tollkit 
+```bash
+npm install @reduxjs/toolkit
+```
+> Do we need to use new redux method?
+Use the new one. But know how the old one works.changing infrastructure expensive. that's why some companies would still prefer to use old redux 
+
+> How to implement this?
+- we've implemented actions within reducer directly 
+
+> create a slice.js, instead of creating actions.js and reducers.js (some actions were objects, some were callback functions which needed to be send as payload) 
+- in old approach we created reducers and actions, to combine reducers we use combinereducers(), over here they renamed it as createSlice(), 
+- we encapsulated actions within reducer, state is an object, object are pass by reference, you dont need to return the state in reducers 
+- exporting as action and exporting as reducer
+- we'll still use useSelector to retreive the object and useDispatch to dispatch the actions 
+![](t0.PNG)
+
+> slice.js 
+```bash
+import { createSlice } from "@reduxjs/toolkit";
+#were defining both actions and reducers in slice.js 
+#createSlice() is an alternative to combineReducers() used in version before v8 
+const slice = createSlice({
+  #default values defined here 
+  name: 'geekConnect',
+  initialState: {
+    theme: "light",
+    likedPosts: [],
+  },
+
+  reducers: {
+    #action.type : defining reducer logic 
+    setThemeLight: state => {
+      state.theme = "light"
+    },
+    setThemeDark: state => {
+      state.theme = "dark"
+    },
+    likePost: (state, action) => {
+      state.likedPosts.push(action.payload);
+    },
+    dislikePost: (state, action) => {
+      const index = state.likedPosts.indexOf(action.payload);
+      if(index >= 0) {
+        state.likedPosts.splice(index, 1);
+      }
+    }
+  }
+});
+#exporting actions 
+export const { setThemeLight, setThemeDark, likePost, dislikePost } = slice.actions;
+#exporting reducers 
+export default slice.reducer;
+```
+> index.js 
+```bash
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+import { BrowserRouter } from 'react-router-dom';
+import { configureStore } from '@reduxjs/toolkit';
+import sliceReducer from './slice';
+import { Provider } from 'react-redux';
+
+const store = configureStore({ reducer: sliceReducer });
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <Provider store={store}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>
+);
+```
+### Adding theme switcher 
+- we defined the actions and reducers with the iniital state inside slice.js, all the reducers combined within createSlice() and both actions and reducers are returned 
+- at index.js we defined the configureStore object and passed our reducer to it, then we passed our store object to the provider component 
+- Within App.js we've passed a toggle switch functionality through ThemeProvider and CssBaseline MUI API and we set the theme of the page via createTheme() which takes in the theme state retreived from the redux store via useSelector()
+```bash
+import './App.css';
+import Home from './pages/Home';
+import Profile from './pages/Profile';
+import Detail from './pages/Detail';
+import Search from './pages/Search';
+import NavigationBar from './components/NavigationBar';
+import Footer from './components/Footer';
+import { Routes, Route } from 'react-router-dom';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { CssBaseline } from '@mui/material';
+import { useSelector } from 'react-redux';
+
+function App() {
+  #were retreiving the theme state over here 
+  const theme = useSelector(state => state.theme);
+
+  const themeObject = createTheme({
+    palette: {
+      #mode: 'dark' or mode: 'light'
+      mode: theme,
+    },
+  });
+
+  return (
+    <>
+    # we integrated CssBaseline API to change the background color on toggle 
+      <ThemeProvider theme={themeObject}>
+        <CssBaseline >
+          <NavigationBar />
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/profile/:id' element={<Profile />} />
+            <Route path='/post/:id' element={<Detail />} />
+            <Route path='/search' element={<Search />} />
+          </Routes>
+          <Footer />
+        </CssBaseline>
+      </ThemeProvider>
+    </>
+  );
+}
+
+export default App;
+```
+- ThemeSwitcher.js within which we'll retreive the state from the redux store is defined in NavigationBar.js 
+- Within ThemeSwitcher.js were retreiving the state from useSelector hook and calling it theme and we integrated the toggle button (all code defined inside MaterialUISwitch.js) and we pass 2 props to it, theme object and another function). Within this function were checking if the toggleswitch is checked or not, if its checked, then dispatch setThemeDark actions, otherwise dispatch setThemeLight actions. 
+```bash
+#import ThemeSwitcher.js inside NavigationBar.
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setThemeDark, setThemeLight } from '../slice';
+import MaterialUISwitch from './MaterialUISwitch';
+
+const ThemeSwitcher = () => {
+  const dispatch = useDispatch();
+  const theme = useSelector(state => state.theme);
+
+  #actions are dispatched here 
+  const changeTheme = e => {
+    if(e.target.checked) {
+      dispatch(setThemeDark());
+    } else {
+      dispatch(setThemeLight());
+    }
+  }
+
+  return (
+    <>
+      <MaterialUISwitch onChange={changeTheme} theme={theme} />
+    </>
+  )
+}
+
+export default ThemeSwitcher
+```
+### adding like when clicking on favoriteIcon from PostCard.js, incrementing the like counter, adding like functionality on double click of the image, dislike on clciking on favouriteIcon again
+- add likedposts[] state in slice.js and define likePost and dislikePost action.type 
+> slice.js 
+```bash
+import { createSlice } from "@reduxjs/toolkit";
+#were defining both actions and reducers in slice.js 
+#createSlice() is an alternative to combineReducers() used in version before v8 
+const slice = createSlice({
+  #default values defined here 
+  name: 'geekConnect',
+  initialState: {
+    theme: "light",
+    likedPosts: [],
+  },
+
+  reducers: {
+    #action.type : defining reducer logic 
+    setThemeLight: state => {
+      state.theme = "light"
+    },
+    setThemeDark: state => {
+      state.theme = "dark"
+    },
+    #were pushing the id of the image clicked on in likedPosts[]
+    likePost: (state, action) => {
+      state.likedPosts.push(action.payload);
+    },
+    dislikePost: (state, action) => {
+      #were fetching the index of the card id user clicked on, and checking whether that index is present in likedPosts[]
+      const index = state.likedPosts.indexOf(action.payload);
+      #if its present then the index will be more than 0
+      if(index >= 0) {
+        #then we remove the card id from likedPosts[]
+        state.likedPosts.splice(index, 1);
+      }
+    }
+  }
+});
+
+#exporting actions 
+export const { setThemeLight, setThemeDark, likePost, dislikePost } = slice.actions;
+#exporting reducers 
+export default slice.reducer;
+```
+- Inside PostCard.js we've retreived the state via useSelector() hook and we've also imported useDispatch() to dispatch either likePost or dislikePost based on the isLiked state
+```bash
+
+export default function PostCard(props) {
+  #dispatching actions 
+  const dispatch = useDispatch();
+  #retreiving state from redux store 
+  # well check if the imageid is present inside the likedPosts state we retreieved from redux store. 
+  const isLiked = useSelector(state => state.likedPosts.some(e => e === props.singlePost?.id));
+
+  #some() is a callback function and checks if atleast one element pssing that exists. Is there any one element having that image ID. then it means that post is liked. 
+  
+  const likeDislikePost = _ => {
+    if(isLiked) {
+      dispatch(dislikePost(props.singlePost?.id));
+    } else {
+      dispatch(likePost(props.singlePost?.id));
+    }
+  }
+
+  #we acheived 3 Routes in this component 
+  #when user clicks on the avatar image 
+  #when user clicks on the title
+  #when user clicks on the comment Icon 
+  return (
+    <Card sx={{ maxWidth: 520 }}>
+      <CardHeader
+        avatar={
+          #wrapped out avatar photo inside the link, the image avatr is anchor tag, when you click on the image it takes us to the profile page 
+          #when were navigated to profile/id then through App.js Route takes us to the profile component 
+          <Link to={`/profile/${props.singlePost?.owner?.id}`}>
+            <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe" src={props.singlePost?.owner?.picture} />
+        </Link>
+        }
+        #when user clicks on title we redirect them to profile component 
+        title={
+          <Link to={`/profile/${props.singlePost?.owner?.id}`}>
+            {props.singlePost?.owner?.firstName} {props.singlePost?.owner?.lastName}
+        </Link>
+        }
+        subheader={props.singlePost?.publishDate}
+        #  action={
+        #      <IconButton aria-label="settings">
+        #        <MoreVertIcon />
+        #      </IconButton>
+        #    }
+  
+        #    title="Shrimp and Chorizo Paella"
+        #    subheader="September 14, 2016"
+      />
+      <CardMedia
+        component="img"
+        # insert image over here 
+        image={props.singlePost?.image}
+        alt="Paella dish"
+        #add onDoubleClick attribute to integrate double tap like 
+        onDoubleClick={likeDislikePost}
+      />
+      <CardContent>
+        # imported from https://mui.com/material-ui/react-typography/main-content 
+        <Typography variant="body2" color="text.secondary">
+          {props.singlePost?.text}
+        </Typography>
+
+        <Stack direction="row" spacing={1} mt={1}>
+          {props.singlePost?.tags?.map((singleTag, idx) => {
+            console.log(singleTag)
+            return (  
+              # search for query parameter path 
+              <Link key={idx} to={`/search?q=${singleTag}`}>
+                <Chip label={`#${singleTag}`} variant="outlined" size="small" style={{ textTransform: "capitalize" }} onClick={() => { }} />
+              </Link>
+              # <Chip label={`${singleTag}`} variant="outlined" key={idx} size="small" style={{textTransform: "capitalize"}} onClick={() => {}} />
+            );
+          })}
+        </Stack>
+
+      </CardContent>
+      <CardActions disableSpacing>
+      # <IconButton aria-label="add to favorites">
+          <FavoriteIcon />
+        </IconButton> 
+        # <Typography variant="caption" display="block" gutterBottom>
+          {props.singlePost?.likes} Likes
+        </Typography> 
+
+        # ✅when user clicks on the heart button, likeDislikePost is called which is responsible for dispatching like and dislike actions based on the cureent isLiked state  
+          <IconButton aria-label="add to favorites" onClick={likeDislikePost}>
+
+          # ✅inside FavoriteIcon we'll add style via ternary condition when IconButton is clicked were invoking a function which would check if post is liked or not. if its liked, dispatch dislike post, else dispatch like post 
+          <FavoriteIcon style={{color: isLiked? "red": "inherit"}} />
+        </IconButton>
+        # ✅when isLiked state is true then increase the like count by 1 
+        <Typography variant="caption" display="block" gutterBottom>
+          {props.singlePost?.likes + (isLiked ? 1 : 0)} Likes
+        </Typography>
+
+        # adding link for comments 
+        # when user clicks on commentIcon redirect them to Detail component 
+        <Link to={`/post/${props.singlePost?.id}`} style={{ marginLeft: "auto" }}>
+          # http:#localhost:3000/post/60d21b4667d0d8992e610c85 
+          <IconButton>
+            <CommentIcon />
+          </IconButton>
+        </Link>
+      </CardActions>
+    </Card>
+  );
+}
+```
+[](https://stellular-hummingbird-250de5.netlify.app/)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

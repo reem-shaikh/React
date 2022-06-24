@@ -12,21 +12,36 @@ import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import {Link} from 'react-router-dom'
-
+import { useDispatch, useSelector } from 'react-redux';
+import { likePost, dislikePost } from '../slice';
 //we imported the icon from here: https://mui.com/material-ui/material-icons/?query=Comment&selected=Comment
 import CommentIcon from '@mui/icons-material/Comment';
 import { Chip, Stack } from '@mui/material';
 
 export default function PostCard(props) {
-  //  const [expanded, setExpanded] = React.useState(false);
+  //dispatching actions 
+  const dispatch = useDispatch();
+  //retreiving state from redux store 
+  // we'll check if the imageid is present inside the likedPosts state we retreieved from redux store. 
+  const isLiked = useSelector(state => state.likedPosts?.some(e => e === props.singlePost?.id));
 
-  //  const handleExpandClick = () => {
-  //    setExpanded(!expanded);
-  //  };
+  //some() is a callback function and checks if atleast one element pssing that exists. Is there any one element having that image ID. then it means that post is liked. 
+
+  //incase of old school redux, dont use some(), rather use 
+  
+  const likeDislikePost = _ => {
+    if(isLiked) {
+      dispatch(dislikePost(props.singlePost?.id));
+    } else {
+      dispatch(likePost(props.singlePost?.id));
+    }
+  }
+
 
   //we acheived 3 Routes in this component 
   //when user clicks on the avatar image 
-  //when user clicks on the 
+  //when user clicks on the title
+  //when user clicks on the comment Icon 
   return (
     <Card sx={{ maxWidth: 520 }}>
       <CardHeader
@@ -55,11 +70,11 @@ export default function PostCard(props) {
       />
       <CardMedia
         component="img"
-        // height sets the height for the image 
-        // height="194"
         // insert image over here 
         image={props.singlePost?.image}
         alt="Paella dish"
+        //add onDoubleClick attribute to integrate double tap like 
+        onDoubleClick={likeDislikePost}
       />
       <CardContent>
         {/* imported from https://mui.com/material-ui/react-typography/main-content */}
@@ -82,11 +97,22 @@ export default function PostCard(props) {
 
       </CardContent>
       <CardActions disableSpacing>
-      <IconButton aria-label="add to favorites">
+      {/* <IconButton aria-label="add to favorites">
           <FavoriteIcon />
-        </IconButton>
-        <Typography variant="caption" display="block" gutterBottom>
+        </IconButton> */}
+        {/* <Typography variant="caption" display="block" gutterBottom>
           {props.singlePost?.likes} Likes
+        </Typography> */}
+
+        {/* when user clicks on the heart button, likeDislikePost is called which is responsible for dispatching like and dislike actions based on the cureent isLiked state  */}
+          <IconButton aria-label="add to favorites" onClick={likeDislikePost}>
+
+          {/* inside FavoriteIcon we'll add style via ternary condition when IconButton is clicked were invoking a function which would check if post is liked or not. if its liked, dispatch dislike post, else dispatch like post */}
+          <FavoriteIcon style={{color: isLiked? "red": "inherit"}} />
+        </IconButton>
+        {/* when isLiked state is true then increase the like count by 1 */}
+        <Typography variant="caption" display="block" gutterBottom>
+          {props.singlePost?.likes + (isLiked ? 1 : 0)} Likes
         </Typography>
 
         {/* adding link for comments */}

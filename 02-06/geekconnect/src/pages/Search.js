@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSearchParams, useNavigate } from 'react-router-dom'
 import { dummyapi } from '../util';
-import { Container } from '@mui/material';
+import { Container, LinearProgress } from '@mui/material';
 import PostList from '../components/PostList';
 import SearchBasicCard from '../components/SearchBasicCard';
 const Search = () => {
@@ -31,7 +31,7 @@ const Search = () => {
             navigate('/')
         }
      })()
-  }, [searchParams])
+  }, [searchParams, navigate])
 
   const loadMore = async() => {
     const response = await dummyapi.get(`/tag/${searchParams.get('q')}/post?page=${pageNumber}`);  
@@ -42,9 +42,14 @@ const Search = () => {
 
   return (
     <>
-      <Container fixed>
+     <Container fixed>
         <SearchBasicCard query={searchParams.get('q')} />
-        <PostList posts={posts} loadMore={loadMore} />
+      {/* if there is nothing in the posts state, that means data is not yet fetched in this state from the API endpoint */}
+      {posts.length === 0 ? (
+        <LinearProgress style={{margin: "1.5rem 0.75rem 1.5rem 0.75rem"}}/>
+        ) : (
+          <PostList posts={posts} loadMore={loadMore} />
+        )}
       </Container>
     </>
   )

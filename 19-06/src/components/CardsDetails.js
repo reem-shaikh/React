@@ -4,7 +4,6 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { DLT,ADD,REMOVE } from '../redux/actions/action'
 
-
 const CardsDetails = () => {
 
   const [data,setData] = useState([]);
@@ -29,20 +28,20 @@ const CardsDetails = () => {
     setData(comparedata);
   }
 
-  // add data
-  
-
+  // to add the item within card details when user clicks on +
   const send = (e)=>{
     // console.log(e);
     dispatch(ADD(e));
   }
   
+//when user clicks on trash icon in the card details page 
   const dlt = (id)=>{
     dispatch(DLT(id));
+    //after deleting redirect to the home page 
     history("/");
 }
 
-// remove one
+// to delete one item when user clicks on - 
 const remove = (item)=>{
   dispatch(REMOVE(item))
 }

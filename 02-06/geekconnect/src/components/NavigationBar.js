@@ -5,19 +5,27 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Logo from '../logo.png';
+//import Logodark from '../logo_dark.png'
 import { Link } from 'react-router-dom';
-
-// const pages = ['Products', 'Pricing', 'Blog'];
-// const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+import ThemeSwitcher from './ThemeSwitcher';
+// import { useSelector } from 'react-redux';
 
 const NavigationBar = () => {
+  // const theme = useSelector(state => state.theme);
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
         {/* whenever the user clicks on the logo / brand name we'll redirect the user to the home page  */}
         <Link to="/">
-          <img src={Logo} style={{height: "2rem", paddingRight: "1rem"}} alt='logo'/>
+             <img src={Logo} style={{height: "2rem", paddingRight: "1rem"}} alt='logo'/>
+            {/*           
+            {theme ? (
+              <img src={Logodark} style={{height: "2rem", paddingRight: "1rem"}} alt='logo'/>
+            ) : (
+              <img src={Logo} style={{height: "2rem", paddingRight: "1rem"}} alt='logo'/>
+            )} */}
         </Link>
 
           <Link to='/'>
@@ -39,6 +47,8 @@ const NavigationBar = () => {
             GeekConnect
           </Typography>
           </Link>
+          <ThemeSwitcher/>
+          
         </Toolbar>
       </Container>
     </AppBar>

@@ -10,25 +10,26 @@ import { useDispatch, useSelector } from 'react-redux';
 import Table from 'react-bootstrap/esm/Table';
 import { DLT } from '../redux/actions/action';
 import './style.css'
+
 const Header = (props) => {
     //console.log(props.data)
     const [price,setPrice] = useState(0);
     // console.log(price);
 
-        const getdata = useSelector((state)=> state.cartreducer.carts);
-        // console.log(getdata);
+    const getdata = useSelector((state)=> state.cartreducer.carts);
+    // console.log(getdata);
 
-        const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
+
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
     const handleClose = () => {
         setAnchorEl(null);
     };
-
 
     const dlt = (id)=>{
         dispatch(DLT(id))
@@ -43,8 +44,16 @@ const Header = (props) => {
     //     setPrice(price);
     // };
 
+    //this was throwing error 
+    //useEffect(() => {
+    // total()
+   // })
+
+   //so i encapsulated the function within the useEffect within IIFE
+
     useEffect(()=>{
-        //total();
+        
+        //total() is typically to calculate the total calcculation of items in the cart 
         (()=>{
             let price = 0;
             getdata.map((ele, k) => {
@@ -59,7 +68,7 @@ const Header = (props) => {
     return (
         <>
             <Navbar bg="dark" variant="dark" style={{ height: "60px" }}>
-                <Container>
+            <Container>
                     {/* <NavLink to="/" className="text-decoration-none text-light mx-3 cute" style={{fontSize: "30px"}}>Add to Cart</NavLink> */}
                     <Nav className="me-auto">
                         <NavLink to="/" className="text-decoration-none text-light cute" style={{fontSize: "30px"}}>Add To Cart</NavLink>
@@ -87,6 +96,7 @@ const Header = (props) => {
                         'aria-labelledby': 'basic-button',
                     }}
                 >
+                    {/* this is to place the data within the cart  */}
 
                     {
                         getdata.length ? 
@@ -105,6 +115,7 @@ const Header = (props) => {
                                                 <>
                                                     <tr key={id}>
                                                         <td>
+                                                            {/* we added handleclose function because whenever were clicking on one image from the cart, and we want another image to render when we clcik on another, then we have to close the first image */}
                                                         <NavLink to={`/cart/${e.id}`}   onClick={handleClose}>
                                                         <img src={e.image} style={{width:"5rem",height:"5rem"}} alt="" />
                                                         </NavLink>   
@@ -113,12 +124,13 @@ const Header = (props) => {
                                                             <p>{e.title}</p>
                                                             <p>Price : ₹{e.price}</p>
                                                             <p>Quantity : {e.quantity}</p>
-                                                       
+                                                {/* were invoking the dlt function when trash icon is clicked */}
+                                                       {/* trash icon for mobile layout */}
                                                             <p style={{color:"red",fontSize:20,cursor:"pointer"}} onClick={()=>dlt(e.id)}>
                                                                 <i className='fas fa-trash smalltrash'></i>
                                                             </p>
                                                         </td>
-
+                                                        {/* trash icon for desktop layout */}
                                                         <td className='mt-5'style={{color:"red",fontSize:20,cursor:"pointer"}}  onClick={()=>dlt(e.id)}>
                                                         <i className='fas fa-trash largetrash'></i>
                                                         </td>
