@@ -89,8 +89,6 @@ export default App;
 ```
 - before npm run build, we need to run this command on terminal `npx tailwindcss -i ./src/index.css -o ./dist/index.css`
 - when we run npm run build, it optmises the `dist/index.css `file, it will only contain classes that we use
-- for instance, before running `npx tailwindcss -i ./src/index.css -o ./dist/index.css` on terminal, this was the state of my dist/css file
-![](oip.PNG)
 
 #### Tips
 - Tailwind UI is paid, but there are some free component provisions, which we can customize. 
