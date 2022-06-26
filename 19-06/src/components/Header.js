@@ -74,13 +74,13 @@ const Header = (props) => {
                         <NavLink to="/" className="text-decoration-none text-light cute" style={{fontSize: "30px"}}>Add To Cart</NavLink>
                     </Nav>
 
+                    {/* this adds data to the badge */}
                     <Badge badgeContent={getdata.length} color="primary"
                         id="basic-button"
                         aria-controls={open ? 'basic-menu' : undefined}
                         aria-haspopup="true"
                         aria-expanded={open ? 'true' : undefined}
-                        onClick={handleClick}
-                    >
+                        onClick={handleClick}>
                         <i className="fa-solid fa-cart-shopping text-light" style={{ fontSize: 25, cursor: "pointer" }}></i>
                     </Badge>
 
@@ -145,6 +145,7 @@ const Header = (props) => {
                         </div>:
                         
                    <div className='card_details d-flex justify-content-center align-items-center' style={{width:"24rem",padding:10,position:"relative"}}>
+                    {/* cross icon to close the your cart is empty message */}
                     <i className='fas fa-close smallclose'
                     onClick={handleClose}
                      style={{position:"absolute",top:2,right:20,fontSize:23,cursor:"pointer"}}></i>

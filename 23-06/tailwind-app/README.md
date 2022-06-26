@@ -56,8 +56,14 @@ Run the CLI tool to scan your template files for classes and build your CSS.
 > Terminal
 ```bash
 #this is for building an index.css in dist/index.css
-npx tailwindcss -i ./src/index.css -o ./dist/index.css --watch
+#npx tailwindcss -i ./src/index.css -o ./dist/index.css --watch
+
+#this is the right command 
+npx tailwindcss -i ./src/index.css -o ./public/index.css --watch
 ```
+> what is `--watch`
+as soon as their is a change, it will rebuilt the css file. 
+
 ### 5. index.html
 Start using Tailwind in your HTML
 Add your compiled CSS file to the <head> and start using Tailwind’s utility classes to style your content.
@@ -87,10 +93,17 @@ const App =() =>{
 
 export default App;
 ```
-- before npm run build, we need to run this command on terminal `npx tailwindcss -i ./src/index.css -o ./dist/index.css`
-- when we run npm run build, it optmises the `dist/index.css `file, it will only contain classes that we use
+- before npm run build, we need to run this command on terminal `npx tailwindcss -i ./src/index.css -o ./public/index.css`
+- when we run npm run build, it optmises the `public/index.css `file, it will only contain classes that we use
 
 #### Tips
 - Tailwind UI is paid, but there are some free component provisions, which we can customize. 
 - we can create components using Tailwind 
 - you can customize anything, you are not restricted to the components. 
+ 
+### Why did we import index.css in both public and dist ?
+- the import in dist was a mistake 
+- then dont use that import, in place use the public one 
+
+
+

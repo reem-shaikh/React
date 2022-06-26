@@ -36,6 +36,7 @@ const Cards = () => {
   const dispatch = useDispatch();
 
 
+  //to add items to the cart 
   const send = (e)=>{
     // console.log(e);
     //were dispatching actions 
@@ -54,17 +55,20 @@ const Cards = () => {
               //imported card from react-bootstrap
               <div key={id} className='cute'>
                 <Card style={{ width: '18rem', border:"none", height: '28rem'}} className="mx-2 mt-4 card_style">
+                  
                   <Card.Img variant="top" src={element.image} style={{height:"16rem"}} className="mt-3" />
                   <Card.Body>
+
                     <Card.Title  style={{fontSize: '12px'}}>{element.title}</Card.Title>
+
                     <Card.Text  style={{fontSize: '21px'}}>
                     Price : ₹ {element.price}
                     </Card.Text>
+
                     <div className="button_div" style={{display: "flex", justifyContent: "center"}}>
-                 
-                    <Button variant="primary"  
-                      onClick={()=> send(element)}
-                     className='col-lg-12'  style={{fontSize: '20px'}}>Add to Cart</Button>
+                      <Button variant="primary"  
+                        onClick={()=> send(element)}
+                      className='col-lg-12'  style={{fontSize: '20px'}}>Add to Cart</Button>
                     </div>
                     {/*  when user clicks on Add to Cart invoke send function, his will send all he data presen inside element argument*/}
                   </Card.Body>

@@ -20,7 +20,7 @@ export const cartreducer = (state = INIT_STATE, action) => {
         //findindex returns index 
 
         //if ItemIndex has a value greater than 0
-        //if any item is actually present in both carts[] and the payload, then it can have an index thats 0 or anything above that
+        //if any item is actually present in both carts[] and the payload, then it can have an index thats 0 or anything above that in carts[]
         if(IteamIndex >= 0){
             //then increase the quantity by 1 
             state.carts[IteamIndex].quantity +=1
@@ -43,7 +43,7 @@ export const cartreducer = (state = INIT_STATE, action) => {
 
         //were filtering out the id passed to remove
         case "RMV_CART":
-            //were typically filtering out the id that were retreive over here
+            //were typically filtering out the id that we'll retreive over here
             //if cart id in carts[] is not equal to the id passed in payload, then return the rest of the data in the carts[]
             const data = state.carts.filter((el)=>el.id !== action.payload); 
             // console.log(data);

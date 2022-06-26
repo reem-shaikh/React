@@ -21,6 +21,7 @@ const CardsDetails = () => {
   // console.log(getdata);
 
 
+  //when the id user clicked on, is present inside the cart 
   const compare = ()=>{
     let comparedata = getdata.filter((e)=>{
       return e.id == id
@@ -34,7 +35,7 @@ const CardsDetails = () => {
     dispatch(ADD(e));
   }
   
-//when user clicks on trash icon in the card details page 
+//when user clicks on trash icon in the card details page, delete the entire section from the cart 
   const dlt = (id)=>{
     dispatch(DLT(id));
     //after deleting redirect to the home page 
@@ -45,7 +46,6 @@ const CardsDetails = () => {
 const remove = (item)=>{
   dispatch(REMOVE(item))
 }
-
 
   useEffect(()=>{
     compare();
@@ -79,7 +79,7 @@ const remove = (item)=>{
             
                     <span style={{fontSize:24}} onClick={ele.quantity <=1 ? ()=>dlt(ele.id) : ()=>remove(ele)}>-</span>
                     <span style={{fontSize:22}}>{ele.quantity}</span>
-                
+                    {/* add items to the cart */}
                     <span style={{fontSize:24}} onClick={()=>send(ele)}>+</span>
 
                     </div>
@@ -87,6 +87,7 @@ const remove = (item)=>{
                   </td>
                   <td>
                   <div style={{marginTop: "240px"}} className='cute'>
+                    {/* remove the item user clicked on */}
                     <p>Remove <span ><i className='fas fa-trash' onClick={()=>dlt(ele.id)} style={{color:"grey",fontSize:30,cursor:"pointer"}}></i>	</span></p>
                   </div>
                   </td>
