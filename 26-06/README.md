@@ -1,6 +1,4 @@
 ### Article Newspaper app 
-Note: I'm using the newsapi to render the json content, but only after deployment I realized that they only support their API's on localhost and they removes their support from hosting services. i'm getting this error: Failed to load resource: the server responded with a status of 426 ()
-
 ### Article app 
 > Light Mode
 ![](lightmode.PNG)
@@ -19,3 +17,6 @@ Note: I'm using the newsapi to render the json content, but only after deploymen
 - like and unlike implementation via react-redux
 - light and dark mode implementation redux
 - commenting integration underneath the div
+
+#### Note: 
+Initially I used the newsapi to render the json content, but after deployment i was getting this getting this error: Failed to load resource: the server responded with a status of 426 (). I read online to find a fix, but figured out, that they only support their API's on localhost and they removed their support from hosting services. Thats why I created a seperate JSON file with the same endpoint data and fetched it via axios. 

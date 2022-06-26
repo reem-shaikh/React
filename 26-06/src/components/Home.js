@@ -10,12 +10,22 @@ const Home = () => {
   //process.env.REACT_APP_NEWS_KEY
   useEffect(() => {
     (async() => {
-      axios.get(`https://newsapi.org/v2/everything?q=bitcoin&apiKey=${process.env.REACT_APP_NEWS_KEY}`)
+      // axios.get(`https://newsapi.org/v2/everything?q=bitcoin&apiKey=${process.env.REACT_APP_NEWS_KEY}`)
+      axios.get(`/sampleOutput.json`)
       .then((response) => {
         console.log("mwow",response)
         setData(response.data.articles) 
       })
       .catch((error) => console.log(error))
+
+      // sampleOutput.map(response => {
+      //   setData(response.data.articles) 
+      //   return(
+      //   // console.log("mwow",response)
+      //   <div>response</div>
+      //   )
+      // })
+
     })();
   }, []);
 
