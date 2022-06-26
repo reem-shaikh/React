@@ -1,7 +1,7 @@
 ### Add To Cart Ecommerce Store 
 ![](t1.PNG)
 > Note: It takes some time to fetch data from the API endpoint. 
-[Deployed Link]()
+[Deployed Link](https://addtocartfunctionality.netlify.app/)
 
 ### Features implemented
 - Responsive Design via MUI and React-Bootstrap
