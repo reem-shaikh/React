@@ -1,38 +1,38 @@
-import * as React from 'react';
+import * as React from 'react'
 //import { styled } from '@mui/material/styles';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
+import Card from '@mui/material/Card'
+import CardHeader from '@mui/material/CardHeader'
+import CardMedia from '@mui/material/CardMedia'
+import CardContent from '@mui/material/CardContent'
+import CardActions from '@mui/material/CardActions'
 //import Collapse from '@mui/material/Collapse';
-import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import { red } from '@mui/material/colors';
+import Avatar from '@mui/material/Avatar'
+import IconButton from '@mui/material/IconButton'
+import Typography from '@mui/material/Typography'
+import { red } from '@mui/material/colors'
 import FavoriteIcon from '@mui/icons-material/Favorite'
-import { useDispatch, useSelector } from 'react-redux';
-import { likePost, dislikePost } from '../slice';
-import { styled } from '@mui/material/styles';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Collapse from '@mui/material/Collapse';
-import ShareIcon from '@mui/icons-material/Share';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { Paper, Stack} from '@mui/material'
-import {useState} from 'react'
-
+import { useDispatch, useSelector } from 'react-redux'
+import { likePost, dislikePost } from '../slice'
+import { styled } from '@mui/material/styles'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import Collapse from '@mui/material/Collapse'
+import ShareIcon from '@mui/icons-material/Share'
+import MoreVertIcon from '@mui/icons-material/MoreVert'
+import { Paper, Stack } from '@mui/material'
+import { useState } from 'react'
+import Comments from './Comments'
 const ExpandMore = styled((props) => {
   console.log(props.NewsPost)
 
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
+  const { expand, ...other } = props
+  return <IconButton {...other} />
 })(({ theme, expand }) => ({
   transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
   marginLeft: 'auto',
   transition: theme.transitions.create('transform', {
     duration: theme.transitions.duration.shortest,
   }),
-}));
+}))
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -40,41 +40,44 @@ const Item = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(1),
   textAlign: 'center',
   color: theme.palette.text.secondary,
-}));
+}))
 
 export default function PostCard(props) {
   //console.log(props.NewsPost)
-  const [expanded, setExpanded] = React.useState(false);
-  const [inputData, setInputData] = useState('')
-
+  const [expanded, setExpanded] = React.useState(false)
   const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
+    setExpanded(!expanded)
+  }
 
-    //dispatching actions 
-    const dispatch = useDispatch();
-    //retreiving state from redux store 
-    // we'll check if the imageid is present inside the likedPosts state we retreieved from redux store. 
-    const isLiked = useSelector(state => state.likedPosts?.some(e => e === props.NewsPost?.source?.id));
-  
-    //some() is a callback function and checks if atleast one element pssing that exists. Is there any one element having that image ID. then it means that post is liked. 
-  
-    //incase of old school redux, dont use some(), rather use 
-    
-    const likeDislikePost = _ => {
-      if(isLiked) {
-        dispatch(dislikePost(props.NewsPost?.source?.id));
-      } else {
-        dispatch(likePost(props.NewsPost?.source?.id));
-      }
+  //dispatching actions
+  const dispatch = useDispatch()
+  //retreiving state from redux store
+  // we'll check if the imageid is present inside the likedPosts state we retreieved from redux store.
+  const isLiked = useSelector((state) =>
+    state.likedPosts?.some((e) => e === props.NewsPost?.source?.id),
+  )
+
+  //some() is a callback function and checks if atleast one element pssing that exists. Is there any one element having that image ID. then it means that post is liked.
+
+  //incase of old school redux, dont use some(), rather use
+
+  const likeDislikePost = (_) => {
+    if (isLiked) {
+      dispatch(dislikePost(props.NewsPost?.source?.id))
+    } else {
+      dispatch(likePost(props.NewsPost?.source?.id))
     }
+  }
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 445 }}>
       <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe" src={props.NewsPost.urlToImage}>
-          </Avatar>
+          <Avatar
+            sx={{ bgcolor: red[500] }}
+            aria-label="recipe"
+            src={props.NewsPost.urlToImage}
+          ></Avatar>
         }
         action={
           <IconButton aria-label="settings">
@@ -85,25 +88,24 @@ export default function PostCard(props) {
         subheader={props.NewsPost.publishedAt}
       />
       <CardMedia
-        component='img'
+        component="img"
         height="194"
         image={props.NewsPost.urlToImage}
         alt="Paella dish"
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-         {props.NewsPost.description}
+          {props.NewsPost.description}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-
-      <IconButton aria-label="add to favorites" onClick={likeDislikePost}>
-          <FavoriteIcon style={{color: isLiked? "red": "inherit"}} />
+        <IconButton aria-label="add to favorites" onClick={likeDislikePost}>
+          <FavoriteIcon style={{ color: isLiked ? 'red' : 'inherit' }} />
         </IconButton>
-  
+
         <IconButton aria-label="share">
           <ShareIcon />
-        </IconButton> 
+        </IconButton>
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}
@@ -115,8 +117,16 @@ export default function PostCard(props) {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
+          <Stack>
+            <Item>
+              <Comments
+                commentsUrl="http://localhost:3004/comments"
+                currentUserId="1"
+              />
+            </Item>
+          </Stack>
 
-        <Stack spacing={2}>
+          {/* <Stack spacing={2}>
           <Item >
            <Stack direction="row" spacing={1} sx={{ width: 55, height: 55 }}>
              <Item sx={{ width: 37, height: 37 }}><Avatar sx={{ width: 27, height: 27 }}>U</Avatar>
@@ -136,7 +146,8 @@ export default function PostCard(props) {
             
             </Stack>
            </Stack>
-          </Item>
+          </Item> */}
+
           {/* second starts */}
           {/* <Item >
            <Stack direction="row" spacing={1} sx={{ width: 55, height: 55 }}>
@@ -150,10 +161,9 @@ export default function PostCard(props) {
           </Item> */}
           {/* second ends */}
 
-        </Stack>
-      
+          {/* </Stack> */}
         </CardContent>
       </Collapse>
     </Card>
-  );
+  )
 }

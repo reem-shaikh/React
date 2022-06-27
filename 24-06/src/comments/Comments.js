@@ -1,4 +1,3 @@
-//fetch comments from backend here 
 import { useState, useEffect } from "react";
 import CommentForm from "./CommentForm";
 import Comment from "./Comment";
@@ -52,7 +51,6 @@ const Comments = ({ commentsUrl, currentUserId }) => {
     }
   };
 
-  //this useEffect will be triggered only once after the component is mounted 
   useEffect(() => {
     getCommentsApi().then((data) => {
       setBackendComments(data);
