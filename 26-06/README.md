@@ -1,4 +1,6 @@
 ### Article Newspaper app 
+[Deployed Link](https://singular-crumble-2cc32d.netlify.app/)
+
 > Tech integrated:
 - react-redux (v8 new method)
 - react-router
@@ -23,10 +25,10 @@
 
 ## Implementation:
 ### Redux
-- Like and Dislike 
+- Like and Dislike functionality
 ![](lp.PNG)
 
-- Light & Dark theme 
+- Light & Dark theme functionality
 ![](lop.PNG)
 
 ### Router 
@@ -35,7 +37,7 @@
 ### Axios 
 ![](axios.PNG)
 
-### Comments 
+### Comment functionality
 ![](comment.PNG)
 
 --------
