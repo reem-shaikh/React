@@ -1422,7 +1422,7 @@ const Player = () => {
 
 export default Player
 ```
-[Dployed site]()
+[Deployed site](https://frolicking-pixie-9de43c.netlify.app/)
 
 
 
