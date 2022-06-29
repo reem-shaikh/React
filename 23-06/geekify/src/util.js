@@ -10,8 +10,8 @@ const napster = axios.create({
 
 //get track or album image 
 //https://api.napster.com/imageserver/v2/albums/{album_id}/images/{size}.{extension}
-const trackImage = trackId => {
-  return `https://api.napster.com/imageserver/v2/albums/${trackId}/images/500x500.jpg`;
+const trackImage = albumId => {
+  return `https://api.napster.com/imageserver/v2/albums/${albumId}/images/500x500.jpg`;
   //Album image(Top artist song)
   //it'll technically show the album image the song belongs to
 }
@@ -30,3 +30,4 @@ const getArtistImage = artistId => {
 }
 
 export {napster, trackImage, getArtistImage};
+

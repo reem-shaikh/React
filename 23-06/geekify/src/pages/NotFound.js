@@ -1,10 +1,9 @@
 import { Route, Routes } from "react-router-dom";
-import NavigationBar from "./components/NavigationBar";
-import Player from "./components/Player";
-import Home from "./pages/Home";
-import Album from './pages/Album';
-import Artist from './pages/Artist'
-import NotFound from "./pages/NotFound";
+import NavigationBar from "../components/NavigationBar";
+import Player from "../components/Player";
+import Home from "../pages/Home";
+import Album from '../pages/Album';
+import NotFound from "../pages/NotFound";
 
 const App = _ => {
   return (
@@ -15,7 +14,6 @@ const App = _ => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/album/:albumId" element={<Album />} />
-            <Route path="/artist/:Id" element={<Artist />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
