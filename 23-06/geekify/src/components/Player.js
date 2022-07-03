@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 //we added fontAwesome icons for the play and pause icon [](https://fontawesome.com/docs/web/use-with/react/)
 import { faPlay, faPause } from '@fortawesome/free-solid-svg-icons'
-
+import PlayerProgressBar from './PlayerProgressBar';
 
 //GET Track Detail
 // Returns detailed information about a track or tracks, including artist and album and genre information.
@@ -19,7 +19,7 @@ import { faPlay, faPause } from '@fortawesome/free-solid-svg-icons'
 const response = { "meta": { "totalCount": null, "returnedCount": 1 }, "tracks": [{ "type": "track", "id": "tra.5156528", "index": 7, "disc": 1, "href": "https://api.napster.com/v2.2/tracks/tra.5156528", "playbackSeconds": 258, "isExplicit": false, "isStreamable": false, "isAvailableInHiRes": false, "name": "Say It Ain't So", "isrc": "USIR10400084", "shortcut": "weezer/weezer-blue-album-deluxe-edition/say-it-aint-so", "amg": "6907998", "blurbs": [], "artistId": "art.954", "artistName": "Weezer", "albumName": "Weezer (Blue Album) (Deluxe Edition)", "formats": [{ "type": "format", "bitrate": 320, "name": "AAC", "sampleBits": 16, "sampleRate": 44100 }, { "type": "format", "bitrate": 192, "name": "AAC", "sampleBits": 16, "sampleRate": 44100 }, { "type": "format", "bitrate": 128, "name": "MP3", "sampleBits": 16, "sampleRate": 44100 }, { "type": "format", "bitrate": 64, "name": "AAC PLUS", "sampleBits": 16, "sampleRate": 44100 }], "losslessFormats": [{ "type": "format", "bitrate": 44100, "name": "FLAC", "sampleBits": 16, "sampleRate": 44100 }], "albumId": "alb.5153820", "isAvailableInAtmos": false, "contributors": { "primaryArtist": "art.954" }, "links": { "artists": { "ids": ["art.954"], "href": "https://api.napster.com/v2.2/artists/art.954" }, "albums": { "ids": ["alb.5153820"], "href": "https://api.napster.com/v2.2/albums/alb.5153820" }, "genres": { "ids": ["g.1053", "g.1050", "g.5"], "href": "https://api.napster.com/v2.2/genres/g.1053,g.1050,g.5" }, "tags": { "ids": ["tag.152196498"], "href": "https://api.napster.com/v2.2/tags/tag.152196498" } }, "previewURL": "https://listen.hs.llnwd.net/g2/prvw/4/2/4/9/8/911189424.mp3" }] };
 
   //we create a track object to target previewURL which contains the mp3 song file 
-const track = response.tracks[0];
+  const track = response.tracks[0];
 
 
 const Player = () => {
@@ -47,7 +47,7 @@ const Player = () => {
       // /v2.2/tracks/tra.5156528
     (async _ => {
       //if there's nothing in the trackId, when page is initially loaded return false 
-      if(trackId === "") {
+      if (trackId === "") {
         return false;
       }
 
@@ -75,7 +75,7 @@ const Player = () => {
   //we create a mutation observer: mutation observer observes change of object in the dom - over here were observing it using ref 
   //run this useEffect whenever any change to isPlaying state occurs 
   useEffect(() => {
-    if(isPlaying) {
+    if (isPlaying) {
       //when isPlaying state is true, then play the song, by targetting it via useRef() current property 
       audioPlayer.current.play();
     } else {
@@ -117,7 +117,9 @@ const Player = () => {
     <>
       {/* we added another navigation bar component to the bottom  */}
     {/* we cleaned up all the nav content, we added classes to fix it to the bottom and fixed the width to 100% (w-full) */}
-      <footer className=" fixed bottom-0 w-full">
+
+    {/* if trackid is empty then dont show the player (hidden class) */}
+    <footer className={`fixed bottom-0 w-full ${trackId === "" ? "hidden" : ""}`}>
          {/* were using Player.js as a proxy to send data to the control that is hidden */}
          {/* <audio ref={audioPlayer} onTimeUpdate={playerCurrentTimeUpdate}></audio> */}
 
@@ -129,7 +131,11 @@ const Player = () => {
         
         {/* we added input type range to integrate the player range scroll  */}
         {/* when the value of the range is changed, were passing the currentTime to the function changeCurrentTime */}
-        <input type="range" className="w-full -mb-4" value={currentTime} max={30} onChange={changeCurrentTime} />
+        {/* <input type="range" className="w-full -mb-4" value={currentTime} max={30} onChange={changeCurrentTime} /> */}
+
+        <input type="range" className="w-full -mb-4 hidden"  max={30} />
+        <PlayerProgressBar value={currentTime} changeFn={changeCurrentTime}  />
+
         <div className='bg-gray-800'>
           <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
             <div className="relative flex items-center justify-between h-16">

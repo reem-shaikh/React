@@ -6,8 +6,8 @@ import TopSongs from '../components/TopSongs'
 const Home = () => {
   return (
     <>
-      <div class="container pl-2">
-        <h1 class="text-3xl font-semibold ">Two way binding</h1>
+      <div className="container pl-2">
+        <h1 className="text-3xl font-semibold ">Two way binding</h1>
         <br />
         <TopSongs />
         <br />
