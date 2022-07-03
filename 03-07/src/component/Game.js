@@ -44,10 +44,6 @@ const Game = () => {
 
   };
 
-  // const handleClick = useCallback((i) => {
-  //   dispatch({type: 'handleClick', idx: i})
-  // }, [dispatch])
-
   // were setting the current step value 
   const jumpTo = (step) => {
     setStepNumber(step);
