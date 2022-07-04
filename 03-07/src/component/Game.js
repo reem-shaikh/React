@@ -64,6 +64,20 @@ const Game = () => {
       );
     });
 
+    let status;  
+    //let winningSquares;
+    if(winner && winner !== 'draw'){
+      status = 'Winner: ' + winner;
+      //winningSquares = this.lines[winner[1]];
+    } else if (winner && winner === 'draw'){
+        status = "It's a" + winner;
+        //winningSquares = [];
+    } else {
+        status = 'Next player: ' + xO;
+        //winningSquares = [];
+    }
+
+
   return (
     <>
       <h1>TIC TAC TOE</h1>
@@ -74,9 +88,11 @@ const Game = () => {
           {renderMoves()}
         </div>
         {/* if the winner state is true and game is not ended, then display the winner, otherwise keep displaying the next player X or O constant */}
-        <h3>{winner ? ("Winner: " + winner) : ("Next Player: " + xO)}
-        </h3>
-
+        {/* <h3>{winner ? ("Winner: " + winner) : ("Next Player: " + xO)}
+        </h3> */}
+          <div className="game-info">
+          <div>{status}</div>
+        </div>
       </div>
     </>
   );

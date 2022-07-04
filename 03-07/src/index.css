@@ -42,6 +42,10 @@ h1 {
   outline: none;
 }
 
+.square--winning {
+  background-color: yellow;
+}
+
 .X {
   color: rgb(244, 244, 244);
   font-family: 'Times New Roman', Times, serif;

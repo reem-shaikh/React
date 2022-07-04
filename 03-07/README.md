@@ -8,8 +8,8 @@ Deployed Link [Tic-Tac-Toe](https://glittering-jelly-4a17b2.netlify.app/).
 
 ## Features 
 - [x] Display the location for each move in the history list.
-- [x] Rewrite Board to use two loops to make the squares instead of hardcoding them.
-- [x] Mobile Responsive Layout 
+- [x] Win, lose and draw functionalities implemented
+- [x] Mobile Responsive Design 
 
 ## The Basic Code structure:
 - I've specified the main logic in `Game.js`, and passing `squares` and `onClick` prop to `Board.js` 
