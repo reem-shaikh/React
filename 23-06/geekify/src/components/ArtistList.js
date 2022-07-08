@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { getArtistImage } from '../util';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleRight } from '@fortawesome/free-solid-svg-icons';
+import Image from './Image';
 
 const ArtistList = ({ list, loadMore, showLoadMore, horizontal = true }) => {
   return (
@@ -19,7 +20,8 @@ const ArtistList = ({ list, loadMore, showLoadMore, horizontal = true }) => {
           return (
             <Link to={`/artist/${singleArtist.id}`} key={idx}>
               <div class="flex-none w-32 cursor-pointer">
-                <img class="border-4 border-transparent hover:border-blue-400 rounded-lg" src={getArtistImage(singleArtist.id)} />
+                {/* <img class="border-4 border-transparent hover:border-blue-400 rounded-lg" src={getArtistImage(singleArtist.id)} /> */}
+                <Image className="w-32 h-24 border-4 border-transparent hover:border-blue-400 rounded-lg" src={getArtistImage(singleArtist.id)} />
                 <p class="m-0 text-sm text-gray-600 pl-1">{singleArtist.name}</p>
               </div>
             </Link>

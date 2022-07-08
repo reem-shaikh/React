@@ -13,6 +13,7 @@ const ArtistsTab = () => {
   useEffect(() => {
     if(query === undefined || query === "") {
       setTrackList([]);
+      setShowMore(false);
       return;
     }
     setTrackList(Array(20).fill(-1));

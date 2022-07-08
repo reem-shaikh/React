@@ -70,7 +70,7 @@ const Game = () => {
       status = 'Winner: ' + winner;
       //winningSquares = this.lines[winner[1]];
     } else if (winner && winner === 'draw'){
-        status = "It's a" + winner;
+        status = "It's a " + winner;
         //winningSquares = [];
     } else {
         status = 'Next player: ' + xO;

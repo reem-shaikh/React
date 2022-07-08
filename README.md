@@ -264,6 +264,12 @@ Responsive Design via MUI and React-Bootstrap, Axios, Redux, Dyanamic Routing, H
 - article newspaper app [with comments under div](https://singular-crumble-2cc32d.netlify.app/)
 react-redux (v8 new method), react-router, Material-UI, axios 
 
+#### 03-07
+Tic-tac-toe 
+
+#### 04-07
+- class based components 
+
 -----------
 ### Deploying a React App 
 - Deployment to heroku app: https://github.com/reem-shaikh/heroku-app

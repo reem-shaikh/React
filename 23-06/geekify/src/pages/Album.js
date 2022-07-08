@@ -45,7 +45,7 @@ const Album = () => {
         navigate("/404");
       }
     })();
-  }, [albumId])
+  }, [albumId, navigate])
 
   return (
     <>

@@ -3359,10 +3359,35 @@ const ArtistList = ({ list, loadMore, showLoadMore, horizontal = true }) => {
   )
 }
 ```
+# The App structure 
+### Home.js 
+> TopSongs.js 
+> TopAlbums.js -> AlbumList.js 
+- Album.js 
+  - AlbumInfo.js 
+  - SongList.js 
+  - AlbumList.js 
+> TopArtists.js 
+- Artists.js 
+  - ArtistsInfo.js 
+  - AlbumList.js 
+  - SongList.js -> SingleTrackCard.js
+> Player.js
+
+### Search.js 
+> Search.js 
+  - Searchform.js 
+  - TracksTab -> SongList.js -> SingleTrackCard.js 
+  - AlbumsTab -> AlbumList.js 
+  - ArtistTab -> ArtistList.js 
+
+> for rendering the images we have a seperate component -> Image.js
+> AlbumList.js is same as HorizontalList.js, we simply renamed it to AlbumList
 
 
-
-
+### Deployed Link 
+> Note: styling is not done in this app, to work on the styling refer to the deployed link of geektunestwo
+![](https://geektunesone.netlify.app/)
 
 
 

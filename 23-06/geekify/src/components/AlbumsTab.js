@@ -50,7 +50,8 @@ const AlbumTab = () => {
   return (
     <>
       {/* <SongList list={trackList} loadMore={loadMore} showLoadMore={showMore}  showtrackImages={true}  /> */}
-      {/* were rendering AlbumTab and ArtistTab in their own individual components unlike TrackTab which goes from SonGlist -> SingleTrackCard.js  */}
+
+      {/* were rendering AlbumTab and ArtistTab in their own individual components unlike TrackTab which goes from SongList -> SingleTrackCard.js  */}
       <AlbumList albumList={trackList} horizontal={false} loadMore={loadMore} showLoadMore={showMore}  />
     </>
   )

@@ -19,7 +19,8 @@ const AlbumList = ({ albumList, loadMore, showLoadMore, horizontal=true }) => {
             return (
               <Link to={`/album/${singleAlbum.id}`} key={idx}>
                 <div class="flex-none w-32 cursor-pointer">
-                  <img className='border-4 border-transparent hover:border-blue-400 rounded-lg' src={trackImage(singleAlbum.id)} />
+                  <img className='border-4 border-transparent hover:border-blue-400 rounded-lg' 
+                  src={trackImage(singleAlbum.id)} />
                   <p class="m-0 text-sm text-gray-600 pl-1">{singleAlbum.name}</p>
                 </div>
               </Link>

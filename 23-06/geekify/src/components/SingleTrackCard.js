@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCirclePlay } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { changePlayingTrack } from '../slice';
-import { trackImage, getArtistImage } from '../util';
+import { trackImage } from '../util';
 // import playingAnimation from '../playing-animation.gif';
 import AudioWave from '../AudioWave';
 const SingleTrackCard = ({trackDetail, index, showtrackImage}) => {
@@ -24,13 +24,6 @@ const SingleTrackCard = ({trackDetail, index, showtrackImage}) => {
 
   return (
     <>
-    {/*
-        sm:w-5/12 	width: 41.666667%;
-        md:w-1/4    width: 25%;
-        lg:w-1/5    width: 20%;
-    */}
-
-    {/* were placing the event handler in the parent div, because when we click on the parent div, the changes will automatically propogate to the child div */}
       <div onClick={playSong} className={`w-full sm:w-5/12 md:w-1/4 lg:w-1/5 border-2 flex items-center hover:bg-blue-100 hover:border-blue-700 ${isPlaying ? "border-blue-700 bg-blue-100" : "border-gray-700"} rounded-md p-3 cursor-pointer`}>
         <span>{index}.</span>
 
@@ -41,8 +34,7 @@ const SingleTrackCard = ({trackDetail, index, showtrackImage}) => {
         )}
 
         <span className='ml-2'>{trackDetail.name}</span>
-        {/* when isPlaying state is true, we want to display the equalizer gif file (transparent sound wave animation small) other show the play icon */}
-        {/* we downloaded the equalizer and run it through a background gif remove background and paste it in the src folder*/}
+        {/* when isPlaying state is true, we want to display the equalizer otheriwise display the play icon */}
         {isPlaying ? (
           // <img src={playingAnimation} alt="Playing animation" className="h-12 ml-auto"/>
           <div className='h-9 w-9 mr-2 ml-auto inline-block'>
