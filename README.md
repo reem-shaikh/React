@@ -256,19 +256,28 @@ Responsive Design via MUI and React-Bootstrap, Axios, Redux, Dyanamic Routing, H
 - styled components 
 
 #### 23-06 
-- geekify (music app) - [part 1- music app](https://frolicking-pixie-9de43c.netlify.app/)
+- geekify (music app) 
+  - [part 1- music app](https://frolicking-pixie-9de43c.netlify.app/)
+  - [part 2- styling left](https://geektunesone.netlify.app/)
+- geekify 2 [final app](https://geektunestwo.netlify.app/)
 - tailwind-app (contains readme and explanation) [mistake: installed index.css in both dist and public file]
 - tailwindtwoapp (praticing tailwind implementation) [resolved mistake in this app]
 
 #### 26-06
 - article newspaper app [with comments under div](https://singular-crumble-2cc32d.netlify.app/)
-react-redux (v8 new method), react-router, Material-UI, axios 
+- react-redux (v8 new method), react-router, Material-UI, axios 
 
 #### 03-07
-Tic-tac-toe 
+- Tic-tac-toe 
 
 #### 04-07
-- class based components 
+- bindapp (this, call, apply, bind, why do we need to bind event handlers in react)
+- bindappjs (how call, apply, bind works?, why do we bind?)
+- bubbling 
+- capturing 
+- class components (lifecyle methods in class comps, custom hooks, context api)
+- reduxclass (redux in class based components, debouncing and throttling)
+- suspense (react suspense and code splitting)
 
 -----------
 ### Deploying a React App 
