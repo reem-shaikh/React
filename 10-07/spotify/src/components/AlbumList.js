@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { getAlbumImage } from '../util';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleRight } from '@fortawesome/free-solid-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faCircleRight } from '@fortawesome/free-solid-svg-icons';
 import Image from './Image';
 
 const AlbumList = ({ albumList, loadMore, showLoadMore, horizontal=true }) => {

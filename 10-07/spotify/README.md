@@ -1,5 +1,7 @@
 # Spotify Clone 
 
+Note: The napster API doesnt work sometimes, I'm attaching pictures of my interface for reference.
+
 > Technology used:
 - Material UI, node-SASS, Tailwind CSS for styling 
 - axios 
@@ -8,7 +10,7 @@
 
 > Features:
 - Search for artists, tracks and artists on typing artist / track / artist name, integrated on Tailwind CSS via tab navigation. 
-![](d2.PNG)
+![](d8.PNG)
 ![](d3.PNG)
 ![](d4.PNG)
 - Home page consists of top artists, top albums and top songs, rendered in a horizontal pattern, I've set the horizontal scrollbar to hidden, scroll to see more elements by clicking on the right scroll key from keyboard 

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { getArtistImage } from '../util';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleRight } from '@fortawesome/free-solid-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faCircleRight } from '@fortawesome/free-solid-svg-icons';
 import Image from './Image';
 
 const ArtistList = ({ list, loadMore, showLoadMore, horizontal = true }) => {

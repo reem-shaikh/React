@@ -9,4 +9,4 @@ https://vimeo.com/727479443/7ed2984f56
 - read the redux and make changes 
 - commenting system 
 - qra
-- figure out why api aint working 
+- figure out why api aint working
