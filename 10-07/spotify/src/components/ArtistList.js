@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { getArtistImage } from '../util';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faCircleRight } from '@fortawesome/free-solid-svg-icons';
 import Image from './Image';
 
 const ArtistList = ({ list, loadMore, showLoadMore, horizontal = true }) => {
@@ -23,7 +21,7 @@ const ArtistList = ({ list, loadMore, showLoadMore, horizontal = true }) => {
             <Link to={`/artist/${singleArtist.id}`} key={idx}>
               <div className="flex-none w-32 cursor-pointer">
                 <Image className="w-32 h-38  rounded-lg" src={getArtistImage(singleArtist.id)} />
-                <p className="m-0 text-sm text-gray-600 pl-1">{singleArtist.name}</p>
+                <p className="m-0 text-sm text-white pl-1">{singleArtist.name}</p>
               </div>
             </Link>
             </div>
@@ -31,11 +29,6 @@ const ArtistList = ({ list, loadMore, showLoadMore, horizontal = true }) => {
           );
         }
       })}
-      {/* {(loadMore !== undefined) && showLoadMore ? (
-        <div onClick={loadMore} className="flex-none w-36 cursor-pointer border-2 hover:border-4 hover:border-blue-400 border-gray-300 rounded-md h-32 flex justify-center items-center">
-          <p className="m-0 text-lg pl-1">Load More <FontAwesomeIcon icon={faCircleRight} /></p>
-        </div>
-      ) : false} */}
     </div>
   )
 }

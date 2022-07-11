@@ -4,11 +4,13 @@ const slice = createSlice({
   name: 'geektunes-slice',
   initialState: {
     playingTrack: "",
+  
   },
   reducers: {
     changePlayingTrack(state, action) {
       state.playingTrack = action.payload;
-    }
+    },
+
   }
 });
 
