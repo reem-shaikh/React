@@ -11,9 +11,9 @@ Note: The napster API doesnt work sometimes, I'm attaching pictures of my interf
 > Features:
 - Mobile Responsive 
 - Search for artists, tracks and artists on typing artist / track / artist name, integrated on Tailwind CSS via tab navigation. 
-![](d2.PNG)
-![](d8.PNG)
 ![](d4.PNG)
+![](d8.PNG)
+![](d2.PNG)
 - Home page consists of top artists, top albums and top songs, rendered in a horizontal pattern, I've set the horizontal scrollbar to hidden, scroll to see more elements by clicking on the right scroll key from keyboard 
 ![Home Page](d9.PNG)
 - When user clicks on top songs music, the player starts playing
