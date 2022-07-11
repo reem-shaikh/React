@@ -1,6 +1,7 @@
 # Spotify Clone 
 
-Note: The napster API doesnt work sometimes, I'm attaching pictures of my interface for reference.
+[Deployed Link](https://roaring-mousse-84007a.netlify.app/)
+Note: The napster API doesnt work sometimes (backend issue), I'm attaching pictures of my interface for reference. 
 
 > Technology used:
 - Material UI, node-SASS, Tailwind CSS for styling 
