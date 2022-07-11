@@ -21,7 +21,6 @@ Note: The napster API doesnt work sometimes, I'm attaching pictures of my interf
 ![Album Page](d5.PNG)
 - when user clicks on top artists music the user is then redirected to user/artistid i.e the artist page, when you can view the particular artist page based on the artist id 
 ![Artist Page](d7.PNG)
-- Light & Dark Mode 
 
 ### The code workflow
 
@@ -38,10 +37,10 @@ Note: The napster API doesnt work sometimes, I'm attaching pictures of my interf
 ![](albumstab.PNG)
 
 #### Main Components 
-> Navbar 
+- Navbar 
 ![](home.PNG)
 
-> Home components 
+- Home components 
 ![](main.PNG)
 
 > Artist 
