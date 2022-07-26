@@ -278,7 +278,8 @@ Responsive Design via MUI and React-Bootstrap, Axios, Redux, Dyanamic Routing, H
 - class components (lifecyle methods in class comps, custom hooks, context api)
 - reduxclass (redux in class based components, debouncing and throttling)
 - suspense (react suspense and code splitting)
-
+- contextapi (contextAPI in class components)
+- customhook (creating a custom hook - offline detector)
 -----------
 ### Deploying a React App 
 - Deployment to heroku app: https://github.com/reem-shaikh/heroku-app

@@ -13,11 +13,12 @@ class Buttons extends Component {
   }
 }
 
-const dispatchFn = (dispatch) => {
+//mapDispatchToProps 
+const mapDisptachToProps = (dispatch) => {
   return {
     increment: _ => dispatch(INCREMENT),
     decrement: _ => dispatch(DECREMENT)
   };
 }
 
-export default connect(null, dispatchFn)(Buttons);
+export default connect(null, mapDisptachToProps)(Buttons);

@@ -1,12 +1,4 @@
-- usecallback 
-- debouncing and throttling 
-- memo vs usecallback 
-- react router class components 
 - context api 
 - custom hooks 
-- detect if computer connection is offline 
 https://vimeo.com/727479443/7ed2984f56
-- read the redux and make changes 
-- commenting system 
-- qra
-- figure out why api aint working
+- commenting system
