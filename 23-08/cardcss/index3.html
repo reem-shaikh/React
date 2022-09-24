@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+.name{color: blue;
+margin-left: 8px;
+margin-top: 3px;}
+
+.description{
+    margin-left: 40px;
+    margin-top: 10px;
+}
+
+/* .description{
+    border-left: 1px solid grey;
+
+} */
+
+.content{
+    margin-left: 60px;
+}
+
+.test {
+   display: flex;
+   justify-content: flex-end;
+   margin-bottom: 5px;
+}
+
+.testimonial .post {
+  display: inline-block;
+  font-size: 15px;
+  color: grey;
+}
+
+.testimonial .description {
+  font-size: 15px;
+  letter-spacing: 1px;
+  color: #6f6f6f;
+  line-height: 25px;
+  margin-bottom: 15px;
+}
+
+.testimonial .pic {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  /* overflow: hidden; */
+  position: absolute;
+  top: 60px;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  margin-right: 30px;
+}
+
+.testimonial {
+    width: 30%;
+    height: 50%;
+  border-right: 4px solid #2a3d7d;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+  padding: 30px 30px 30px 30px;
+  margin: 0 15px 30px 15px;
+  overflow: hidden;
+  position: relative;
+}
+
+.testimonial .post {
+  display: inline-block;
+  font-size: 15px;
+  color: grey;
+}
+
+.testimonial:before {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: -17px;
+  border-top: 25px solid #29d18b;
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+  transform: rotate(45deg);
+}
+.testimonial:after {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: -17px;
+  border-top: 25px solid #29d18b;
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+  transform: rotate(135deg);
+}
+
+.testimonial .pic img {
+  width: 100%;
+  height: auto;
+}
+
+body {
+  margin-top: 100px !important;
+}
+
+.description {
+  font-size: 15px;
+  letter-spacing: 1px;
+  color: #6f6f6f;
+  line-height: 25px;
+  margin-bottom: 15px;
+
+}
+
+.desig {
+    width: 100%;
+    height: auto;
+}
+
+.testimg{
+    width: 10%;
+    height: auto;
+}
+
+    </style>
+</head>
+<body>
+              <div class="testimonial">
+            
+                <div class="pic">
+    
+                  <img src="https://livedemo00.template-help.com/wt_prod-10943/images/testimonials-1-120x120.jpg">
+                  <div class="det">
+                  <div class="name">Matthew Perkins</div>
+                  <small class="desig">
+                    <img src="logo.png">
+                  </small>
+                  </div>
+               
+                </div>
+            
+                <div class="description">
+                    <small class="test">
+                        <img class="testimg" src="youtube.png">
+                        Watch Testimonial</small>
+              <p class="content">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada vulputate nisi in
+                  fermentum. Vivamus ac libero quis nisi auctor pulvinar. Aenean sit amet lectus posuere,
+                  mattis massa eget, ullamcorper diam. Nunc sit amet felis eget arcu congue dictum.
+                </p>
+
+            </div>
+
+              </div>
+</body>
+</html>

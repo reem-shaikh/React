@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            border: 2px solid red;
+            width: 150px;
+            height: 150px;
+            display: inline-block;
+        }
+
+        #box3{
+            /* relative to its normal position and will leave a gap at its normal position*/
+            top: 34px;
+            left: 20px;
+            background-color: red;
+            position: relative;
+
+        }
+
+        #box2{
+          /* absolute - relative to the parent .box */
+           top: 34px;
+            left: 20px;
+            background-color: orange;
+            /* position: absolute; */
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="box" id="box1"></div>
+    <div class="box" id="box2"></div>
+    <div class="box" id="box3"></div>
+    <div class="box" id="box4"></div>
+
+        
+    </body>
+</html>

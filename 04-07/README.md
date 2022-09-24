@@ -5,10 +5,10 @@
 # useCallback Hook
 [](https://exquisite-licorice-b96353.netlify.app/)
 
-usecllback is a hook that will return a memoized version of the callback function that only changes if one of the dependencies has changed.
+usecallback is a hook that will return a memoized version of the callback function that only changes if one of the dependencies has changed.
 
 > Why is it used?
-Its useful when passing callbacks to optimized child components that rely on reference equaliy to prevent unecessary renders. 
+Its useful when passing callbacks to optimized child components that rely on reference equality to prevent unecessary renders. 
 - App.js 
 ```bash
 import React from 'react'
@@ -138,7 +138,7 @@ function Counter() {
 # this function executed everutime the counter value is incremented and it also delays the execution of the counter two, when it doesnt even run  on the logic 
     const isEven = () => {
       let i = 0
-# if we have a large value were checking againstt, its going to slow down the ternary condition given below 
+# if we have a large value were checking against, its going to slow down the ternary condition given below 
 # every time the state updates the component re-renders thats why the function is slow and in turn UI update is slow fr botht the counter one and counter two
      while (i < 2000000000) i++
        return counterOne % 2 === 0
@@ -239,3 +239,11 @@ export default Memo
 # Difference between useCallback and useMemo hook?
 - useCallback caches the provided function instance itself (cache the function itself)
 - useMemo invokes the provided function and caches its result (cache the result of the function)
+
+### usecallback returns memoized function and useMemo returns function's return value 
+Essentially, the only difference between these hooks is that useMemo caches a value type, and usecallback caches a function. and the value is only re-computed / changes when the dependencies is changed otherwise the cached value is displayed.
+
+## Where do we use both these hooks?
+if the computationally expensive code accepts arguments and returns a value, you would need to use useMemo so you could keep referencing that value between renders without re-running the computationally expensive code.
+
+On the other hand, in order to keep a function instance persistent for multiple renders, useCallback is needed. This is like placing a function outside the scope of your react component to keep it intact.
