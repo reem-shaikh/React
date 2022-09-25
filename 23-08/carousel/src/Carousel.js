@@ -62,11 +62,11 @@ const Carousel = () => {
                   <img
                     src={Items[i].img}
                     alt="bg-img"
+                    className='bg-icons'
                     style={{
                       width: '90px',
                       height: '90px',
                       marginBottom: '50px',
-
                       borderRadius: '50px',
                     }}
                   />
@@ -93,10 +93,11 @@ const Carousel = () => {
                              img = {item.img}
                              desc = {item.desc}
                              /> */}
-                  <div class="column">
-                    <div class="pic">
+                  <div className="column">
+                    <div className="pic">
                       <img
                         src={item.img}
+                        className='dp'
                         alt="dp on card"
                         style={{
                           width: '8vw',
@@ -104,11 +105,12 @@ const Carousel = () => {
                           borderRadius: '50px',
                         }}
                       />
-                      <div class="det">
-                        <div class="name">{item.title}</div>
-                        <small class="desig">
+                      <div className="det">
+                        <div className="name">{item.title}</div>
+                        <small className="desig">
                           <img
                             alt="logo on card"
+                            className='cardlogo'
                             src={item.logo}
                             style={{ width: '7vw', height: '8vh' }}
                           />
@@ -116,18 +118,18 @@ const Carousel = () => {
                       </div>
                     </div>
 
-                    <div class="description">
-                      <small class="test">
+                    <div className="description">
+                      <small className="test">
                         <img
-                          class="testimg"
+                          className="testimg"
                           src={youtubelogo}
                           alt="youtube logo"
                         />
-                        <a href="https://youtu.be/_hWP0gK3_iA" class="a">
+                        <a href="https://youtu.be/_hWP0gK3_iA" className="a">
                           Watch Testimonial
                         </a>
                       </small>
-                      <p class="content">{item.desc}</p>
+                      <p className="content">{item.desc}</p>
                     </div>
                   </div>
                 </li>
@@ -136,7 +138,7 @@ const Carousel = () => {
           </Slider>
         </div>
       </div>
-      <div class="cta">
+      <div className="cta">
         <button>Read More Testimonials</button>
       </div>
     </>
