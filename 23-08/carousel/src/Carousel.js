@@ -15,7 +15,7 @@ const PreviousBtn = (props) => {
   const { className, onClick } = props
   return (
     <div className={className} onClick={onClick}>
-      <ArrowBackIosIcon style={{ color: 'blue', fontSize: '30px' }} />
+      <ArrowBackIosIcon style={{ color: 'white', fontSize: '15px' }} />
     </div>
   )
 }
@@ -23,7 +23,7 @@ const NextBtn = (props) => {
   const { className, onClick } = props
   return (
     <div className={className} onClick={onClick}>
-      <ArrowForwardIosIcon style={{ color: 'blue', fontSize: '30px' }} />
+      <ArrowForwardIosIcon style={{ color: 'white', fontSize: '15px' }} />
     </div>
   )
 }
@@ -48,9 +48,9 @@ const Carousel = () => {
       <div style={{ margin: '80px' }} className="carousel">
         {/* <h1>Basic carousel</h1> */}
         <Slider
-          autoplay
-          autoplaySpeed={2000}
-          initialSlide={2}
+          // autoplay
+          // autoplaySpeed={2000}
+          initialSlide={1}
           dots={true}
           infinite
           prevArrow={<PreviousBtn />}
@@ -108,7 +108,7 @@ const Carousel = () => {
                       <small class="desig">
                         <img
                           src={item.logo}
-                          style={{ width: '5vw', height: '8vh' }}
+                          style={{ width: '7vw', height: '8vh' }}
                         />
                       </small>
                     </div>

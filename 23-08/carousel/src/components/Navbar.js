@@ -17,7 +17,6 @@ class Navbar extends React.Component{
             <nav className='NavbarItems'>
                 <h1 className='navbar-logo'><img alt="logo" src={img1}></img></h1>
                 <div className='menu-icon' onClick={this.handleClick}>
-
                 </div>
                 <ul className={this.state.clicked ? 'nav-menu active' : 'nav-menu'}>
                
@@ -31,9 +30,7 @@ class Navbar extends React.Component{
                     })}
                 
                 </ul>
-
-            </nav>
-                 
+            </nav>     
         )
     }
 }
