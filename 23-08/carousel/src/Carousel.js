@@ -49,8 +49,8 @@ const Carousel = () => {
           {/* <h1>Basic carousel</h1> */}
           <Slider
             autoplay
-            autoplaySpeed={2000}
-            initialSlide={23}
+            autoplaySpeed={3000}
+            initialSlide={24}
             dots={true}
             infinite
             prevArrow={<PreviousBtn />}

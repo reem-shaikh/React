@@ -39,10 +39,10 @@ export const Items = [
   //keep all menu names here
   {
     title: 'Lorem Ipsum',
-    img: image1,
+    img: image4,
     desc:
       'Geeksters supportive team taught me advanced Java concepts, helped me with interview preparation, and provided various reading materials.',
-    logo: logo,
+    logo: logo3,
   },
   {
     title: 'Lorem Ipsum2',
@@ -55,15 +55,15 @@ export const Items = [
     title: 'Lorem Ipsum3',
     img: image3,
     desc:
-      'From 0 offers to multiple offers, that has been my journey at Geekster. .',
+      'From 0 offers to multiple offers, that has been my journey at Geekster.',
     logo: logo2,
   },
   {
     title: 'Lorem Ipsum4',
-    img: image4,
+    img: image1,
     desc:
       'It is the learnings and guidance I received during the course that had brought me success',
-    logo: logo3,
+    logo: logo,
   },
   {
     title: 'Lorem Ipsum5',
