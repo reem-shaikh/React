@@ -91,7 +91,7 @@ body {
   width: 80px;
   height: 80px;
   right: 35%;
-  filter: grayscale(100%);
+  filter: opacity(40%);
   margin-left: 60px;
 }
 
@@ -184,7 +184,7 @@ body {
     width: 20px;
     height: 20px;
     right: 25%;
-    filter: grayscale(100%);
+    filter: opacity(40%);
     margin-left: 60px;
   }
 
@@ -284,7 +284,7 @@ body {
     width: 20px;
     height: 20px;
     right: 25%;
-    filter: grayscale(100%);
+    filter: opacity(40%);
     margin-left: 60px;
   }
 
@@ -384,7 +384,7 @@ body {
     width: 20px;
     height: 20px;
     right: 33%;
-    filter: grayscale(100%);
+    filter: opacity(40%);
     margin-left: 60px;
   }
 
@@ -484,7 +484,7 @@ body {
     width: 20px;
     height: 20px;
     right: 33%;
-    filter: grayscale(100%);
+    filter: opacity(40%);
     margin-left: 60px;
   }
 
@@ -584,7 +584,7 @@ body {
     width: 20px;
     height: 20px;
     right: 33%;
-    filter: grayscale(100%);
+    filter: opacity(40%);
     margin-left: 60px;
   }
 
@@ -758,7 +758,7 @@ body {
     width: 20px;
     height: 20px;
     right: 33%;
-    filter: grayscale(100%);
+    filter: opacity(40%);
     margin-left: 60px;
   }
   .custom-indicator li:nth-child(1),
@@ -857,7 +857,7 @@ body {
     width: 20px;
     height: 20px;
     right: 35%;
-    filter: grayscale(100%);
+    filter: opacity(40%);
     margin-left: 60px;
   }
 
@@ -957,7 +957,7 @@ body {
     width: 20px;
     height: 20px;
     right: 35%;
-    filter: grayscale(100%);
+    filter: opacity(40%);
     margin-left: 60px;
   }
 
